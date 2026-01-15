@@ -30,7 +30,7 @@ const steps = [
 
 export const Process = () => {
   return (
-    <div className="relative overflow-hidden bg-black min-h-screen">
+    <div className="relative overflow-visible bg-black min-h-screen">
       {/* Scroll-driven Creeping Light Blocks */}
       <ScrollStaggerBlocks color="#f8f9fa" />
 

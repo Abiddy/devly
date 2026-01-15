@@ -11,24 +11,24 @@ const SPEEDS = [0.4, 0.7, 0.5, 0.9, 0.6, 0.8, 0.45, 0.75, 0.55, 0.85, 0.5, 0.7];
 export const ScrollStaggerBlocks = ({ color = 'black', reverse = false }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // We use a tighter offset so the transition completes quickly as the section enters
+  // We trigger the animation earlier and let it last longer to create the "bleed"
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "start 0.1"] 
+    offset: ["start end", "start 0.2"] 
   });
 
   return (
-    <div ref={containerRef} className="absolute inset-0 flex pointer-events-none z-0 overflow-hidden">
+    <div ref={containerRef} className="absolute -top-[30vh] left-0 right-0 bottom-0 flex pointer-events-none z-0">
       {Array.from({ length: COLUMNS }).map((_, i) => {
-        // Different start and end points for each bar to create "leaping" effect
         const speed = SPEEDS[i % SPEEDS.length];
-        const start = (i * 0.02);
+        const start = (i * 0.03);
         const end = Math.min(start + speed, 1);
         
+        // Height is now 130% to account for the -30vh top offset bleed
         const height = useTransform(
           scrollYProgress, 
           [start, end], 
-          reverse ? ["100%", "0%"] : ["0%", "100%"]
+          reverse ? ["130%", "0%"] : ["0%", "130%"]
         );
 
         return (
@@ -40,7 +40,7 @@ export const ScrollStaggerBlocks = ({ color = 'black', reverse = false }) => {
               bottom: 0,
               position: 'absolute',
               left: `${(i / COLUMNS) * 100}%`,
-              width: `${(100 / COLUMNS) + 0.1}%`, // small overlap to prevent gaps
+              width: `${(100 / COLUMNS) + 0.1}%`,
             }}
           />
         );

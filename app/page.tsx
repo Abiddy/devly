@@ -3,8 +3,11 @@
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { Problems } from '@/components/Problems';
+import { Intro } from '@/components/Intro';
+import { Work } from '@/components/Work';
 import { Process } from '@/components/Process';
 import { Footer } from '@/components/Footer';
+import { PageTransition } from '@/components/PageTransition';
 import { TextFill } from '@/components/TextFill';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
@@ -17,15 +20,14 @@ export default function Home() {
     <main className="relative min-h-screen">
       <Navbar />
 
-      <div className="relative z-20">
-        <Hero />
-        
-        {/* Scroll-driven Text Fill Section */}
-        <TextFill text={PHILOSOPHY_TEXT} />
-        
-        <Problems />
-        <Process />
-        <Footer />
+      <div className="relative">
+        <div className="relative z-10"><Hero /></div>
+        <div className="relative z-20"><TextFill text={PHILOSOPHY_TEXT} /></div>
+        <div className="relative z-30"><Problems /></div>
+        <div className="relative z-40"><Intro /></div>
+        <div className="relative z-50"><Work /></div>
+        <div className="relative z-[60]"><Process /></div>
+        <div className="relative z-[70]"><Footer /></div>
       </div>
 
       {/* Background Noise/Texture */}

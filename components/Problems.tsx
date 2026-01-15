@@ -18,7 +18,7 @@ const problems = [
 
 export const Problems = () => {
   return (
-    <div className="bg-white relative overflow-hidden min-h-screen" data-theme="dark">
+    <div className="bg-white relative overflow-visible min-h-screen" data-theme="dark">
       {/* Scroll-driven Creeping Blocks */}
       <ScrollStaggerBlocks color="black" />
 
