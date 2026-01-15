@@ -7,7 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 const projects = [
   {
     id: "01",
-    title: "Transformed Bioanalysis Diagnostic Laboratories into a modern digital platform with integrated booking scheduling and a premium modern look.",
+    title: "Transformed Bioanalysis Diagnostic Laboratories into a modern digital platform with integrated booking systems and streamlined service navigation.",
     client: "BDL",
     tags: ["Healthcare UX", "Webflow development", "Booking Integration"],
     imageColor: "bg-[#0a0a0a]",
@@ -17,11 +17,13 @@ const projects = [
   },
   {
     id: "02",
-    title: "Helped Yoda increase conversions despite a price increase with a new brand identity and complete website rebuild",
-    client: "Yoda",
-    tags: ["Brand Identity design", "Web design", "Webflow development"],
-    imageColor: "bg-[#e5e7eb]",
-    logo: "Yoda"
+    title: "Ongoing brand evolution for Pacific Auto Body, focusing on a complete identity overhaul, advanced SEO for market visibility, and AA accessibility standards.",
+    client: "Pacific Auto Body",
+    tags: ["Brand Identity", "SEO Strategy", "Accessibility"],
+    imageColor: "bg-[#1a1a1a]",
+    logo: "Pacific",
+    video: "/auto.mov",
+    link: "https://pacific-delta.vercel.app"
   },
   {
     id: "03",
