@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from './SectionWrapper';
 import { ArrowDown } from 'lucide-react';
+import Link from 'next/link';
 
 export const Hero = () => {
   return (
@@ -34,10 +35,13 @@ export const Hero = () => {
             Book a Call
             <div className="w-2 h-2 rounded-full bg-[#F97316] group-hover:bg-white transition-colors" />
           </a>
-          <button className="flex items-center justify-center gap-2 px-6 py-3 border border-black/10 rounded-sm text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 hover:text-black hover:border-black/30 transition-all group">
+          <Link 
+            href="#work"
+            className="flex items-center justify-center gap-2 px-6 py-3 border border-black/10 rounded-sm text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 hover:text-black hover:border-black/30 transition-all group"
+          >
             View Work
             <ArrowDown className="w-3 h-3 group-hover:translate-y-1 transition-transform" />
-          </button>
+          </Link>
         </motion.div>
       </div>
 

@@ -33,10 +33,10 @@ export const Footer = () => {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-2xl font-medium tracking-tight">Devly</div>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-white/40">
+             <Link href="#problem" className="hover:text-white transition-colors">Problem</Link>
+             <Link href="#intro" className="hover:text-white transition-colors">Intro</Link>
              <Link href="#work" className="hover:text-white transition-colors">Work</Link>
              <Link href="#process" className="hover:text-white transition-colors">Process</Link>
-             <Link href="#reviews" className="hover:text-white transition-colors">Reviews</Link>
-             <Link href="#services" className="hover:text-white transition-colors">Services</Link>
           </div>
         </div>
       </SectionWrapper>
