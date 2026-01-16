@@ -25,10 +25,15 @@ export const Hero = () => {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mt-12 md:mt-16 w-full sm:w-auto"
         >
-          <button className="flex items-center justify-center gap-2 px-6 py-3 border border-[#F97316] rounded-sm text-[11px] font-bold uppercase tracking-[0.2em] text-[#F97316] hover:bg-[#F97316] hover:text-white transition-all active:scale-95 group">
+          <a 
+            href="https://calendly.com/abidinouman/new-meeting" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-6 py-3 border border-[#F97316] rounded-sm text-[11px] font-bold uppercase tracking-[0.2em] text-[#F97316] hover:bg-[#F97316] hover:text-white transition-all active:scale-95 group"
+          >
             Book a Call
             <div className="w-2 h-2 rounded-full bg-[#F97316] group-hover:bg-white transition-colors" />
-          </button>
+          </a>
           <button className="flex items-center justify-center gap-2 px-6 py-3 border border-black/10 rounded-sm text-[11px] font-bold uppercase tracking-[0.2em] text-black/40 hover:text-black hover:border-black/30 transition-all group">
             View Work
             <ArrowDown className="w-3 h-3 group-hover:translate-y-1 transition-transform" />

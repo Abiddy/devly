@@ -11,7 +11,7 @@ import { PageTransition } from '@/components/PageTransition';
 import { TextFill } from '@/components/TextFill';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
-const PHILOSOPHY_TEXT = "It was the brainchild of Giorgio Rosa, engineer from Bologna with links to the former 'Republic of Salò' during WW II. His aim was to create a state that was completely independent from Italy. It had its own system of taxation and would finance itself.";
+const PHILOSOPHY_TEXT = "Design is the silent ambassador of your brand. A high-performance website doesn't just display information; it builds trust, signals authority, and changes the trajectory of your business by turning visitors into lifelong believers.";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();

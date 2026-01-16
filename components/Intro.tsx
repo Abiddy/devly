@@ -6,7 +6,7 @@ import { ScrollStaggerBlocks } from './ScrollStaggerBlocks';
 
 export const Intro = () => {
   return (
-    <div className="relative bg-black">
+    <div id="intro" className="relative bg-black">
       <SectionWrapper className="relative z-10 py-32 text-white">
         <div className="max-w-3xl">
           <motion.div 

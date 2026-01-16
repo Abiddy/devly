@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 
 const navItems = [
+  { name: 'Problem', href: '#problem' },
+  { name: 'Intro', href: '#intro' },
   { name: 'Work', href: '#work' },
   { name: 'Process', href: '#process' },
-  { name: 'Reviews', href: '#reviews' },
-  { name: 'Services', href: '#services' },
 ];
 
 export const Navbar = () => {
@@ -63,9 +63,14 @@ export const Navbar = () => {
                 })}
             </div>
 
-            <button className="px-4 py-2 border border-[#F97316] rounded-sm text-[10px] font-bold uppercase tracking-[0.2em] text-[#F97316] hover:bg-[#F97316] hover:text-white transition-all active:scale-95">
+            <a 
+              href="https://calendly.com/abidinouman/new-meeting" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-4 py-2 border border-[#F97316] rounded-sm text-[10px] font-bold uppercase tracking-[0.2em] text-[#F97316] hover:bg-[#F97316] hover:text-white transition-all active:scale-95"
+            >
                 Book a Call
-            </button>
+            </a>
             
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F97316] hidden sm:inline">
                 2026

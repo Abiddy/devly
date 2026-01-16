@@ -27,11 +27,13 @@ const projects = [
   },
   {
     id: "03",
-    title: "Crafting a digital presence for a sustainable future in the mobility space",
-    client: "EcoMove",
-    tags: ["Web design", "Motion design", "Development"],
-    imageColor: "bg-[#1a1a1a]",
-    logo: "EcoMove"
+    title: "Revamped the Islamic Institute of Torrance's digital presence with a comprehensive UI/UX redesign using Next.js and Framer Motion for a fluid experience.",
+    client: "IIT",
+    tags: ["Next.js", "Framer Motion", "UI/UX Redesign"],
+    imageColor: "bg-[#0a0a0a]",
+    logo: "IIT",
+    video: "/masjid.mov",
+    link: "https://www.ictorrance.org/"
   }
 ];
 
