@@ -9,8 +9,22 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: 'Devly | Design & Webflow Partner',
-  description: 'Build trust, convert more, and raise funding with a beautifully functional website & brand.',
+  title: 'Devly',
+  description: 'Building high-end digital experiences that change the trajectory of your business.',
+  openGraph: {
+    title: 'Devly',
+    description: 'Building high-end digital experiences that change the trajectory of your business.',
+    url: 'https://work.devly.info',
+    siteName: 'Devly',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Devly',
+    description: 'Building high-end digital experiences that change the trajectory of your business.',
+    creator: '@DevlyOfficial',
+  },
 }
 
 export default function RootLayout({
