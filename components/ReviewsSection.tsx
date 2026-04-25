@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { REVIEWS_CONFIG } from '@/data/reviews-config';
 import type { Review } from '@/lib/reviews';
-import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
@@ -59,33 +58,19 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-function ReviewCard({ review, formUrl }: { review: Review; formUrl: string }) {
-  const fullHref = review.fullReviewUrl || (formUrl || undefined);
+function ReviewCard({ review }: { review: Review }) {
   return (
     <div className="space-y-3 text-left">
       <Stars count={review.rating} />
       <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
         {renderEmphasis(review.text)}
       </p>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm">
-        <span
-          className="font-serif text-xs font-medium italic tracking-wide text-foreground"
-          style={{ fontFamily: "var(--font-serif), ui-serif, Georgia, serif" }}
-        >
-          — {review.name.toUpperCase()}
-        </span>
-        {fullHref ? (
-          <Link
-            href={fullHref}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-400 transition-colors hover:text-foreground"
-          >
-            Full review
-            <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        ) : null}
-      </div>
+      <p
+        className="font-serif text-xs font-medium italic tracking-wide text-foreground"
+        style={{ fontFamily: "var(--font-serif), ui-serif, Georgia, serif" }}
+      >
+        — {review.name.toUpperCase()}
+      </p>
     </div>
   );
 }
@@ -142,7 +127,7 @@ export function ReviewsSection({ reviews }: { reviews: Review[] }) {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: id * 0.04, ease: [0.22, 1, 0.36, 1] }}
             >
-              <ReviewCard review={rev} formUrl={formUrl} />
+              <ReviewCard review={rev} />
             </motion.div>
           ))}
         </div>

@@ -87,11 +87,34 @@ function detectColumns(headerRow: string[]): ColumnMap | null {
         ? idx((s) => s === "name")
         : 1;
   const review =
-    idx((s) => s.includes("review") || s.includes("feedback") || s.includes("comment") || s.includes("message")) >= 0
-      ? idx((s) => s.includes("review") || s.includes("feedback") || s.includes("comment") || s.includes("message"))
+    idx(
+      (s) =>
+        s.includes("review") ||
+        s.includes("feedback") ||
+        s.includes("comment") ||
+        s.includes("message") ||
+        s.includes("stood out") ||
+        s.includes("what would you tell") ||
+        s.includes("tell someone")
+    ) >= 0
+      ? idx(
+          (s) =>
+            s.includes("review") ||
+            s.includes("feedback") ||
+            s.includes("comment") ||
+            s.includes("message") ||
+            s.includes("stood out") ||
+            s.includes("what would you tell") ||
+            s.includes("tell someone")
+        )
       : 2;
   const rating = idx(
-    (s) => s === "rating" || s.includes("star") || s === "score"
+    (s) =>
+      s === "rating" ||
+      s.includes("star") ||
+      s === "score" ||
+      s.includes("how would you rate") ||
+      s.includes("rate your experience")
   );
   const link = idx(
     (s) => s.includes("link") || s.includes("url") || s.includes("full review")
