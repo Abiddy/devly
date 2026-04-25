@@ -1,11 +1,17 @@
 import type { Metadata } from 'next'
-import { Outfit } from 'next/font/google'
+import { Outfit, Playfair_Display } from 'next/font/google'
 import './globals.css'
 
 const outfit = Outfit({ 
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-outfit',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  style: ['normal', 'italic'],
 })
 
 export const metadata: Metadata = {
@@ -33,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${outfit.variable}`}>
+    <html lang="en" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
       <body className={`${outfit.className} antialiased`}>{children}</body>
     </html>
   )

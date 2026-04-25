@@ -15,6 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-outfit)", "Inter", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "ui-serif", "Georgia", "serif"],
       },
     },
   },
