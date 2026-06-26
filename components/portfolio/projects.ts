@@ -59,4 +59,14 @@ export const projects: Project[] = [
     description:
       'AI agents that sell food better than humans — showing customers what your menu is really about.',
   },
+  {
+    id: 'corridor-flow',
+    title: 'Corridor Flow',
+    anchorX: 73.92,
+    anchorY: 40.75,
+    thumbnail: '/corridor-flow.png',
+    url: 'https://cafe-production-9588.up.railway.app/',
+    description:
+      'A family-owned coffee shop and co-working space — bonds over coffee, conversation, and deep work.',
+  },
 ];
