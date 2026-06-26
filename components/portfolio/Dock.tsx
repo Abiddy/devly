@@ -4,13 +4,23 @@ import { useState } from 'react';
 
 type DockIconProps = {
   label: string;
-  src: string;
+  src?: string;
+  emoji?: string;
   onClick?: () => void;
   href?: string;
+  showTooltipAlways?: boolean;
 };
 
-function DockIcon({ label, src, onClick, href }: DockIconProps) {
+function DockIcon({
+  label,
+  src,
+  emoji,
+  onClick,
+  href,
+  showTooltipAlways,
+}: DockIconProps) {
   const [hover, setHover] = useState(false);
+  const tooltipVisible = showTooltipAlways || hover;
 
   const button = (
     <div
@@ -23,20 +33,36 @@ function DockIcon({ label, src, onClick, href }: DockIconProps) {
         cursor: 'pointer',
         transform: hover ? 'scale(1.12)' : 'scale(1)',
         transition: 'transform 0.2s cubic-bezier(0.34,1.56,0.64,1)',
+        background: emoji ? 'white' : undefined,
+        display: emoji ? 'flex' : undefined,
+        alignItems: emoji ? 'center' : undefined,
+        justifyContent: emoji ? 'center' : undefined,
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={label}
-        draggable={false}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          display: 'block',
-        }}
-      />
+      {emoji ? (
+        <span
+          aria-hidden
+          style={{
+            fontSize: 28,
+            lineHeight: 1,
+          }}
+        >
+          {emoji}
+        </span>
+      ) : (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={src}
+          alt={label}
+          draggable={false}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
+      )}
     </div>
   );
 
@@ -57,7 +83,7 @@ function DockIcon({ label, src, onClick, href }: DockIconProps) {
           bottom: 'calc(100% + 12px)',
           left: '50%',
           transform: 'translateX(-50%)',
-          opacity: hover ? 1 : 0,
+          opacity: tooltipVisible ? 1 : 0,
           transition: 'opacity 0.15s ease',
           pointerEvents: 'none',
           display: 'flex',
@@ -134,11 +160,7 @@ export function Dock({ onOpenAbout, onOpenNotes }: DockProps) {
         WebkitBackdropFilter: 'blur(5px)',
       }}
     >
-      <DockIcon
-        label="About Me"
-        src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_151824_5f47765e-d133-4a38-b8bc-d968a07881a3.png&w=1920&q=85"
-        onClick={onOpenAbout}
-      />
+      <DockIcon label="About Me" emoji="👦🏻" onClick={onOpenAbout} />
       <DockIcon
         label="Notes"
         src="https://framerusercontent.com/images/4ar8CL6aUtjymV8jTsXrcPzXCM.svg"
@@ -156,11 +178,12 @@ export function Dock({ onOpenAbout, onOpenNotes }: DockProps) {
         label="Book a Call"
         src="https://www.gstatic.com/images/branding/product/2x/meet_2020q4_48dp.png"
         href="https://calendly.com/abidinouman/new-meeting"
+        showTooltipAlways
       />
       <DockIcon
         label="X"
         src="https://framerusercontent.com/images/vjmmhizcqEgw5ZT5SNFQMpxD00.png"
-        href="https://www.x.com/"
+        href="https://x.com/DevlyOfficial"
       />
       <DockIcon
         label="Instagram"
