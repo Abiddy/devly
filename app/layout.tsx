@@ -1,25 +1,12 @@
 import type { Metadata } from 'next'
-import { Outfit, Playfair_Display } from 'next/font/google'
 import './globals.css'
-
-const outfit = Outfit({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-outfit',
-})
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-serif',
-  style: ['normal', 'italic'],
-})
 
 export const metadata: Metadata = {
   title: 'Devly',
-  description: 'Building high-end digital experiences that change the trajectory of your business.',
+  description: 'A photography portfolio.',
   openGraph: {
     title: 'Devly',
-    description: 'Building high-end digital experiences that change the trajectory of your business.',
+    description: 'A photography portfolio.',
     url: 'https://work.devly.info',
     siteName: 'Devly',
     locale: 'en_US',
@@ -28,7 +15,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Devly',
-    description: 'Building high-end digital experiences that change the trajectory of your business.',
+    description: 'A photography portfolio.',
     creator: '@DevlyOfficial',
   },
 }
@@ -39,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${outfit.variable} ${playfair.variable}`}>
-      <body className={`${outfit.className} antialiased`}>{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   )
 }
