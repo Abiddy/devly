@@ -7,8 +7,7 @@ import { WindowShell } from './WindowShell';
 import { projects } from './projects';
 import type { Project } from './projects';
 
-const BACKGROUND_URL =
-  'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_151236_784929aa-a992-4292-9938-1dd9b5296a29.png&w=1920&q=85';
+const BACKGROUND_URL = '/wallpaper.png';
 
 type WindowItem =
   | { kind: 'project'; key: string; project: Project }
