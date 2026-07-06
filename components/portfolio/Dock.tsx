@@ -124,7 +124,12 @@ function DockIcon({
       </div>
 
       {href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a
+          href={href}
+          {...(href.startsWith('http')
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
           {button}
         </a>
       ) : (
@@ -177,7 +182,7 @@ export function Dock({ onOpenAbout, onOpenNotes }: DockProps) {
       <DockIcon
         label="Book a Call"
         src="https://www.gstatic.com/images/branding/product/2x/meet_2020q4_48dp.png"
-        href="https://calendly.com/abidinouman/new-meeting"
+        href="/"
         showTooltipAlways
       />
       <DockIcon
