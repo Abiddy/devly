@@ -95,7 +95,7 @@ export function LandingPage() {
               color: 'rgb(100,100,105)',
             }}
           >
-            Your details are saved — choose a slot that works for you.
+            Your details are saved, choose a slot that works for you.
           </p>
           <div
             style={{
@@ -158,23 +158,9 @@ export function LandingPage() {
               maxWidth: 420,
             }}
           >
-            Share a few details, then pick a time. No back-and-forth — just a
+            Share a few details, then pick a time. No back-and-forth just a
             straight path to your call.
           </p>
-          <a
-            href="/portfolio"
-            style={{
-              display: 'inline-block',
-              marginTop: 32,
-              fontFamily: "'Inter',sans-serif",
-              fontSize: 14,
-              color: 'rgb(100,100,105)',
-              textDecoration: 'underline',
-              textUnderlineOffset: 4,
-            }}
-          >
-            View portfolio →
-          </a>
         </div>
 
         <form
@@ -204,7 +190,7 @@ export function LandingPage() {
                 color: 'rgb(100,100,105)',
               }}
             >
-              Devly — Website Application
+              Devly
             </span>
             <span
               style={{
