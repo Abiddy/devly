@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { buildCalendlyUrl, type BookingDetails } from '@/lib/calendly';
+import { trackEvent } from '@/lib/track-client';
 import { CalendlyEmbed } from './CalendlyEmbed';
+import { WorkShowcase } from './WorkShowcase';
 
 type FormState = {
   name: string;
@@ -19,6 +21,7 @@ const initialForm: FormState = {
 };
 
 export function LandingPage() {
+  const formRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState<'form' | 'schedule'>('form');
   const [form, setForm] = useState<FormState>(initialForm);
   const [calendlyUrl, setCalendlyUrl] = useState('');
@@ -46,7 +49,12 @@ export function LandingPage() {
 
     setCalendlyUrl(buildCalendlyUrl(details));
     setStep('schedule');
+    trackEvent('scheduling_start');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   if (step === 'schedule') {
@@ -113,16 +121,18 @@ export function LandingPage() {
   }
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '48px 24px',
-        background: 'white',
-      }}
-    >
+    <main style={{ background: 'white', minHeight: '100vh' }}>
+      <section
+        ref={formRef}
+        id="booking-form"
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '48px 24px',
+        }}
+      >
       <div
         style={{
           width: '100%',
@@ -317,6 +327,9 @@ export function LandingPage() {
           </div>
         </form>
       </div>
+      </section>
+
+      <WorkShowcase onBookCall={scrollToForm} />
     </main>
   );
 }

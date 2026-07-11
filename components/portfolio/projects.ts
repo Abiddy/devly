@@ -24,7 +24,7 @@ export const projects: Project[] = [
     title: 'Paradise Worldwide',
     anchorX: 26,
     anchorY: 29.5,
-    thumbnail: '/paradise.png',
+    thumbnail: '/showcase/paradise.png',
     url: 'https://www.paradisebikes.co/',
     description:
       'Coastal e-bike rentals in Los Angeles — high-quality electric bikes built for the coast and made for the curious.',
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: 'Freeland Family Farms',
     anchorX: 23.33,
     anchorY: 60.88,
-    thumbnail: '/freeland.png',
+    thumbnail: '/showcase/freeland.png',
     url: 'https://freelandfarms.vercel.app/',
     description:
       'Farm-fresh dairy and sourdoughs rooted in California, raised on Portuguese tradition — crafted in Woodcrest.',
