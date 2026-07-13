@@ -12,9 +12,4 @@ export const showcaseWork: ShowcaseItem[] = [
   { name: 'Platter', role: 'Food Tech', src: '/showcase/platter.png' },
   { name: 'HelpDesk', role: 'Platform', src: '/showcase/helpdesk.png' },
   { name: 'Corridor Flow', role: 'Coffee Shop', src: '/showcase/corridor-flow.png' },
-  { name: 'Pursuit', role: 'SaaS Onboarding', src: '/showcase/pursuit.png' },
-  { name: 'Rovr Health', role: 'Health Dashboard', src: '/showcase/rovr.png' },
-  { name: 'Artisan Carry', role: 'Leather Goods', src: '/showcase/artisan-carry.png' },
-  { name: 'Data Flow', role: 'Tech Visualization', src: '/showcase/data-flow.png' },
-  { name: 'The Mist', role: 'Fragrance Brand', src: '/showcase/the-mist.png' },
 ];
