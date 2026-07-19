@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import { Star } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { buildCalendlyUrl, type BookingDetails } from '@/lib/calendly';
 import { trackEvent } from '@/lib/track-client';
@@ -121,212 +123,134 @@ export function LandingPage() {
   }
 
   return (
-    <main style={{ background: 'white', minHeight: '100vh' }}>
+    <main className="min-h-screen bg-white">
       <section
         ref={formRef}
         id="booking-form"
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '48px 24px',
-        }}
+        className="bg-[#F9FAFB] px-4 py-16 sm:px-6 lg:py-24"
       >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: 1100,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 64,
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              margin: 0,
-              fontFamily: "'Inter',sans-serif",
-              fontWeight: 600,
-              fontSize: 'clamp(36px, 5vw, 56px)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.04em',
-              color: 'rgb(20,20,22)',
-            }}
-          >
-            Bring the idea.
-            <br />I&apos;ll shape the experience.
-          </h1>
-          <p
-            style={{
-              margin: '24px 0 0',
-              fontFamily: "'Inter',sans-serif",
-              fontSize: 16,
-              lineHeight: 1.6,
-              color: 'rgb(100,100,105)',
-              maxWidth: 420,
-            }}
-          >
-            Share a few details, then pick a time. No back-and-forth just a
-            straight path to your call.
-          </p>
-        </div>
+        <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div className="grid lg:grid-cols-2">
+            <div className="px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
+              <div className="mb-8">
+                <span className="text-lg font-semibold tracking-tight text-gray-900">
+                  Devly
+                </span>
+              </div>
 
-        <form
-          onSubmit={handleContinue}
-          style={{
-            border: '1px solid rgb(229,229,234)',
-            borderRadius: 16,
-            overflow: 'hidden',
-            background: 'white',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '16px 24px',
-              borderBottom: '1px solid rgb(229,229,234)',
-              gap: 16,
-              flexWrap: 'wrap',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'Inter',sans-serif",
-                fontSize: 13,
-                color: 'rgb(100,100,105)',
-              }}
-            >
-              Devly
-            </span>
-            <span
-              style={{
-                fontFamily: "'Inter',sans-serif",
-                fontSize: 13,
-                color: 'rgb(134,134,139)',
-              }}
-            >
-              Confidential · Reviewed within 24h
-            </span>
-          </div>
+              <div className="mb-8">
+                <h1 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+                  We&apos;d love to help
+                </h1>
+                <p className="mt-3 max-w-md text-base leading-relaxed text-gray-600">
+                  Share a few details, then pick a time. We&apos;ll get in touch
+                  within 24 hours.
+                </p>
+              </div>
 
-          <div style={{ padding: '32px 24px 24px' }}>
-            <h2
-              style={{
-                margin: '0 0 24px',
-                fontFamily: "'Inter',sans-serif",
-                fontWeight: 600,
-                fontSize: 22,
-                letterSpacing: '-0.03em',
-                color: 'rgb(20,20,22)',
-              }}
-            >
-              Let&apos;s get to know you
-            </h2>
+              <form onSubmit={handleContinue} className="space-y-5">
+                <Field
+                  label="Full Name"
+                  required
+                  value={form.name}
+                  onChange={(v) => updateField('name', v)}
+                  placeholder="Your full name"
+                />
+                <Field
+                  label="Email"
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={(v) => updateField('email', v)}
+                  placeholder="you@company.com"
+                />
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                    Phone / WhatsApp{' '}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <p className="mb-2 text-sm leading-relaxed text-gray-500">
+                    Include your country code. You&apos;ll receive a meeting
+                    confirmation after you book.
+                  </p>
+                  <input
+                    required
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => updateField('phone', e.target.value)}
+                    placeholder="+1 (555) 000-0000"
+                    className={inputClassName}
+                  />
+                </div>
+                <Field
+                  label="Current Website"
+                  value={form.website}
+                  onChange={(v) => updateField('website', v)}
+                  placeholder="https:// (optional)"
+                />
 
-            <Field
-              label="Full Name"
-              required
-              value={form.name}
-              onChange={(v) => updateField('name', v)}
-              placeholder="Your full name"
-            />
-            <Field
-              label="Email"
-              required
-              type="email"
-              value={form.email}
-              onChange={(v) => updateField('email', v)}
-              placeholder="your@email.com"
-            />
-            <div style={{ marginBottom: 20 }}>
-              <label
-                style={{
-                  display: 'block',
-                  marginBottom: 6,
-                  fontFamily: "'Inter',sans-serif",
-                  fontSize: 14,
-                  fontWeight: 500,
-                  color: 'rgb(20,20,22)',
-                }}
-              >
-                Phone / WhatsApp <span style={{ color: 'rgb(253,93,92)' }}>*</span>
-              </label>
-              <p
-                style={{
-                  margin: '0 0 8px',
-                  fontFamily: "'Inter',sans-serif",
-                  fontSize: 12,
-                  color: 'rgb(134,134,139)',
-                  lineHeight: 1.5,
-                }}
-              >
-                Include your country code. You&apos;ll receive a meeting
-                confirmation after you book.
-              </p>
-              <input
-                required
-                type="tel"
-                value={form.phone}
-                onChange={(e) => updateField('phone', e.target.value)}
-                placeholder="+1 555 000 0000"
-                style={inputStyle}
+                {error ? (
+                  <p className="text-sm text-red-500">{error}</p>
+                ) : null}
+
+                <label className="flex items-start gap-3 pt-1">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    className="mt-0.5 size-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
+                  />
+                  <span className="text-sm leading-relaxed text-gray-600">
+                    You agree to our friendly{' '}
+                    <span className="underline underline-offset-2">
+                      privacy policy
+                    </span>
+                    .
+                  </span>
+                </label>
+
+                <button
+                  type="submit"
+                  className="mt-2 w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
+                >
+                  Continue
+                </button>
+              </form>
+            </div>
+
+            <div className="relative min-h-[420px] lg:min-h-[720px]">
+              <Image
+                src="/contact-side.png"
+                alt=""
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
-            <Field
-              label="Current Website"
-              value={form.website}
-              onChange={(v) => updateField('website', v)}
-              placeholder="https:// (optional)"
-            />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-            {error ? (
-              <p
-                style={{
-                  margin: '0 0 16px',
-                  fontFamily: "'Inter',sans-serif",
-                  fontSize: 13,
-                  color: 'rgb(253,93,92)',
-                }}
-              >
-                {error}
-              </p>
-            ) : null}
-
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                paddingTop: 8,
-                borderTop: '1px solid rgb(229,229,234)',
-                marginTop: 8,
-              }}
-            >
-              <button
-                type="submit"
-                style={{
-                  marginTop: 16,
-                  padding: '12px 24px',
-                  borderRadius: 64,
-                  border: 'none',
-                  background: 'rgb(20,20,22)',
-                  color: 'white',
-                  fontFamily: "'Inter',sans-serif",
-                  fontWeight: 500,
-                  fontSize: 15,
-                  cursor: 'pointer',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                Continue
-              </button>
+              <div className="absolute inset-x-0 bottom-0 p-8 sm:p-10">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="size-4 fill-white text-white"
+                      strokeWidth={0}
+                    />
+                  ))}
+                </div>
+                <p className="mt-4 max-w-md text-base leading-relaxed text-white sm:text-lg">
+                  I would say whoever you work with from Devly, they are going
+                  to give you the results you expect to receive. They will
+                  deliver in a timely manner and make sure that you are
+                  completely satisfied with the outcome.
+                </p>
+                <p className="mt-6 text-sm font-semibold text-white">
+                  BDL Labs
+                </p>
+              </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
       </section>
 
       <WorkShowcase onBookCall={scrollToForm} />
@@ -334,16 +258,8 @@ export function LandingPage() {
   );
 }
 
-const inputStyle: React.CSSProperties = {
-  width: '100%',
-  padding: '12px 14px',
-  borderRadius: 8,
-  border: '1px solid rgb(229,229,234)',
-  fontFamily: "'Inter',sans-serif",
-  fontSize: 15,
-  color: 'rgb(20,20,22)',
-  outline: 'none',
-};
+const inputClassName =
+  'w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5 text-sm text-gray-900 shadow-sm outline-none transition-colors placeholder:text-gray-400 focus:border-gray-900 focus:ring-2 focus:ring-gray-900/10';
 
 type FieldProps = {
   label: string;
@@ -363,21 +279,10 @@ function Field({
   type = 'text',
 }: FieldProps) {
   return (
-    <div style={{ marginBottom: 20 }}>
-      <label
-        style={{
-          display: 'block',
-          marginBottom: 8,
-          fontFamily: "'Inter',sans-serif",
-          fontSize: 14,
-          fontWeight: 500,
-          color: 'rgb(20,20,22)',
-        }}
-      >
+    <div>
+      <label className="mb-1.5 block text-sm font-medium text-gray-700">
         {label}{' '}
-        {required ? (
-          <span style={{ color: 'rgb(253,93,92)' }}>*</span>
-        ) : null}
+        {required ? <span className="text-red-500">*</span> : null}
       </label>
       <input
         required={required}
@@ -385,7 +290,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        style={inputStyle}
+        className={inputClassName}
       />
     </div>
   );
