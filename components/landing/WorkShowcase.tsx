@@ -9,22 +9,26 @@ type WorkShowcaseProps = {
 
 export function WorkShowcase({ onBookCall }: WorkShowcaseProps) {
   return (
-    <section className="border-t border-border bg-background px-4 py-16 sm:py-20">
-      <div className="mx-auto max-w-4xl text-center">
-        <h2 className="mx-auto max-w-md text-base font-normal leading-relaxed tracking-normal text-black sm:text-lg">
-          Websites that actually bring you leads.
+    <section className="border-t border-graphite px-6 py-24 sm:px-8 lg:py-40">
+      <div className="mx-auto max-w-page text-center">
+        <p className="text-[13px] font-semibold uppercase tracking-[-0.02em] text-copper">
+          Selected work
+        </p>
+        <h2 className="mx-auto mt-4 max-w-3xl font-display text-[clamp(2rem,5vw,3.25rem)] leading-[1.13] text-paper-white">
+          Websites built to convert, not just look good.
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-[18px] font-light leading-[1.5] text-fog">
+          A sample of recent launches — clean, fast, and focused on bringing
+          you leads.
+        </p>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-16">
         <ShowcaseMarquee />
       </div>
 
-      <div className="mt-12 flex justify-center pb-4">
-        <BookCallButton
-          onClick={onBookCall}
-          label="Ready for the make over?"
-        />
+      <div className="mt-16 flex justify-center">
+        <BookCallButton onClick={onBookCall} label="Ready for the make over?" />
       </div>
     </section>
   );

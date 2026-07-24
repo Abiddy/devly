@@ -1,54 +1,42 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        card: {
-          DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
-        },
-        popover: {
-          DEFAULT: 'var(--popover)',
-          foreground: 'var(--popover-foreground)',
-        },
-        primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
-        },
-        secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
-        },
-        muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
-        },
-        accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
-        },
-        destructive: {
-          DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)',
-        },
         border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
+        obsidian: '#08080a',
+        onyx: '#040406',
+        carbon: '#121317',
+        graphite: '#1c1d22',
+        slate: '#2e3038',
+        steel: '#777a88',
+        fog: '#9194a1',
+        mist: '#acafb9',
+        bone: '#e2e3e9',
+        'paper-white': '#ffffff',
+        copper: '#cc9166',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+      },
+      maxWidth: {
+        page: '1216px',
+      },
+      borderRadius: {
+        card: '10px',
       },
     },
   },
   plugins: [],
-  darkMode: "class",
 };
+
 export default config;
