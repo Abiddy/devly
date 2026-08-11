@@ -11,6 +11,7 @@ import { BlurText } from './BlurText';
 import { PhoneUI } from './PhoneUI';
 
 const CONTACT_EMAIL = 'sales@devly.info';
+const CALENDLY_URL = 'https://calendly.com/abidinouman/new-meeting';
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const heroBgVideo =
@@ -110,12 +111,12 @@ function MeditationItem({
 }) {
   return (
     <motion.div
-      className="relative flex overflow-hidden rounded-2xl bg-white"
+      className="relative flex min-h-[88px] overflow-hidden rounded-2xl bg-white"
       initial={{ opacity: 0, y: -24 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -24 }}
       transition={{ duration: 0.85, delay, ease: EASE }}
     >
-      <div className="flex flex-1 flex-col justify-between p-3">
+      <div className="flex flex-1 items-center p-4 pr-3">
         <p
           className="font-[family-name:var(--font-noola-inter)] font-medium leading-snug"
           style={{
@@ -125,19 +126,11 @@ function MeditationItem({
         >
           {title}
         </p>
-        <div
-          className="flex h-8 w-8 items-center justify-center rounded-full"
-          style={{ background: '#9092e3' }}
-        >
-          <svg width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden>
-            <path d="M1 1.5l8 4.5-8 4.5V1.5z" fill="white" />
-          </svg>
-        </div>
       </div>
       <div className="relative w-[110px] shrink-0 self-stretch overflow-hidden rounded-2xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={thumb} alt="" className="absolute inset-0 h-full w-full object-cover" />
-        <span className="absolute right-2 top-2 rounded-full bg-black/35 px-2 py-0.5 font-[family-name:var(--font-noola-inter)] text-[11px] text-white">
+        <span className="absolute right-2 top-2 whitespace-nowrap rounded-full bg-black/40 px-2.5 py-1 font-[family-name:var(--font-noola-inter)] text-[10px] leading-none text-white">
           {meta}
         </span>
       </div>
@@ -218,7 +211,9 @@ export function AgencyLanding() {
                 </a>
               ))}
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-xl px-5 py-2.5 text-sm uppercase text-white transition-opacity hover:opacity-90"
                 style={{ backgroundColor: '#9092e3' }}
               >
@@ -290,7 +285,9 @@ export function AgencyLanding() {
                 </a>
               ))}
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-5 py-3 text-center text-sm uppercase text-white"
                 style={{
@@ -352,7 +349,9 @@ export function AgencyLanding() {
               actually need to hit.
             </motion.p>
             <motion.a
-              href={`mailto:${CONTACT_EMAIL}?subject=Devly%20—%20Book%20a%20call`}
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 rounded-xl bg-white px-6 py-3 text-sm font-medium uppercase tracking-wide"
               style={{ color: '#706a9b' }}
               initial={{ opacity: 0, y: 24 }}
@@ -384,19 +383,22 @@ export function AgencyLanding() {
       {/* Features intro */}
       <section
         id="why"
-        className="relative z-10 mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-28 md:py-36"
+        className="relative z-40 mx-auto max-w-5xl overflow-visible px-5 pb-20 pt-28 text-center sm:px-8 sm:pb-28 sm:pt-32 md:pb-36 md:pt-40"
       >
-        <h2 className="tracking-tighter text-white" style={{ lineHeight: 1.05 }}>
+        <h2
+          className="overflow-visible tracking-tighter text-white"
+          style={{ lineHeight: 1.12 }}
+        >
           <BlurText
             text="Designed"
             delay={160}
             direction="bottom"
             stepDuration={0.58}
-            className="justify-center"
+            className="justify-center overflow-visible pb-1 pt-2"
             style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
           />
           <span
-            className="inline-flex flex-wrap items-baseline justify-center gap-x-3"
+            className="inline-flex flex-wrap items-baseline justify-center gap-x-3 overflow-visible"
             style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
           >
             <BlurText
@@ -409,7 +411,7 @@ export function AgencyLanding() {
                 { filter: 'blur(5px)', opacity: 0.5, y: -5 },
                 { filter: 'blur(0px)', opacity: 1, y: 0 },
               ]}
-              className="justify-center"
+              className="justify-center overflow-visible"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -428,7 +430,7 @@ export function AgencyLanding() {
               delay={160}
               direction="bottom"
               stepDuration={0.58}
-              className="justify-center"
+              className="justify-center overflow-visible"
             />
           </span>
           <BlurText
@@ -436,7 +438,7 @@ export function AgencyLanding() {
             delay={160}
             direction="bottom"
             stepDuration={0.58}
-            className="justify-center"
+            className="justify-center overflow-visible"
             style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
           />
         </h2>
@@ -453,7 +455,7 @@ export function AgencyLanding() {
       </section>
 
       {/* How it works card */}
-      <section id="how" className="relative z-10 px-4 pb-6 sm:px-6 md:px-10">
+      <section id="how" className="relative z-40 px-4 pb-6 sm:px-6 md:px-10">
         <motion.div
           ref={moodRef}
           className="mx-auto max-w-5xl overflow-hidden rounded-[24px] sm:rounded-[28px]"
@@ -512,7 +514,7 @@ export function AgencyLanding() {
       </section>
 
       {/* KPIs card */}
-      <section id="kpis" className="relative z-10 px-4 pb-16 sm:px-6 sm:pb-24 md:px-10">
+      <section id="kpis" className="relative z-40 px-4 pb-16 sm:px-6 sm:pb-24 md:px-10">
         <motion.div
           ref={medRef}
           className="mx-auto max-w-5xl overflow-hidden rounded-[24px] sm:rounded-[28px]"
@@ -572,7 +574,7 @@ export function AgencyLanding() {
       {/* Final CTA */}
       <section
         id="contact"
-        className="relative z-10 px-5 pb-20 pt-8 text-center sm:px-8 sm:pb-28"
+        className="relative z-40 px-5 pb-20 pt-8 text-center sm:px-8 sm:pb-28"
       >
         <BlurText
           as="h2"
@@ -605,7 +607,9 @@ export function AgencyLanding() {
           transition={{ duration: 1, delay: 0.45, ease: EASE }}
         >
           <a
-            href={`mailto:${CONTACT_EMAIL}?subject=Devly%20—%20Book%20a%20call`}
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-xl px-6 py-3 text-sm uppercase text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: '#9092e3' }}
           >
@@ -621,7 +625,7 @@ export function AgencyLanding() {
         </motion.div>
       </section>
 
-      <footer className="relative z-10 border-t border-white/15 px-5 py-8 sm:px-8">
+      <footer className="relative z-40 border-t border-white/15 px-5 py-8 sm:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-medium text-white">Devly</p>
           <p className="text-xs text-white/60">
