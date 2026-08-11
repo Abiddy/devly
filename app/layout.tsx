@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Devly — We help brands meet their KPIs',
   description:
     'Devly connects brands with vetted creators qualified on engagement, consistency, and audience alignment — matched to your awareness, lead gen, or sales objectives.',
+  metadataBase: new URL('https://work.devly.info'),
   openGraph: {
     title: 'Devly — We help brands meet their KPIs',
     description:
