@@ -1,3 +1,5 @@
+@import url('https://db.onlinewebfonts.com/c/69f2576e7ca287875bf8d089130e292c?family=TT+Firs+Neue');
+@import url('https://db.onlinewebfonts.com/c/0884d17cb11ba81fc10318f784a5133e?family=TT+Firs+Neue+Trl');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
 @tailwind base;
@@ -21,6 +23,10 @@
     --background: var(--color-obsidian);
     --foreground: var(--color-bone);
     --border: var(--color-graphite);
+
+    --font-noola-display: 'TT Firs Neue', sans-serif;
+    --font-noola-body: 'TT Firs Neue Trl', sans-serif;
+    --font-noola-inter: 'Inter', sans-serif;
   }
 }
 
@@ -32,12 +38,42 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  background: #f2f5f8;
+  background: #6574a4;
   color: #0b1a24;
 }
 
 .agency {
-  font-family: var(--font-agency-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-noola-display), sans-serif;
+  scroll-behavior: smooth;
+}
+
+.agency ::-webkit-scrollbar {
+  width: 4px;
+}
+
+.agency ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.agency ::-webkit-scrollbar-thumb {
+  background: rgba(144, 146, 227, 0.4);
+  border-radius: 99px;
+}
+
+.clouds-position {
+  bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .clouds-position {
+    bottom: -15%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .clouds-position {
+    bottom: -30%;
+  }
 }
 
 .font-display {

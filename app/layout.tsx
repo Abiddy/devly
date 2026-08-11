@@ -1,21 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { Instrument_Serif, Manrope } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 import './globals.css';
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-agency-sans',
-  display: 'swap',
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-agency-display',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'Devly — We help brands meet their KPIs',
@@ -45,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${instrumentSerif.variable}`}>
+    <html lang="en">
       <body className="font-sans antialiased">
         <Suspense fallback={null}>
           <AnalyticsTracker />
