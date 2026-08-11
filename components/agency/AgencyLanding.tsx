@@ -133,7 +133,10 @@ export function AgencyLanding() {
           />
 
           <div className="relative z-10 mx-auto max-w-4xl px-6 py-32 text-center sm:px-8">
-            <h1 className="font-agency-display text-[clamp(2.75rem,8vw,5.75rem)] leading-[1.05] tracking-[-0.02em] text-chalk">
+            <p className="font-agency-display text-[clamp(2rem,5vw,3rem)] leading-none tracking-[-0.02em] text-chalk">
+              Devly
+            </p>
+            <h1 className="mt-6 font-agency-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] tracking-[-0.02em] text-chalk">
               We help brands meet their KPIs
             </h1>
             <p className="mx-auto mt-6 max-w-xl font-agency-sans text-[17px] leading-relaxed text-chalk/75 sm:text-[18px]">
@@ -182,7 +185,7 @@ export function AgencyLanding() {
                 />
               </div>
 
-              <ol className="space-y-4 sm:space-y-6">
+              <ol className="divide-y divide-ink/10 border-y border-ink/10">
                 {steps.map((step, index) => {
                   const isActive = reducedMotion || activeStep === index;
                   return (
@@ -191,25 +194,19 @@ export function AgencyLanding() {
                       ref={(el) => {
                         stepRefs.current[index] = el;
                       }}
-                      className={`group rounded-xl border px-6 py-8 transition-[border-color,background-color,box-shadow,transform] duration-300 sm:px-8 sm:py-10 motion-reduce:transition-none ${
-                        isActive
-                          ? 'border-signal/30 bg-chalk shadow-[0_12px_40px_-20px_rgba(14,116,144,0.35)]'
-                          : 'border-ink/8 bg-chalk/60'
-                      } ${
-                        !reducedMotion
-                          ? 'hover:-translate-y-0.5 hover:border-signal/40 hover:shadow-[0_16px_44px_-18px_rgba(14,116,144,0.4)]'
-                          : ''
+                      className={`group py-8 transition-colors duration-300 sm:py-10 motion-reduce:transition-none ${
+                        !reducedMotion ? 'hover:bg-chalk/80' : ''
                       }`}
                     >
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8">
+                      <div className="flex flex-col gap-4 px-1 sm:flex-row sm:items-start sm:gap-8 sm:px-2">
                         <span
-                          className={`font-agency-display text-[2.5rem] leading-none tracking-tight transition-colors duration-300 motion-reduce:transition-none ${
+                          className={`font-agency-display text-[2.75rem] leading-none tracking-tight transition-colors duration-300 motion-reduce:transition-none ${
                             isActive ? 'text-signal' : 'text-ink/20'
                           }`}
                         >
                           {step.number}
                         </span>
-                        <div>
+                        <div className="pt-1">
                           <h3 className="font-agency-sans text-[1.25rem] font-semibold tracking-tight text-ink">
                             {step.title}
                           </h3>
@@ -241,8 +238,8 @@ export function AgencyLanding() {
               get cut.
             </p>
 
-            <div className="mt-16 grid gap-6 lg:grid-cols-2 lg:gap-8">
-              <div className="rounded-xl border border-chalk/10 bg-ink-elevated p-8 sm:p-10">
+            <div className="mt-16 grid gap-12 border-t border-chalk/10 pt-12 lg:grid-cols-2 lg:gap-16">
+              <div>
                 <p className="font-agency-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-chalk/40">
                   The old way
                 </p>
@@ -256,7 +253,7 @@ export function AgencyLanding() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-signal/40 bg-signal/10 p-8 sm:p-10">
+              <div className="lg:border-l lg:border-signal/40 lg:pl-16">
                 <p className="font-agency-sans text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-light">
                   The Devly way
                 </p>
