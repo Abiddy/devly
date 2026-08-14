@@ -1,14 +1,14 @@
-import { LandingPage } from '@/components/landing/LandingPage';
+import { WebsitesLanding } from '@/components/websites/WebsitesLanding';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Devly — Websites that bring you leads',
+  title: 'Devly — What a world with a good website looks like',
   description:
-    'Software solutions, websites, and SEO — book a call to get started.',
+    'Minimal, high-end websites that generate leads 24/7. Book a call with Devly.',
   openGraph: {
-    title: 'Devly — Websites that bring you leads',
+    title: 'Devly — What a world with a good website looks like',
     description:
-      'Software solutions, websites, and SEO — book a call to get started.',
+      'Minimal, high-end websites that generate leads 24/7. Book a call with Devly.',
     url: 'https://work.devly.info/websites',
     siteName: 'Devly',
     locale: 'en_US',
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Devly — Websites that bring you leads',
+    title: 'Devly — What a world with a good website looks like',
     description:
-      'Software solutions, websites, and SEO — book a call to get started.',
+      'Minimal, high-end websites that generate leads 24/7. Book a call with Devly.',
     creator: '@DevlyOfficial',
   },
 };
 
 export default function WebsitesPage() {
-  return <LandingPage />;
+  return <WebsitesLanding />;
 }

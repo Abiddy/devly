@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "predev": "lsof -ti:3000,3001 | xargs kill -9 2>/dev/null || true",
-    "dev": "WATCHPACK_POLLING=true next dev --turbo",
-    "dve": "WATCHPACK_POLLING=true next dev --turbo",
+    "dev": "next dev --turbo",
+    "dve": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
