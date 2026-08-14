@@ -72,6 +72,12 @@ function Navbar() {
           Why
         </a>
         <a
+          href="/websites/pricing"
+          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
+        >
+          Pricing
+        </a>
+        <a
           href="#book"
           className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
         >
