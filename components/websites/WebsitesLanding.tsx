@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Aperture, BarChart3, Facebook, Linkedin, Twitter } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { CALENDLY_EVENT_URL } from '@/lib/calendly';
 
 const HERO_VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260611_130946_e6793cc7-6b6f-4035-9852-44290b781ae6.mp4';
@@ -258,13 +257,11 @@ function BookingSection() {
           it costs, and when we can ship.
         </p>
         <a
-          href={CALENDLY_EVENT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="liquid-glass reveal font-inter mt-12 inline-block rounded-[50%] px-10 py-5 text-[10px] uppercase tracking-[0.25em] transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.98] sm:px-12 sm:py-6 sm:text-xs"
+          href="/websites/pricing"
+          className="font-inter reveal mt-12 inline-block rounded-md bg-white px-10 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:px-12 sm:py-4 sm:text-xs"
           style={{ animationDelay: '0.3s' }}
         >
-          Book a call
+          Pricing
         </a>
       </div>
 
