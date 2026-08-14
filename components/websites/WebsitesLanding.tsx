@@ -44,16 +44,20 @@ const reasons = [
   },
 ];
 
-function LogoMark({ className }: { className?: string }) {
+function ReasonTitle({ title }: { title: string }) {
+  const parts = title.split(/(\d[\d/]*)/);
   return (
-    <svg
-      viewBox="0 0 256 256"
-      fill="white"
-      className={className}
-      aria-hidden
-    >
-      <path d="M 64 128 L 64.5 128 L 32 95 L 0 64 L 0 0 L 64 0 L 128 64 L 128 64.5 L 161 32 L 192 0 L 256 0 L 256 64 L 192 128 L 128 128 L 128 192 L 96 223 L 63.5 256 L 0 256 L 0 192 Z M 256 192 L 224 223 L 191.5 256 L 128 256 L 128 192 L 192 128 L 256 128 Z" />
-    </svg>
+    <>
+      {parts.map((part, i) =>
+        /^\d/.test(part) ? (
+          <span key={i} className="font-inter font-semibold tracking-tight">
+            {part}
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
   );
 }
 
@@ -66,15 +70,6 @@ function Navbar() {
           className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
         >
           Why
-        </a>
-        <a
-          href="#reasons"
-          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
-        >
-          Work
-        </a>
-        <a href="#top" aria-label="Devly home" className="relative z-10">
-          <LogoMark className="h-5 w-5 transition-transform hover:scale-110 sm:h-7 sm:w-7" />
         </a>
         <a
           href="#book"
@@ -200,7 +195,7 @@ function ReasonSection({
           className="reveal font-arsenica mt-4 text-4xl tracking-wide drop-shadow-[0_2px_20px_rgba(0,0,0,0.3)] sm:text-6xl md:text-7xl"
           style={{ animationDelay: '0.08s' }}
         >
-          {reason.title}
+          <ReasonTitle title={reason.title} />
         </h2>
         <p
           className="reveal font-arsenica mt-6 text-xl tracking-wide text-white/90 drop-shadow-[0_2px_16px_rgba(0,0,0,0.25)] sm:text-3xl md:text-4xl"
