@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Aperture, BarChart3, Check, Facebook, Linkedin, Twitter } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -9,8 +9,15 @@ import { CALENDLY_EVENT_URL } from '@/lib/calendly';
 const CLOUD_PARALLAX =
   'https://soft-zoom-63098134.figma.site/_assets/v11/c536f05c69de65726fe598137058c1e477d2badc.png';
 
-const PAYPAL_PACKAGE_URL =
-  'https://www.paypal.com/ncp/payment/3GXQXENJZ99FL';
+/** Create separate PayPal NCP links for each total, then paste them here. */
+const PAYPAL_WEBSITE_ONLY =
+  'https://www.paypal.com/ncp/payment/3GXQXENJZ99FL'; // $699 — replace with your $699 link
+const PAYPAL_WITH_MAINTENANCE =
+  'https://www.paypal.com/ncp/payment/3GXQXENJZ99FL'; // $999 — replace with your $999 link
+
+const PRICE_SITE = 699;
+const PRICE_MAINTENANCE = 300; // $30/yr × 10 years
+const PRICE_WITH_MAINTENANCE = PRICE_SITE + PRICE_MAINTENANCE; // 999
 
 const starterFeatures = [
   'Full custom landing page — design through launch',
@@ -20,7 +27,7 @@ const starterFeatures = [
   'Mobile-responsive, fast, and SEO-ready basics',
   'Copy structure that pushes visitors toward a clear CTA',
   'Launch support and handoff',
-  '30 days of post-launch maintenance (bug fixes & small text tweaks)',
+  '30 days of post-launch bug-fix coverage included',
 ];
 
 const customFeatures = [
@@ -29,7 +36,7 @@ const customFeatures = [
   'Deeper brand / UX exploration',
   'Extended consultation and iteration time',
   'Ongoing maintenance retainers',
-  'Whatever the $1,500 package cannot cover cleanly',
+  'Whatever the Launch package cannot cover cleanly',
 ];
 
 function Navbar() {
@@ -131,6 +138,98 @@ function FeatureList({ items }: { items: string[] }) {
   );
 }
 
+function LaunchPackageCard() {
+  const [includeMaintenance, setIncludeMaintenance] = useState(true);
+  const total = includeMaintenance ? PRICE_WITH_MAINTENANCE : PRICE_SITE;
+  const paypalUrl = includeMaintenance
+    ? PAYPAL_WITH_MAINTENANCE
+    : PAYPAL_WEBSITE_ONLY;
+
+  return (
+    <article
+      className="reveal liquid-glass rounded-[28px] p-7 sm:p-10"
+      style={{ animationDelay: '0.1s' }}
+    >
+      <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-white/55">
+        Launch
+      </p>
+      <h2 className="font-arsenica mt-3 text-3xl tracking-wide sm:text-4xl">
+        Website package
+      </h2>
+
+      <div className="mt-4">
+        <p className="flex items-baseline gap-1">
+          <span className="font-inter text-5xl font-semibold tracking-tight tabular-nums sm:text-6xl">
+            ${total.toLocaleString()}
+          </span>
+          <span className="font-inter text-sm text-white/50">one-time</span>
+        </p>
+        <p className="font-inter mt-2 text-sm text-white/55">
+          {includeMaintenance ? (
+            <>
+              ${PRICE_SITE} site + ${PRICE_MAINTENANCE} maintenance (10 yrs)
+            </>
+          ) : (
+            <>Website only — maintenance not included</>
+          )}
+        </p>
+      </div>
+
+      <p className="font-inter mt-4 text-sm leading-relaxed text-white/65">
+        Everything you need for a lead-generating landing page — design, build,
+        forms & booking, and launch. No surprise scope creep inside this
+        package.
+      </p>
+
+      <FeatureList items={starterFeatures} />
+
+      <div className="mt-8 rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="font-inter text-[11px] font-medium uppercase tracking-[0.2em] text-white/50">
+              Add-on
+            </p>
+            <p className="font-inter mt-1.5 text-sm font-medium text-white/90">
+              10-year maintenance
+            </p>
+            <p className="font-inter mt-1 text-[13px] leading-relaxed text-white/55">
+              $30/year prepaid × 10 years = ${PRICE_MAINTENANCE}. Covers ongoing
+              upkeep after the included 30-day bug-fix window.
+            </p>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={includeMaintenance}
+            aria-label="Include 10-year maintenance"
+            onClick={() => setIncludeMaintenance((v) => !v)}
+            className={`relative mt-1 h-7 w-12 shrink-0 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+              includeMaintenance ? 'bg-white' : 'bg-white/20'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 h-6 w-6 rounded-full transition-transform ${
+                includeMaintenance
+                  ? 'left-0.5 translate-x-5 bg-[#410C01]'
+                  : 'left-0.5 translate-x-0 bg-white/80'
+              }`}
+            />
+          </button>
+        </div>
+      </div>
+
+      <a
+        href={paypalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-inter mt-8 inline-flex w-full items-center justify-center rounded-md bg-white px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:text-xs"
+      >
+        Pay ${total.toLocaleString()}
+      </a>
+    </article>
+  );
+}
+
 export function WebsitesPricing() {
   const ref = useRef<HTMLDivElement | null>(null);
   useScrollReveal(ref);
@@ -162,52 +261,8 @@ export function WebsitesPricing() {
         id="plans"
         className="relative z-20 mx-auto grid max-w-5xl gap-6 px-4 pb-24 sm:px-8 lg:grid-cols-2 lg:gap-8"
       >
-        {/* Starter — $1,500 */}
-        <article
-          className="reveal liquid-glass rounded-[28px] p-7 sm:p-10"
-          style={{ animationDelay: '0.1s' }}
-        >
-          <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-white/55">
-            Launch
-          </p>
-          <h2 className="font-arsenica mt-3 text-3xl tracking-wide sm:text-4xl">
-            Website package
-          </h2>
-          <p className="mt-4 flex items-baseline gap-1">
-            <span className="font-inter text-5xl font-semibold tracking-tight sm:text-6xl">
-              $1,500
-            </span>
-            <span className="font-inter text-sm text-white/50">one-time</span>
-          </p>
-          <p className="font-inter mt-4 text-sm leading-relaxed text-white/65">
-            Everything you need for a lead-generating landing page — design,
-            build, forms & booking, and launch. No surprise scope creep inside
-            this package.
-          </p>
+        <LaunchPackageCard />
 
-          <FeatureList items={starterFeatures} />
-
-          <div className="mt-8 rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3.5">
-            <p className="font-inter text-[11px] font-medium uppercase tracking-[0.2em] text-white/50">
-              Optional
-            </p>
-            <p className="font-inter mt-1.5 text-sm text-white/80">
-              Hosting — <span className="font-semibold">$30 / year</span> if you
-              want us to handle it. Bring your own host if you prefer.
-            </p>
-          </div>
-
-          <a
-            href={PAYPAL_PACKAGE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-inter mt-8 inline-flex w-full items-center justify-center rounded-md bg-white px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:text-xs"
-          >
-            Book this package
-          </a>
-        </article>
-
-        {/* Custom */}
         <article
           className="reveal rounded-[28px] border border-white/20 bg-black/25 p-7 sm:p-10"
           style={{ animationDelay: '0.2s' }}
@@ -233,7 +288,7 @@ export function WebsitesPricing() {
 
           <div className="mt-8 rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3.5">
             <p className="font-inter text-sm text-white/80">
-              Best when the $1,500 package would be a squeeze — not a fit.
+              Best when the Launch package would be a squeeze — not a fit.
             </p>
           </div>
 
@@ -260,7 +315,7 @@ export function WebsitesPricing() {
             className="reveal font-inter mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/60"
             style={{ animationDelay: '0.18s' }}
           >
-            Most founders land on the $1,500 package. If you need more than a
+            Most founders land on the Launch package. If you need more than a
             landing page with forms & booking, we&apos;ll say so on the call —
             no pressure pitch.
           </p>
@@ -268,7 +323,7 @@ export function WebsitesPricing() {
             href={CALENDLY_EVENT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="liquid-glass reveal font-inter mt-10 inline-block rounded-[50%] px-10 py-5 text-[10px] uppercase tracking-[0.25em] transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] sm:px-12 sm:py-6 sm:text-xs"
+            className="font-inter reveal mt-10 inline-block rounded-md bg-white px-10 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:px-12 sm:py-4 sm:text-xs"
             style={{ animationDelay: '0.26s' }}
           >
             Book a call
