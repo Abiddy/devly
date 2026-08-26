@@ -49,6 +49,12 @@ function Navbar() {
         >
           Websites
         </Link>
+        <Link
+          href="/websites/inquire"
+          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
+        >
+          Inquire
+        </Link>
         <a
           href="#plans"
           className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"

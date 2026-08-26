@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Aperture, BarChart3, Facebook, Linkedin, Twitter } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { InquiryForm } from '@/components/websites/InquiryForm';
 
 const HERO_VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260611_130946_e6793cc7-6b6f-4035-9852-44290b781ae6.mp4';
@@ -65,10 +66,10 @@ function Navbar() {
     <nav className="fixed left-1/2 top-4 z-50 -translate-x-1/2 sm:top-6">
       <div className="liquid-glass flex items-center gap-4 rounded-full px-4 py-2.5 sm:gap-12 sm:px-10 sm:py-3">
         <a
-          href="#reasons"
+          href="/websites/inquire"
           className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
         >
-          Why
+          Inquire
         </a>
         <a
           href="/websites/pricing"
@@ -238,31 +239,32 @@ function BookingSection() {
       ref={ref}
       className="relative overflow-hidden bg-[#410C01] px-6 pb-32 pt-24 sm:px-12 sm:pt-32 lg:px-28"
     >
-      <div className="relative z-20 mx-auto max-w-3xl text-center">
-        <h2 className="reveal font-arsenica text-4xl tracking-wide sm:text-6xl md:text-7xl">
-          Shall we?
-        </h2>
-        <p
-          className="reveal font-arsenica mt-6 text-lg text-white/85 sm:text-2xl"
-          style={{ animationDelay: '0.12s' }}
-        >
-          Fifteen minutes. One call. A clearer path to a site that actually
-          works.
-        </p>
-        <p
-          className="reveal font-inter mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/55"
-          style={{ animationDelay: '0.2s' }}
-        >
-          No 40-slide decks. No &ldquo;synergy.&rdquo; Just what you need, what
-          it costs, and when we can ship.
-        </p>
-        <a
-          href="/websites/pricing"
-          className="font-inter reveal mt-12 inline-block rounded-md bg-white px-10 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:px-12 sm:py-4 sm:text-xs"
-          style={{ animationDelay: '0.3s' }}
-        >
-          Pricing
-        </a>
+      <div className="relative z-20 mx-auto max-w-2xl">
+        <div className="text-center">
+          <h2 className="reveal font-arsenica text-4xl tracking-wide sm:text-6xl md:text-7xl">
+            Shall we?
+          </h2>
+          <p
+            className="reveal font-arsenica mt-6 text-lg text-white/85 sm:text-2xl"
+            style={{ animationDelay: '0.12s' }}
+          >
+            Send an inquiry — get the Welcome Package instantly.
+          </p>
+          <p
+            className="reveal font-inter mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/55"
+            style={{ animationDelay: '0.2s' }}
+          >
+            We follow up within 1–2 business days with clear next steps. Prefer
+            to skim pricing first?{' '}
+            <a href="/websites/pricing" className="underline underline-offset-2 hover:text-white">
+              See packages
+            </a>
+            .
+          </p>
+        </div>
+        <div className="reveal mt-12" style={{ animationDelay: '0.28s' }}>
+          <InquiryForm compact />
+        </div>
       </div>
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
