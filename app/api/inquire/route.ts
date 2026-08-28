@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import {
+  buildProspectWelcomeEmail,
+  welcomeEmailSubject,
+} from '@/lib/inquire-email';
+import { saveInquiry } from '@/lib/inquiries';
 
 type InquireBody = {
   name?: string;
@@ -7,6 +12,10 @@ type InquireBody = {
   company?: string;
   website?: string;
   message?: string;
+  goals?: string[];
+  budget?: string;
+  size?: string;
+  timeline?: string;
 };
 
 function getBaseUrl(request: Request) {
@@ -30,6 +39,12 @@ export async function POST(request: Request) {
   const company = (body.company || '').trim();
   const website = (body.website || '').trim();
   const message = (body.message || '').trim();
+  const goals = Array.isArray(body.goals)
+    ? body.goals.map((g) => String(g).trim()).filter(Boolean)
+    : [];
+  const budget = (body.budget || '').trim();
+  const size = (body.size || '').trim();
+  const timeline = (body.timeline || '').trim();
 
   if (!name || !email) {
     return NextResponse.json(
@@ -50,32 +65,51 @@ export async function POST(request: Request) {
   const from =
     process.env.RESEND_FROM || 'Devly <onboarding@resend.dev>';
 
+  const lead = {
+    name,
+    email,
+    company,
+    website,
+    message,
+    goals,
+    budget,
+    size,
+    timeline,
+  };
+
+  let stored = false;
+  try {
+    await saveInquiry(lead);
+    stored = true;
+  } catch (err) {
+    console.error('[inquire] could not persist lead', err);
+  }
+
   if (!apiKey) {
     console.warn('[inquire] RESEND_API_KEY missing — lead accepted without email');
-    console.info('[inquire] lead', { name, email, company, website, message });
+    console.info('[inquire] lead', lead);
     return NextResponse.json({
       ok: true,
       emailed: false,
+      stored,
       welcomeUrl,
-      warning:
-        'Email provider not configured. Lead logged; share the Welcome Package link manually.',
+      warning: stored
+        ? 'Email provider not configured. Lead saved in /admin.'
+        : 'Email provider not configured and lead could not be saved.',
     });
   }
 
   const resend = new Resend(apiKey);
+  const photoUrl = `${baseUrl}/website-assets/nouman-1.png`;
 
-  const prospectHtml = `
-    <div style="font-family: Inter, Helvetica, Arial, sans-serif; color: #1a1a1a; line-height: 1.5; max-width: 560px;">
-      <p>Hi ${escapeHtml(name.split(' ')[0] || name)},</p>
-      <p>Thanks for taking the time to share details about your project.</p>
-      <p>We're reviewing your inquiry and will follow up with next steps within <strong>1–2 business days</strong>.</p>
-      <p>In the meantime, review our Welcome Package — it outlines how we approach projects, our process, and what working together typically looks like:</p>
-      <p><a href="${welcomeUrl}" style="color: #0b1a24; font-weight: 600;">View the Welcome Package →</a></p>
-      <p>Pricing overview: <a href="${pricingUrl}">${pricingUrl}</a></p>
-      <p>This should answer most high-level questions and give you a clear sense of whether this feels like the right fit.</p>
-      <p style="margin-top: 28px;">— Devly<br/><a href="mailto:sales@devly.info">sales@devly.info</a></p>
-    </div>
-  `;
+  const prospectHtml = buildProspectWelcomeEmail({
+    name,
+    budget,
+    size,
+    welcomeUrl,
+    pricingUrl,
+    photoUrl,
+  });
 
   const notifyHtml = `
     <div style="font-family: Inter, Helvetica, Arial, sans-serif; line-height: 1.5;">
@@ -84,7 +118,11 @@ export async function POST(request: Request) {
       Email: ${escapeHtml(email)}<br/>
       Company: ${escapeHtml(company || '—')}<br/>
       Website: ${escapeHtml(website || '—')}</p>
-      <p>Message:</p>
+      <p>Goals: ${escapeHtml(goals.length ? goals.join(', ') : '—')}<br/>
+      Budget: ${escapeHtml(budget || '—')}<br/>
+      Size: ${escapeHtml(size || '—')}<br/>
+      Timeline: ${escapeHtml(timeline || '—')}</p>
+      <p>Brief:</p>
       <p>${escapeHtml(message || '—').replace(/\n/g, '<br/>')}</p>
     </div>
   `;
@@ -93,7 +131,7 @@ export async function POST(request: Request) {
     const prospect = await resend.emails.send({
       from,
       to: email,
-      subject: 'Your website project — next steps',
+      subject: welcomeEmailSubject(name),
       html: prospectHtml,
     });
 
@@ -117,7 +155,7 @@ export async function POST(request: Request) {
       console.error('[inquire] notify email failed', notify.error);
     }
 
-    return NextResponse.json({ ok: true, emailed: true, welcomeUrl });
+    return NextResponse.json({ ok: true, emailed: true, stored, welcomeUrl });
   } catch (err) {
     console.error('[inquire] unexpected error', err);
     return NextResponse.json(

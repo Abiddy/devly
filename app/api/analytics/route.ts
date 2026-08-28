@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       ...stats,
       storage: 'local-json',
       note:
-        'Counts are stored in data/analytics.json on the server. On read-only hosts (e.g. some serverless deploys), use Vercel Analytics or a database for production-grade tracking.',
+        'Counts are stored in data/analytics.json on the server. Attach a Railway volume at /data and set DATA_DIR=/data so leads and stats survive restarts.',
     });
   } catch {
     return NextResponse.json(

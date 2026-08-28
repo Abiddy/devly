@@ -15,121 +15,112 @@ const sections: Section[] = [
   {
     label: '01',
     title: 'What we actually do',
-    body: 'Devly builds lead-focused websites for founders and operators who need a site that works while they work. Not a brochure. Not a vanity redesign. A clear story, a sharp layout, and a path to booked calls.',
+    body: 'Devly builds custom websites for founders and local businesses that need leads — clear story, sharp design, forms and booking wired. Not a template with your logo slapped on.',
   },
   {
     label: '02',
     title: 'Who this is for',
-    body: 'You are actively investing in getting customers — not collecting Dribbble shots. You want one strong landing page (or a focused site), forms/booking wired up, and a partner who can decide fast.',
+    body: 'Service businesses and founder-led brands that have outgrown DIY builders. You want something that feels as serious as your work — and a partner who can decide fast.',
   },
   {
     label: '03',
     title: 'How a project runs',
     steps: [
-      'Consult — 15 minutes. Goals, audience, timeline, constraints.',
-      'Scope — We confirm package (Launch or Custom) and kickoff inputs.',
-      'Build — Design + development in one pass. Three revision cycles included.',
-      'Launch — Forms, booking, handoff, and 30 days of bug-fix coverage.',
+      'Call — goals, audience, timeline, constraints.',
+      'Proposal — clear options and investment before kickoff.',
+      'Build — design + development with focused revision cycles.',
+      'Launch — QA, handoff, and support so you’re not left guessing.',
     ],
   },
   {
     label: '04',
-    title: 'What you walk away with',
-    bullets: [
-      'Custom landing page — designed and shipped',
-      'Forms & booking connected (leads go somewhere useful)',
-      'Consultations so your ideas shape the build',
-      'Three revision cycles',
-      'Launch support + 30-day bug fixes',
-      'Optional: 10-year maintenance add-on ($30/yr prepaid)',
-    ],
+    title: 'How pricing works',
+    body: 'We don’t put a checkout button on the internet and hope for the best. You book a call or send an inquiry. If we’re a fit, you get a custom proposal with options you can actually choose from.',
   },
   {
     label: '05',
-    title: 'Clear pricing',
-    body: 'Launch package starts at $699 (site) or $999 with 10-year maintenance. Need more pages or deeper product work? That’s Custom — we scope it on a call, no mystery invoices.',
-  },
-  {
-    label: '06',
     title: 'What we need from you',
     bullets: [
-      'Business name, offer, and who you sell to',
-      'Any brand assets (logo, colors, fonts) — or we start clean',
-      'Examples of sites you respect (and ones you hate)',
-      'Decision-maker available for feedback inside revision windows',
+      'What you sell and who you sell to',
+      'Brand assets if you have them (or we start clean)',
+      'Sites you respect — and ones you don’t',
+      'A decision-maker available for feedback windows',
     ],
   },
 ];
 
 export function WelcomePackage() {
   return (
-    <div className="websites min-h-screen bg-[#410C01] text-white">
-      <header className="mx-auto flex max-w-3xl items-center justify-between px-6 py-6 sm:px-8">
-        <Link
-          href="/websites"
-          className="font-inter text-[12px] font-medium uppercase tracking-[0.2em] text-white/70 transition-colors hover:text-white"
-        >
-          Devly
-        </Link>
-        <Link
-          href="/websites/inquire"
-          className="font-inter rounded-md bg-white px-4 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-black transition-opacity hover:opacity-90"
-        >
-          Start inquiry
-        </Link>
+    <div className="relative min-h-screen overflow-x-hidden bg-[#f3f5fa] text-[#15205f]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_at_top,_rgba(21,40,104,0.1),_transparent_55%)]"
+      />
+      <header className="relative border-b border-[#e2e8f5]/70 bg-white/75 backdrop-blur-2xl">
+        <div className="mx-auto flex h-[4.25rem] max-w-3xl items-center justify-between px-5 sm:px-8">
+          <Link
+            href="/websites"
+            className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
+          >
+            Devly
+          </Link>
+          <Link
+            href="/websites/inquire"
+            className="rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#0f1d52]"
+          >
+            Get a quote
+          </Link>
+        </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-6 pb-24 sm:px-8">
-        <p className="font-inter text-[10px] font-medium uppercase tracking-[0.35em] text-white/50">
+      <main className="relative mx-auto max-w-3xl px-5 py-14 sm:px-8">
+        <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
           Welcome package
         </p>
-        <h1 className="font-arsenica mt-4 text-4xl leading-[1.1] tracking-wide sm:text-6xl">
-          We design and build websites that bring you leads.
+        <h1 className="mt-3 text-[clamp(2.1rem,5vw,3.15rem)] font-extrabold leading-[1.08] tracking-[-0.045em] text-[#152868]">
+          We design and develop{' '}
+          <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+            really good
+          </em>{' '}
+          websites.
         </h1>
-        <p className="font-arsenica mt-6 text-lg text-white/80 sm:text-xl">
-          Custom design. Clear process. No guessing what happens next.
-        </p>
-        <p className="font-inter mt-6 max-w-xl text-sm leading-relaxed text-white/55">
-          Thanks for reaching out. This package explains how we work, what you
-          get, and whether we&apos;re the right fit — so our first call is useful,
-          not a sales monologue.
+        <p className="mt-4 text-[17px] font-medium text-[#5c688f]">
+          Custom design. Custom development. Pricing discussed on a call — then
+          locked in a clear proposal.
         </p>
 
-        <div className="mt-14 space-y-14 border-t border-white/15 pt-14">
+        <div className="mt-12 space-y-5 border-t border-[#e2e8f5] pt-10">
           {sections.map((section) => (
-            <section key={section.label}>
-              <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-white/45">
+            <section
+              key={section.label}
+              className="rounded-[22px] border border-[#e2e8f5] bg-white p-6 shadow-[0_16px_40px_-28px_rgba(21,40,104,0.3)] sm:p-7"
+            >
+              <p className="font-[family-name:var(--font-studio-display)] text-[1.75rem] italic leading-none text-[#152868]/30">
                 {section.label}
               </p>
-              <h2 className="font-arsenica mt-2 text-2xl tracking-wide sm:text-3xl">
+              <h2 className="mt-3 text-[1.35rem] font-extrabold tracking-[-0.03em] text-[#15205f]">
                 {section.title}
               </h2>
               {section.body && (
-                <p className="font-inter mt-4 text-[15px] leading-relaxed text-white/65">
+                <p className="mt-3 text-[15px] leading-relaxed text-[#667085]">
                   {section.body}
                 </p>
               )}
               {section.steps && (
-                <ol className="mt-5 space-y-3">
+                <ol className="mt-4 space-y-2">
                   {section.steps.map((step, i) => (
-                    <li
-                      key={step}
-                      className="font-inter flex gap-3 text-[15px] leading-relaxed text-white/65"
-                    >
-                      <span className="shrink-0 text-white/40">{i + 1}.</span>
+                    <li key={step} className="flex gap-3 text-[15px] text-[#667085]">
+                      <span className="font-bold text-[#152868]">{i + 1}.</span>
                       <span>{step}</span>
                     </li>
                   ))}
                 </ol>
               )}
               {section.bullets && (
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-4 space-y-2">
                   {section.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="font-inter flex gap-3 text-[15px] leading-relaxed text-white/65"
-                    >
-                      <span className="text-white/40">—</span>
+                    <li key={b} className="flex gap-3 text-[15px] text-[#667085]">
+                      <span className="text-[#152868]">—</span>
                       <span>{b}</span>
                     </li>
                   ))}
@@ -139,36 +130,32 @@ export function WelcomePackage() {
           ))}
         </div>
 
-        <section className="mt-16 border-t border-white/15 pt-14">
-          <h2 className="font-arsenica text-2xl tracking-wide sm:text-3xl">
+        <section className="mt-8 overflow-hidden rounded-[28px] bg-[#152868] p-7 text-white shadow-[0_28px_64px_-32px_rgba(21,40,104,0.55)] sm:p-9">
+          <h2 className="text-[1.55rem] font-extrabold tracking-[-0.03em]">
             Next step
           </h2>
-          <p className="font-inter mt-4 max-w-xl text-[15px] leading-relaxed text-white/65">
-            If this feels like a fit, book a short call or send an inquiry. We
-            review every request and follow up within 1–2 business days with
-            clear next steps.
+          <p className="mt-3 text-[15px] leading-relaxed text-white/70">
+            Book a short call or send an inquiry. We’ll follow up within 1–2
+            business days if we’re a fit — with a custom proposal, not a generic
+            price list.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href={CALENDLY_EVENT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-inter inline-flex items-center justify-center rounded-md bg-white px-6 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90"
+              className="inline-flex justify-center rounded-full bg-white px-5 py-3 text-[13px] font-semibold text-[#152868] hover:bg-[#f3f5ff]"
             >
               Book a call
             </a>
             <Link
-              href="/websites/pricing"
-              className="font-inter inline-flex items-center justify-center rounded-md border border-white/40 px-6 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white transition-colors hover:border-white hover:bg-white/10"
+              href="/websites/inquire"
+              className="inline-flex justify-center rounded-full border border-white/30 px-5 py-3 text-[13px] font-semibold text-white hover:bg-white/10"
             >
-              See pricing
+              Send an inquiry
             </Link>
           </div>
         </section>
-
-        <p className="font-inter mt-16 text-xs text-white/40">
-          Devly · sales@devly.info · work.devly.info/websites
-        </p>
       </main>
     </div>
   );

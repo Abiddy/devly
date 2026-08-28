@@ -1,349 +1,216 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Aperture, BarChart3, Check, Facebook, Linkedin, Twitter } from 'lucide-react';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { ArrowRight, CalendarDays } from 'lucide-react';
 import { CALENDLY_EVENT_URL } from '@/lib/calendly';
 
-const CLOUD_PARALLAX =
-  'https://soft-zoom-63098134.figma.site/_assets/v11/c536f05c69de65726fe598137058c1e477d2badc.png';
-
-/** Create separate PayPal NCP links for each total, then paste them here. */
-const PAYPAL_WEBSITE_ONLY =
-  'https://www.paypal.com/ncp/payment/3GXQXENJZ99FL'; // $699 — replace with your $699 link
-const PAYPAL_WITH_MAINTENANCE =
-  'https://www.paypal.com/ncp/payment/3GXQXENJZ99FL'; // $999 — replace with your $999 link
-
-const PRICE_SITE = 699;
-const PRICE_MAINTENANCE = 300; // $30/yr × 10 years
-const PRICE_WITH_MAINTENANCE = PRICE_SITE + PRICE_MAINTENANCE; // 999
-
-const starterFeatures = [
-  'Full custom landing page — design through launch',
-  'Forms & booking flows wired up (leads, contact, Calendly)',
-  'Consultations included so we can hear your ideas and goals',
-  '3 revision cycles baked into the build',
-  'Mobile-responsive, fast, and SEO-ready basics',
-  'Copy structure that pushes visitors toward a clear CTA',
-  'Launch support and handoff',
-  '30 days of post-launch bug-fix coverage included',
+const principles = [
+  {
+    title: 'Quality work beats paid ads.',
+    body: 'A sharp site compounds. Referrals and inbound beat burning budget on a weak first impression.',
+  },
+  {
+    title: 'You choose the investment.',
+    body: 'We shape scope to your goals and budget — not a mystery menu of upsells mid-project.',
+  },
+  {
+    title: 'Need help deciding?',
+    body: 'That’s what the call is for. We’ll say what a smart phase-one looks like — even if it’s smaller than you expected.',
+  },
+  {
+    title: 'We don’t win when you overspend.',
+    body: 'Higher budgets buy depth and flexibility, not inflated margins for the same deliverable.',
+  },
 ];
 
-const customFeatures = [
-  'Multi-page sites, portals, or richer product flows',
-  'Extra integrations beyond forms & booking',
-  'Deeper brand / UX exploration',
-  'Extended consultation and iteration time',
-  'Ongoing maintenance retainers',
-  'Whatever the Launch package cannot cover cleanly',
-];
-
-function Navbar() {
+function Nav() {
   return (
-    <nav className="fixed left-1/2 top-4 z-50 -translate-x-1/2 sm:top-6">
-      <div className="liquid-glass flex items-center gap-4 rounded-full px-4 py-2.5 sm:gap-10 sm:px-10 sm:py-3">
+    <header className="sticky top-0 z-50 border-b border-[#e2e8f5]/70 bg-white/75 backdrop-blur-2xl">
+      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/websites"
-          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
+          className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
         >
-          Websites
+          Devly
         </Link>
-        <Link
-          href="/websites/inquire"
-          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
-        >
-          Inquire
-        </Link>
-        <a
-          href="#plans"
-          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
-        >
-          Plans
-        </a>
+        <nav className="hidden items-center gap-0.5 rounded-full border border-[#e2e8f5] bg-[#f4f6fb]/90 p-1 md:flex">
+          <Link
+            href="/websites#work"
+            className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
+          >
+            Work
+          </Link>
+          <Link
+            href="/websites/pricing"
+            className="rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-[#152868] shadow-sm"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/websites/inquire"
+            className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
+          >
+            Get Quote
+          </Link>
+        </nav>
         <a
           href={CALENDLY_EVENT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-inter text-[10px] font-medium uppercase tracking-[0.15em] text-white/85 transition-colors hover:text-white sm:text-xs sm:tracking-[0.2em]"
+          className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_10px_28px_-10px_rgba(21,40,104,0.65)] hover:bg-[#0f1d52]"
         >
-          Book
+          <CalendarDays className="h-3.5 w-3.5" />
+          Book a call
         </a>
       </div>
-    </nav>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black/40 to-transparent">
-      <div className="flex items-center justify-between px-3 py-2.5 sm:px-10 sm:py-4">
-        <div className="flex items-center gap-4">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/80 transition-colors hover:text-white"
-            aria-label="Facebook"
-          >
-            <Facebook className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/80 transition-colors hover:text-white"
-            aria-label="Twitter"
-          >
-            <Twitter className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/80 transition-colors hover:text-white"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </a>
-          <span className="hidden font-inter text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 sm:inline">
-            Devly
-          </span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a
-            href="mailto:sales@devly.info"
-            className="hidden font-inter text-[10px] font-medium uppercase tracking-[0.25em] text-white/80 transition-colors hover:text-white sm:inline"
-          >
-            sales@devly.info
-          </a>
-          <BarChart3 className="h-3.5 w-3.5 text-white/80 sm:h-4 sm:w-4" aria-hidden />
-          <Aperture className="h-3.5 w-3.5 text-white/80 sm:h-4 sm:w-4" aria-hidden />
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FeatureList({ items }: { items: string[] }) {
-  return (
-    <ul className="mt-8 space-y-3.5 text-left">
-      {items.map((item) => (
-        <li key={item} className="flex gap-3">
-          <Check
-            className="mt-0.5 h-4 w-4 shrink-0 text-white/70"
-            strokeWidth={2}
-            aria-hidden
-          />
-          <span className="font-inter text-[13px] leading-relaxed text-white/70 sm:text-sm">
-            {item}
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function LaunchPackageCard() {
-  const [includeMaintenance, setIncludeMaintenance] = useState(true);
-  const total = includeMaintenance ? PRICE_WITH_MAINTENANCE : PRICE_SITE;
-  const paypalUrl = includeMaintenance
-    ? PAYPAL_WITH_MAINTENANCE
-    : PAYPAL_WEBSITE_ONLY;
-
-  return (
-    <article
-      className="reveal liquid-glass rounded-[28px] p-7 sm:p-10"
-      style={{ animationDelay: '0.1s' }}
-    >
-      <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-white/55">
-        Launch
-      </p>
-      <h2 className="font-arsenica mt-3 text-3xl tracking-wide sm:text-4xl">
-        Website package
-      </h2>
-
-      <div className="mt-4">
-        <p className="flex items-baseline gap-1">
-          <span className="font-inter text-5xl font-semibold tracking-tight tabular-nums sm:text-6xl">
-            ${total.toLocaleString()}
-          </span>
-          <span className="font-inter text-sm text-white/50">one-time</span>
-        </p>
-        <p className="font-inter mt-2 text-sm text-white/55">
-          {includeMaintenance ? (
-            <>
-              ${PRICE_SITE} site + ${PRICE_MAINTENANCE} maintenance (10 yrs)
-            </>
-          ) : (
-            <>Website only — maintenance not included</>
-          )}
-        </p>
-      </div>
-
-      <p className="font-inter mt-4 text-sm leading-relaxed text-white/65">
-        Everything you need for a lead-generating landing page — design, build,
-        forms & booking, and launch. No surprise scope creep inside this
-        package.
-      </p>
-
-      <FeatureList items={starterFeatures} />
-
-      <div className="mt-8 rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0 flex-1">
-            <p className="font-inter text-[11px] font-medium uppercase tracking-[0.2em] text-white/50">
-              Add-on
-            </p>
-            <p className="font-inter mt-1.5 text-sm font-medium text-white/90">
-              10-year maintenance
-            </p>
-            <p className="font-inter mt-1 text-[13px] leading-relaxed text-white/55">
-              $30/year prepaid × 10 years = ${PRICE_MAINTENANCE}. Covers ongoing
-              upkeep after the included 30-day bug-fix window.
-            </p>
-          </div>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={includeMaintenance}
-            aria-label="Include 10-year maintenance"
-            onClick={() => setIncludeMaintenance((v) => !v)}
-            className={`relative mt-1 h-7 w-12 shrink-0 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-              includeMaintenance ? 'bg-white' : 'bg-white/20'
-            }`}
-          >
-            <span
-              className={`absolute top-0.5 h-6 w-6 rounded-full transition-transform ${
-                includeMaintenance
-                  ? 'left-0.5 translate-x-5 bg-[#410C01]'
-                  : 'left-0.5 translate-x-0 bg-white/80'
-              }`}
-            />
-          </button>
-        </div>
-      </div>
-
-      <a
-        href={paypalUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-inter mt-8 inline-flex w-full items-center justify-center rounded-md bg-white px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:text-xs"
-      >
-        Pay ${total.toLocaleString()}
-      </a>
-    </article>
+    </header>
   );
 }
 
 export function WebsitesPricing() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  useScrollReveal(ref);
-
   return (
-    <div ref={ref} className="websites min-h-screen bg-[#410C01] pb-16">
-      <Navbar />
+    <div className="relative min-h-screen overflow-x-hidden bg-[#f3f5fa] text-[#15205f]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,_rgba(21,40,104,0.1),_transparent_55%)]"
+      />
+      <Nav />
 
-      <section className="relative px-6 pb-10 pt-28 text-center sm:px-10 sm:pt-36 lg:px-20">
-        <p className="reveal font-inter text-[10px] font-medium uppercase tracking-[0.35em] text-white/60 sm:text-xs">
-          Pricing
-        </p>
-        <h1
-          className="reveal font-arsenica mt-4 text-4xl tracking-wide sm:text-6xl md:text-7xl"
-          style={{ animationDelay: '0.08s' }}
-        >
-          Two ways to start
+      <section className="relative mx-auto max-w-3xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pt-20">
+        <h1 className="text-[clamp(2.5rem,6vw,3.85rem)] font-extrabold leading-[1.05] tracking-[-0.05em] text-[#152868]">
+          How much does a website{' '}
+          <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+            cost?
+          </em>
         </h1>
-        <p
-          className="reveal font-arsenica mx-auto mt-6 max-w-xl text-base text-white/80 sm:text-xl"
-          style={{ animationDelay: '0.16s' }}
-        >
-          A clear package for most sites — or a custom build when you need more
-          than a landing page.
+        <p className="mx-auto mt-5 max-w-xl text-[16px] font-medium leading-relaxed text-[#5c688f] sm:text-[18px]">
+          You choose how much to invest. We provide the maximum we can within
+          your budget — then put it in a clear proposal after we talk.
         </p>
       </section>
 
-      <section
-        id="plans"
-        className="relative z-20 mx-auto grid max-w-5xl gap-6 px-4 pb-24 sm:px-8 lg:grid-cols-2 lg:gap-8"
-      >
-        <LaunchPackageCard />
-
-        <article
-          className="reveal rounded-[28px] border border-white/20 bg-black/25 p-7 sm:p-10"
-          style={{ animationDelay: '0.2s' }}
-        >
-          <p className="font-inter text-[10px] font-medium uppercase tracking-[0.3em] text-white/55">
-            Custom
+      <section className="relative mx-auto max-w-6xl px-5 pb-16 sm:px-8">
+        <div className="rounded-[32px] border border-[#e2e8f5] bg-white p-6 shadow-[0_28px_64px_-40px_rgba(21,40,104,0.4)] sm:p-10">
+          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
+            Pricing philosophy
           </p>
-          <h2 className="font-arsenica mt-3 text-3xl tracking-wide sm:text-4xl">
-            Built around you
+          <h2 className="mt-2 text-[clamp(1.65rem,3vw,2.2rem)] font-extrabold tracking-[-0.035em] text-[#152868]">
+            Our pricing philosophy.
           </h2>
-          <p className="mt-4 flex items-baseline gap-2">
-            <span className="font-inter text-4xl font-semibold tracking-tight sm:text-5xl">
-              Let&apos;s talk
-            </span>
+          <p className="mt-2 max-w-xl text-[15px] text-[#5c688f]">
+            No matter your budget, we aim for maximum value — not maximum invoice
+            padding.
           </p>
-          <p className="font-inter mt-4 text-sm leading-relaxed text-white/65">
-            Need more pages, deeper product flows, extra integrations, or more
-            consultation time? We scope it together — then quote what actually
-            fits.
-          </p>
-
-          <FeatureList items={customFeatures} />
-
-          <div className="mt-8 rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3.5">
-            <p className="font-inter text-sm text-white/80">
-              Best when the Launch package would be a squeeze — not a fit.
-            </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map((p, i) => (
+              <div
+                key={p.title}
+                className="group rounded-[22px] border border-[#eef1fb] bg-[#f6f7fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#d2daf0] hover:bg-white hover:shadow-[0_18px_40px_-28px_rgba(21,40,104,0.35)]"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-[13px] font-extrabold text-[#152868] shadow-sm ring-1 ring-[#e2e8f5] transition group-hover:bg-[#152868] group-hover:text-white group-hover:ring-[#152868]">
+                  0{i + 1}
+                </div>
+                <h3 className="mt-4 text-[15px] font-bold leading-snug tracking-[-0.015em] text-[#15205f]">
+                  {p.title}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-[#667085]">
+                  {p.body}
+                </p>
+              </div>
+            ))}
           </div>
-
-          <a
-            href={CALENDLY_EVENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-inter mt-8 inline-flex w-full items-center justify-center rounded-md bg-white px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:text-xs"
-          >
-            Book a scoping call
-          </a>
-        </article>
-      </section>
-
-      <section className="relative overflow-hidden px-6 pb-28 pt-4 text-center sm:px-10">
-        <div className="relative z-20 mx-auto max-w-2xl">
-          <h2
-            className="reveal font-arsenica text-3xl tracking-wide sm:text-5xl"
-            style={{ animationDelay: '0.1s' }}
-          >
-            Not sure which fits?
-          </h2>
-          <p
-            className="reveal font-inter mx-auto mt-5 max-w-md text-sm leading-relaxed text-white/60"
-            style={{ animationDelay: '0.18s' }}
-          >
-            Most founders land on the Launch package. If you need more than a
-            landing page with forms & booking, we&apos;ll say so on the call —
-            no pressure pitch.
-          </p>
-          <a
-            href={CALENDLY_EVENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-inter reveal mt-10 inline-block rounded-md bg-white px-10 py-3.5 text-[10px] font-medium uppercase tracking-[0.2em] text-black transition-opacity hover:opacity-90 sm:px-12 sm:py-4 sm:text-xs"
-            style={{ animationDelay: '0.26s' }}
-          >
-            Book a call
-          </a>
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={CLOUD_PARALLAX}
-          alt=""
-          className="pointer-events-none absolute bottom-0 left-0 z-10 w-full opacity-70"
-        />
       </section>
 
-      <Footer />
+      <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 sm:px-8 lg:grid-cols-2">
+        <div>
+          <h2 className="text-[clamp(1.9rem,4vw,2.6rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+            A website is an{' '}
+            <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+              investment.
+            </em>
+          </h2>
+          <p className="mt-4 text-[15px] leading-relaxed text-[#5c688f]">
+            The most expensive build is usually not the best build. The best
+            build solves the right problem — traffic that turns into inquiries,
+            trust in the first three seconds, a booking path that actually works.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="rounded-full border border-[#d2daf0] bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[#152868] shadow-sm">
+              No hidden fees
+            </span>
+            <span className="rounded-full border border-[#d2daf0] bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[#152868] shadow-sm">
+              Outcome-based proposals
+            </span>
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-[28px] border border-[#e2e8f5] bg-white p-2.5 shadow-[0_28px_56px_-32px_rgba(21,40,104,0.45)]">
+          <div className="overflow-hidden rounded-[22px]">
+            <Image
+              src="/website-assets/work-bdl.png"
+              alt="Example client website"
+              width={900}
+              height={600}
+              className="h-auto w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+        <div className="relative overflow-hidden rounded-[32px] bg-[#152868] px-6 py-14 text-center text-white shadow-[0_36px_80px_-32px_rgba(21,40,104,0.7)] sm:px-12">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-10 top-0 h-56 w-56 rounded-full bg-white/10 blur-3xl"
+          />
+          <p className="relative text-[12px] font-bold uppercase tracking-[0.2em] text-white/55">
+            Next step
+          </p>
+          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-extrabold tracking-[-0.04em]">
+            Get your custom proposal now.
+          </h2>
+          <p className="relative mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-white/70">
+            Tell us your goals, timeline, and budget range. We’ll map the
+            smartest path forward — with clear options you can actually decide
+            on.
+          </p>
+          <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={CALENDLY_EVENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-[#152868] hover:bg-[#f3f5ff]"
+            >
+              Book a call
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <Link
+              href="/websites/inquire"
+              className="inline-flex rounded-full border border-white/30 px-7 py-3.5 text-[14px] font-semibold text-white hover:bg-white/10"
+            >
+              Send an inquiry
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-[#e2e8f5] bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <p className="text-[18px] font-extrabold tracking-[-0.04em] text-[#152868]">
+            Devly
+          </p>
+          <div className="flex flex-wrap gap-5 text-[13px] font-semibold text-[#46548a]">
+            <Link href="/websites#work">Work</Link>
+            <Link href="/websites/pricing">Pricing</Link>
+            <Link href="/websites/inquire">Get Quote</Link>
+            <a href="mailto:sales@devly.info">Contact</a>
+          </div>
+        </div>
+        <div className="border-t border-[#e2e8f5] py-4 text-center text-[12px] text-[#98a2b3]">
+          © {new Date().getFullYear()} Devly. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }

@@ -10,34 +10,62 @@ type StatsResponse = AnalyticsStats & {
   note?: string;
 };
 
+type Inquiry = {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  website: string;
+  message: string;
+  goals: string[];
+  budget: string;
+  size: string;
+  timeline: string;
+  createdAt: string;
+};
+
 export function AdminDashboard() {
   const [input, setInput] = useState('');
   const [stats, setStats] = useState<StatsResponse | null>(null);
+  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [tab, setTab] = useState<'traffic' | 'leads'>('leads');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const loadStats = async (key: string) => {
+  const loadAdmin = async (key: string) => {
     setLoading(true);
     setError('');
 
     try {
-      const res = await fetch('/api/analytics', {
-        headers: { Authorization: `Bearer ${key}` },
-      });
+      const headers = { Authorization: `Bearer ${key}` };
+      const [statsRes, leadsRes] = await Promise.all([
+        fetch('/api/analytics', { headers }),
+        fetch('/api/inquiries', { headers }),
+      ]);
 
-      if (!res.ok) {
+      if (!statsRes.ok) {
         setStats(null);
+        setInquiries([]);
         setError(
-          res.status === 401 ? 'Invalid admin password.' : 'Could not load stats.',
+          statsRes.status === 401
+            ? 'Invalid admin password.'
+            : 'Could not load admin data.',
         );
         return;
       }
 
-      const data = (await res.json()) as StatsResponse;
+      const data = (await statsRes.json()) as StatsResponse;
       setStats(data);
       sessionStorage.setItem(STORAGE_KEY, key);
+
+      if (leadsRes.ok) {
+        const leads = (await leadsRes.json()) as { inquiries?: Inquiry[] };
+        setInquiries(leads.inquiries ?? []);
+      } else {
+        setInquiries([]);
+      }
     } catch {
-      setError('Could not reach analytics API.');
+      setError('Could not reach admin API.');
     } finally {
       setLoading(false);
     }
@@ -46,20 +74,21 @@ export function AdminDashboard() {
   useEffect(() => {
     const saved = sessionStorage.getItem(STORAGE_KEY);
     if (saved) {
-      void loadStats(saved);
+      void loadAdmin(saved);
     }
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    void loadStats(input.trim());
+    void loadAdmin(input.trim());
   };
 
   const handleLogout = () => {
     sessionStorage.removeItem(STORAGE_KEY);
     setInput('');
     setStats(null);
+    setInquiries([]);
     setError('');
   };
 
@@ -70,7 +99,7 @@ export function AdminDashboard() {
           Devly Admin
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Enter your admin password to view traffic stats.
+          Enter your admin password to view traffic and quote leads.
         </p>
 
         <form onSubmit={handleLogin} className="mt-8 space-y-4">
@@ -86,7 +115,7 @@ export function AdminDashboard() {
             disabled={loading}
             className="w-full rounded-full bg-foreground px-4 py-3 text-sm font-medium text-background disabled:opacity-60"
           >
-            {loading ? 'Loading…' : 'View stats'}
+            {loading ? 'Loading…' : 'Open admin'}
           </button>
         </form>
 
@@ -103,9 +132,9 @@ export function AdminDashboard() {
     <main className="mx-auto min-h-screen max-w-5xl px-6 py-12">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">Traffic</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">Admin</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Landing page visits and key actions
+            Quote leads and landing-page traffic
           </p>
         </div>
         <button
@@ -117,6 +146,145 @@ export function AdminDashboard() {
         </button>
       </div>
 
+      <div className="mb-8 inline-flex rounded-full border border-border bg-muted/40 p-1">
+        <button
+          type="button"
+          onClick={() => setTab('leads')}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            tab === 'leads'
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground'
+          }`}
+        >
+          Leads ({inquiries.length})
+        </button>
+        <button
+          type="button"
+          onClick={() => setTab('traffic')}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            tab === 'traffic'
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground'
+          }`}
+        >
+          Traffic
+        </button>
+      </div>
+
+      {tab === 'leads' ? (
+        <LeadsList inquiries={inquiries} />
+      ) : (
+        <TrafficView stats={stats} maxDaily={maxDaily} />
+      )}
+    </main>
+  );
+}
+
+function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
+  const [openId, setOpenId] = useState<string | null>(inquiries[0]?.id ?? null);
+
+  if (inquiries.length === 0) {
+    return (
+      <section className="rounded-2xl border border-border p-8 text-sm text-muted-foreground">
+        No quote submissions yet. When someone finishes{' '}
+        <span className="font-medium text-foreground">/websites/inquire</span>,
+        they show up here — and you still get the notify email.
+      </section>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {inquiries.map((lead) => {
+        const open = openId === lead.id;
+        return (
+          <article
+            key={lead.id}
+            className="rounded-2xl border border-border bg-background"
+          >
+            <button
+              type="button"
+              onClick={() => setOpenId(open ? null : lead.id)}
+              className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
+            >
+              <div>
+                <p className="font-medium tracking-tight">{lead.name}</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {lead.email}
+                  {lead.company ? ` · ${lead.company}` : ''}
+                </p>
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-sm font-medium">{lead.budget || 'No budget'}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {new Date(lead.createdAt).toLocaleString()}
+                </p>
+              </div>
+            </button>
+            {open ? (
+              <div className="space-y-3 border-t border-border px-5 py-4 text-sm">
+                <Row label="Size" value={lead.size || '—'} />
+                <Row label="Timeline" value={lead.timeline || '—'} />
+                <Row
+                  label="Goals"
+                  value={lead.goals.length ? lead.goals.join(', ') : '—'}
+                />
+                <Row label="Website" value={lead.website || '—'} />
+                <div>
+                  <p className="text-muted-foreground">Brief</p>
+                  <p className="mt-1 whitespace-pre-wrap leading-relaxed">
+                    {lead.message || '—'}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <a
+                    href={`mailto:${lead.email}`}
+                    className="rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background"
+                  >
+                    Reply
+                  </a>
+                  {lead.website ? (
+                    <a
+                      href={
+                        lead.website.startsWith('http')
+                          ? lead.website
+                          : `https://${lead.website}`
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-border px-4 py-2 text-xs font-medium"
+                    >
+                      Current site
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <p>
+      <span className="text-muted-foreground">{label}: </span>
+      <span>{value}</span>
+    </p>
+  );
+}
+
+function TrafficView({
+  stats,
+  maxDaily,
+}: {
+  stats: StatsResponse;
+  maxDaily: number;
+}) {
+  return (
+    <div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total visits" value={stats.totalPageviews} />
         <StatCard label="Unique visitors" value={stats.uniqueVisitors} />
@@ -201,7 +369,7 @@ export function AdminDashboard() {
           : '—'}
         {stats.note ? ` · ${stats.note}` : ''}
       </p>
-    </main>
+    </div>
   );
 }
 
