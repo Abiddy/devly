@@ -1,28 +1,12 @@
-import { AgencyLanding } from '@/components/agency/AgencyLanding';
+import { WebsitesLanding } from '@/components/websites/WebsitesLanding';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Devly — We help brands meet their KPIs',
+  title: 'Devly — Custom websites that get you results',
   description:
-    'Devly connects brands with vetted creators qualified on engagement, consistency, and audience alignment — matched to your awareness, lead gen, or sales objectives.',
-  openGraph: {
-    title: 'Devly — We help brands meet their KPIs',
-    description:
-      'Creator partnerships measured against your KPIs. Qualification-first matching for brands that need results, not vanity metrics.',
-    url: 'https://work.devly.info',
-    siteName: 'Devly',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Devly — We help brands meet their KPIs',
-    description:
-      'Creator partnerships measured against your KPIs. Qualification-first matching for brands that need results, not vanity metrics.',
-    creator: '@DevlyOfficial',
-  },
+    'Devly designs and develops custom websites for founders and local businesses. Book a call for a clear proposal — no template farms, no surprise checkout.',
 };
 
-export default function Page() {
-  return <AgencyLanding />;
+export default function HomePage() {
+  return <WebsitesLanding />;
 }

@@ -19,26 +19,26 @@ export default function InquirePage() {
       <header className="relative w-full bg-transparent">
         <div className="flex h-[4.25rem] w-full items-center justify-between px-5 sm:px-8 lg:px-12">
           <Link
-            href="/websites"
+            href="/"
             className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
           >
             Devly
           </Link>
           <nav className="hidden items-center gap-0.5 rounded-full border border-[#e2e8f5] bg-[#f4f6fb]/90 p-1 md:flex">
             <Link
-              href="/websites#work"
+              href="/#work"
               className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
             >
               Work
             </Link>
             <Link
-              href="/websites/pricing"
+              href="/pricing"
               className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
             >
               Pricing
             </Link>
             <Link
-              href="/websites/inquire"
+              href="/inquire"
               className="rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-[#152868] shadow-sm"
             >
               Get Quote

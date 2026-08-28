@@ -7,6 +7,6 @@ export const metadata: Metadata = {
     'Transparent pricing philosophy. You choose the investment; we send a custom proposal after a short call — no hidden fees.',
 };
 
-export default function WebsitesPricingPage() {
+export default function PricingPage() {
   return <WebsitesPricing />;
 }

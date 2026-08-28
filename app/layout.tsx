@@ -1,9 +1,29 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { Inter, Playfair_Display } from 'next/font/google';
+import {
+  Bricolage_Grotesque,
+  Fraunces,
+  Inter,
+  Playfair_Display,
+} from 'next/font/google';
 import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 import { FontLoader } from '@/components/FontLoader';
 import './globals.css';
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-studio',
+  display: 'swap',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-studio-display',
+  display: 'swap',
+});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,14 +41,14 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Devly — We help brands meet their KPIs',
+  title: 'Devly — Custom websites that get you results',
   description:
-    'Devly connects brands with vetted creators qualified on engagement, consistency, and audience alignment — matched to your awareness, lead gen, or sales objectives.',
+    'Devly designs and develops custom websites for founders and local businesses. Book a call for a clear proposal — no template farms, no surprise checkout.',
   metadataBase: new URL('https://work.devly.info'),
   openGraph: {
-    title: 'Devly — We help brands meet their KPIs',
+    title: 'Devly — Custom websites that get you results',
     description:
-      'Creator partnerships measured against your KPIs. Qualification-first matching for brands that need results, not vanity metrics.',
+      'Devly designs and develops custom websites for founders and local businesses. Book a call for a clear proposal — no template farms, no surprise checkout.',
     url: 'https://work.devly.info',
     siteName: 'Devly',
     locale: 'en_US',
@@ -36,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Devly — We help brands meet their KPIs',
+    title: 'Devly — Custom websites that get you results',
     description:
-      'Creator partnerships measured against your KPIs. Qualification-first matching for brands that need results, not vanity metrics.',
+      'Devly designs and develops custom websites for founders and local businesses. Book a call for a clear proposal — no template farms, no surprise checkout.',
     creator: '@DevlyOfficial',
   },
 };
@@ -49,8 +69,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className={`${inter.className} antialiased`}>
+    <html
+      lang="en"
+      className={`${bricolage.variable} ${fraunces.variable} ${inter.variable} ${playfair.variable}`}
+    >
+      <body
+        className={`${bricolage.className} font-[family-name:var(--font-studio)] antialiased`}
+      >
         <FontLoader />
         <Suspense fallback={null}>
           <AnalyticsTracker />

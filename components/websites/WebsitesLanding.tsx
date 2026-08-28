@@ -93,10 +93,10 @@ const faqs = [
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-[#e2e8f5]/70 bg-white/75 backdrop-blur-2xl">
-      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8">
+    <header className="sticky top-0 z-50 w-full bg-transparent">
+      <div className="flex h-[4.25rem] w-full items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link
-          href="/websites"
+          href="/"
           className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
         >
           Devly
@@ -105,7 +105,7 @@ function Nav() {
           {[
             { href: '#work', label: 'Work' },
             { href: '#process', label: 'Process' },
-            { href: '/websites/pricing', label: 'Pricing', link: true },
+            { href: '/pricing', label: 'Pricing', link: true },
             { href: '#faq', label: 'FAQ' },
           ].map((item) =>
             item.link ? (
@@ -137,7 +137,7 @@ function Nav() {
             Book a call
           </a>
           <Link
-            href="/websites/inquire"
+            href="/inquire"
             className="inline-flex items-center rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_10px_28px_-10px_rgba(21,40,104,0.65)] transition hover:bg-[#0f1d52]"
           >
             Get a quote
@@ -235,17 +235,15 @@ export function WebsitesLanding() {
           everyone else.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={CALENDLY_EVENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/inquire"
             className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-8 py-3.5 text-[14px] font-semibold text-white shadow-[0_16px_40px_-14px_rgba(21,40,104,0.6)] transition hover:-translate-y-0.5 hover:bg-[#0f1d52]"
           >
-            Book a call
+            Get Quote
             <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
           <Link
-            href="/websites/pricing"
+            href="/pricing"
             className="inline-flex items-center gap-2 rounded-full border border-[#d2daf0] bg-white/95 px-8 py-3.5 text-[14px] font-semibold text-[#152868] shadow-[0_8px_24px_-18px_rgba(21,40,104,0.35)] transition hover:-translate-y-0.5 hover:border-[#152868]/25"
           >
             How pricing works
@@ -332,7 +330,7 @@ export function WebsitesLanding() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
             <Link
-              href="/websites/inquire"
+              href="/inquire"
               className="inline-flex rounded-full border border-[#d2daf0] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#152868] transition hover:bg-[#eef1fb]"
             >
               Get a quote
@@ -532,7 +530,7 @@ export function WebsitesLanding() {
           </p>
           <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="/websites/inquire"
+              href="/inquire"
               className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-[#152868] transition hover:bg-[#f3f5ff]"
             >
               Get a quote
@@ -562,10 +560,10 @@ export function WebsitesLanding() {
             <a href="#process" className="hover:text-[#152868]">
               Process
             </a>
-            <Link href="/websites/pricing" className="hover:text-[#152868]">
+            <Link href="/pricing" className="hover:text-[#152868]">
               Pricing
             </Link>
-            <Link href="/websites/inquire" className="hover:text-[#152868]">
+            <Link href="/inquire" className="hover:text-[#152868]">
               Get a quote
             </Link>
             <a href="mailto:sales@devly.info" className="hover:text-[#152868]">

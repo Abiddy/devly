@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Devly — We help brands meet their KPIs';
+export const alt = 'Devly — Custom websites that get you results';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -15,8 +15,8 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'center',
           padding: 72,
-          background: '#6574a4',
-          color: 'white',
+          background: '#f3f5fa',
+          color: '#152868',
           fontFamily: 'sans-serif',
         }}
       >
@@ -24,7 +24,7 @@ export default function OpenGraphImage() {
           Devly
         </div>
         <div style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, maxWidth: 900 }}>
-          We help brands meet their KPIs
+          We design and develop really good websites
         </div>
       </div>
     ),

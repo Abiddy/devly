@@ -29,26 +29,26 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b border-[#e2e8f5]/70 bg-white/75 backdrop-blur-2xl">
       <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
-          href="/websites"
+          href="/"
           className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
         >
           Devly
         </Link>
         <nav className="hidden items-center gap-0.5 rounded-full border border-[#e2e8f5] bg-[#f4f6fb]/90 p-1 md:flex">
           <Link
-            href="/websites#work"
+            href="/#work"
             className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
           >
             Work
           </Link>
           <Link
-            href="/websites/pricing"
+            href="/pricing"
             className="rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-[#152868] shadow-sm"
           >
             Pricing
           </Link>
           <Link
-            href="/websites/inquire"
+            href="/inquire"
             className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] hover:bg-white hover:text-[#152868]"
           >
             Get Quote
@@ -186,7 +186,7 @@ export function WebsitesPricing() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <Link
-              href="/websites/inquire"
+              href="/inquire"
               className="inline-flex rounded-full border border-white/30 px-7 py-3.5 text-[14px] font-semibold text-white hover:bg-white/10"
             >
               Send an inquiry
@@ -201,9 +201,9 @@ export function WebsitesPricing() {
             Devly
           </p>
           <div className="flex flex-wrap gap-5 text-[13px] font-semibold text-[#46548a]">
-            <Link href="/websites#work">Work</Link>
-            <Link href="/websites/pricing">Pricing</Link>
-            <Link href="/websites/inquire">Get Quote</Link>
+            <Link href="/#work">Work</Link>
+            <Link href="/pricing">Pricing</Link>
+            <Link href="/inquire">Get Quote</Link>
             <a href="mailto:sales@devly.info">Contact</a>
           </div>
         </div>

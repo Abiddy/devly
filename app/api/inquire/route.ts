@@ -58,8 +58,8 @@ export async function POST(request: Request) {
   }
 
   const baseUrl = getBaseUrl(request);
-  const welcomeUrl = `${baseUrl}/websites/welcome`;
-  const pricingUrl = `${baseUrl}/websites/pricing`;
+  const welcomeUrl = `${baseUrl}/welcome`;
+  const pricingUrl = `${baseUrl}/pricing`;
   const apiKey = process.env.RESEND_API_KEY;
   const notifyTo = process.env.INQUIRE_NOTIFY_EMAIL || 'sales@devly.info';
   const from =

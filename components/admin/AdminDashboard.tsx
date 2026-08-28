@@ -187,7 +187,7 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
     return (
       <section className="rounded-2xl border border-border p-8 text-sm text-muted-foreground">
         No quote submissions yet. When someone finishes{' '}
-        <span className="font-medium text-foreground">/websites/inquire</span>,
+        <span className="font-medium text-foreground">/inquire</span>,
         they show up here — and you still get the notify email.
       </section>
     );

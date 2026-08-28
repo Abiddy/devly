@@ -59,13 +59,13 @@ export function WelcomePackage() {
       <header className="relative border-b border-[#e2e8f5]/70 bg-white/75 backdrop-blur-2xl">
         <div className="mx-auto flex h-[4.25rem] max-w-3xl items-center justify-between px-5 sm:px-8">
           <Link
-            href="/websites"
+            href="/"
             className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
           >
             Devly
           </Link>
           <Link
-            href="/websites/inquire"
+            href="/inquire"
             className="rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white hover:bg-[#0f1d52]"
           >
             Get a quote
@@ -149,7 +149,7 @@ export function WelcomePackage() {
               Book a call
             </a>
             <Link
-              href="/websites/inquire"
+              href="/inquire"
               className="inline-flex justify-center rounded-full border border-white/30 px-5 py-3 text-[13px] font-semibold text-white hover:bg-white/10"
             >
               Send an inquiry

@@ -58,7 +58,7 @@ export function InquiryForm() {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
-  const [welcomeUrl, setWelcomeUrl] = useState('/websites/welcome');
+  const [welcomeUrl, setWelcomeUrl] = useState('/welcome');
   const [triedNext, setTriedNext] = useState(false);
 
   const [goals, setGoals] = useState<string[]>([]);
