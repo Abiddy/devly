@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import {
   ArrowRight,
-  CalendarDays,
   ChevronDown,
   Clock3,
   Layers3,
@@ -128,25 +127,49 @@ function Nav() {
             ),
           )}
         </nav>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="/websites/inquire"
-            className="hidden text-[13px] font-semibold text-[#46548a] transition-colors hover:text-[#152868] sm:inline"
-          >
-            Get a quote
-          </Link>
+        <div className="flex items-center gap-3 sm:gap-4">
           <a
             href={CALENDLY_EVENT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_10px_28px_-10px_rgba(21,40,104,0.65)] transition hover:bg-[#0f1d52]"
+            className="hidden text-[13px] font-semibold text-[#46548a] transition-colors hover:text-[#152868] sm:inline"
           >
-            <CalendarDays className="h-3.5 w-3.5" />
             Book a call
           </a>
+          <Link
+            href="/websites/inquire"
+            className="inline-flex items-center rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_10px_28px_-10px_rgba(21,40,104,0.65)] transition hover:bg-[#0f1d52]"
+          >
+            Get a quote
+          </Link>
         </div>
       </div>
     </header>
+  );
+}
+
+function AcceptingStamp() {
+  const label = 'ACCEPTING NOW • ACCEPTING NOW • ';
+  return (
+    <span
+      className="relative ml-1.5 inline-flex h-[4.35rem] w-[4.35rem] shrink-0 translate-y-1 items-center justify-center rounded-full bg-[#ffe566] align-middle shadow-[0_10px_24px_-12px_rgba(245,196,0,0.7)] sm:ml-2 sm:h-[5.15rem] sm:w-[5.15rem] sm:translate-y-1.5"
+      aria-label="Accepting now"
+    >
+      <svg
+        viewBox="0 0 100 100"
+        className="h-[92%] w-[92%] animate-[spin_14s_linear_infinite] motion-reduce:animate-none"
+      >
+        <defs>
+          <path
+            id="accepting-now-path"
+            d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"
+          />
+        </defs>
+        <text fill="#152868" fontSize="8.4" fontWeight="800" letterSpacing="1.6">
+          <textPath href="#accepting-now-path">{label}</textPath>
+        </text>
+      </svg>
+    </span>
   );
 }
 
@@ -198,15 +221,9 @@ export function WebsitesLanding() {
 
       {/* Hero */}
       <section className="relative mx-auto max-w-4xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
-        <div className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#d7def2] bg-white/85 px-4 py-1.5 text-[12px] font-semibold tracking-[-0.01em] text-[#46548a] shadow-[0_8px_24px_-16px_rgba(21,40,104,0.35)] backdrop-blur">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          Accepting new projects
-        </div>
         <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] text-[#152868]">
-          We design and develop{' '}
+          We design and develop
+          <AcceptingStamp />{' '}
           <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic tracking-[-0.02em] text-[#2a3fb8]">
             really good
           </em>{' '}
