@@ -427,6 +427,9 @@ export function ShaderBackground({ className }: { className?: string }) {
     const start = performance.now();
     const timeAnimated = Math.abs(UNIFORMS.timeScale) > 0.0001;
 
+    const view: HTMLCanvasElement = canvas as HTMLCanvasElement;
+    let requestRender = () => {};
+
     const resizeCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rawWidth = Math.max(1, Math.round(bounds.width * dpr));
@@ -437,18 +440,58 @@ export function ShaderBackground({ className }: { className?: string }) {
       );
       const width = Math.max(1, Math.round(rawWidth * pixelScale));
       const height = Math.max(1, Math.round(rawHeight * pixelScale));
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
+      if (view.width !== width || view.height !== height) {
+        view.width = width;
+        view.height = height;
         gl.viewport(0, 0, width, height);
       }
     };
 
-    function requestRender() {
+    const render = (now: number) => {
+      raf = 0;
+      if (disposed || !visible || !inView) return;
+      const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1);
+      lastNow = now;
+      const follow = 1 - Math.exp(-12 * dt);
+      mouseX += (targetX - mouseX) * follow;
+      mouseY += (targetY - mouseY) * follow;
+      cursorPresence += (targetPresence - cursorPresence) * follow;
+      resizeCanvas();
+      gl.uniform4f(
+        uni.scene,
+        view.width,
+        view.height,
+        ((now - start) / 1000) * UNIFORMS.timeScale,
+        UNIFORMS.colorCount,
+      );
+      gl.uniform4f(
+        uni.space,
+        UNIFORMS.offsetX,
+        UNIFORMS.offsetY,
+        mouseX,
+        mouseY,
+      );
+      gl.uniform4f(
+        uni.cursor,
+        UNIFORMS.cursorEnabled ? cursorPresence : 0,
+        UNIFORMS.cursorEffect,
+        UNIFORMS.cursorStrength,
+        UNIFORMS.cursorRadius,
+      );
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      const pointerSettling =
+        Math.abs(targetX - mouseX) > 0.001 ||
+        Math.abs(targetY - mouseY) > 0.001 ||
+        Math.abs(targetPresence - cursorPresence) > 0.001;
+      if (timeAnimated || pointerSettling) requestRender();
+      else lastNow = null;
+    };
+
+    requestRender = () => {
       if (!disposed && visible && inView && raf === 0) {
         raf = requestAnimationFrame(render);
       }
-    }
+    };
 
     const updatePointerTarget = () => {
       if (!pointerKnown) return;
@@ -524,47 +567,6 @@ export function ShaderBackground({ className }: { className?: string }) {
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    function render(now: number) {
-      raf = 0;
-      if (disposed || !visible || !inView) return;
-      const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1);
-      lastNow = now;
-      const follow = 1 - Math.exp(-12 * dt);
-      mouseX += (targetX - mouseX) * follow;
-      mouseY += (targetY - mouseY) * follow;
-      cursorPresence += (targetPresence - cursorPresence) * follow;
-      resizeCanvas();
-      const width = canvas.width;
-      const height = canvas.height;
-      gl.uniform4f(
-        uni.scene,
-        width,
-        height,
-        ((now - start) / 1000) * UNIFORMS.timeScale,
-        UNIFORMS.colorCount,
-      );
-      gl.uniform4f(
-        uni.space,
-        UNIFORMS.offsetX,
-        UNIFORMS.offsetY,
-        mouseX,
-        mouseY,
-      );
-      gl.uniform4f(
-        uni.cursor,
-        UNIFORMS.cursorEnabled ? cursorPresence : 0,
-        UNIFORMS.cursorEffect,
-        UNIFORMS.cursorStrength,
-        UNIFORMS.cursorRadius,
-      );
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-      const pointerSettling =
-        Math.abs(targetX - mouseX) > 0.001 ||
-        Math.abs(targetY - mouseY) > 0.001 ||
-        Math.abs(targetPresence - cursorPresence) > 0.001;
-      if (timeAnimated || pointerSettling) requestRender();
-      else lastNow = null;
-    }
     requestRender();
     return () => {
       disposed = true;

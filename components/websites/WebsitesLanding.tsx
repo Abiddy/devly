@@ -427,7 +427,7 @@ export function WebsitesLanding() {
               About
             </p>
             <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
-              A boutique studio founded by{' '}
+              Meet the developer{' '}
               <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
                 Mo.
               </em>
