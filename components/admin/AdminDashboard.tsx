@@ -94,11 +94,11 @@ export function AdminDashboard() {
 
   if (!stats) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-16">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+      <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center bg-[#f3f5fa] px-6 py-16 text-[#15205f]">
+        <h1 className="text-2xl font-semibold tracking-tight text-[#152868]">
           Devly Admin
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-[#667085]">
           Enter your admin password to view traffic and quote leads.
         </p>
 
@@ -108,19 +108,19 @@ export function AdminDashboard() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Admin password"
-            className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-none ring-ring focus-visible:ring-2"
+            className="w-full rounded-lg border border-[#d2daf0] bg-white px-4 py-3 text-sm text-[#15205f] outline-none placeholder:text-[#98a2b3] focus-visible:ring-2 focus-visible:ring-[#152868]/30"
           />
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-foreground px-4 py-3 text-sm font-medium text-background disabled:opacity-60"
+            className="w-full rounded-full bg-[#152868] px-4 py-3 text-sm font-medium text-white disabled:opacity-60"
           >
             {loading ? 'Loading…' : 'Open admin'}
           </button>
         </form>
 
         {error ? (
-          <p className="mt-4 text-sm text-destructive">{error}</p>
+          <p className="mt-4 text-sm text-red-600">{error}</p>
         ) : null}
       </main>
     );
@@ -129,31 +129,34 @@ export function AdminDashboard() {
   const maxDaily = Math.max(...stats.dailyPageviews.map((d) => d.count), 1);
 
   return (
-    <main className="mx-auto min-h-screen max-w-5xl px-6 py-12">
+    <main className="min-h-screen bg-[#f3f5fa] text-[#15205f]">
+      <div className="mx-auto max-w-5xl px-6 py-12">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">Admin</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h1 className="text-3xl font-semibold tracking-tight text-[#152868]">
+            Admin
+          </h1>
+          <p className="mt-1 text-sm text-[#667085]">
             Quote leads and landing-page traffic
           </p>
         </div>
         <button
           type="button"
           onClick={handleLogout}
-          className="rounded-full border border-border px-4 py-2 text-sm text-muted-foreground hover:bg-muted"
+          className="rounded-full border border-[#d2daf0] bg-white px-4 py-2 text-sm text-[#5c688f] hover:bg-[#eef1fb]"
         >
           Sign out
         </button>
       </div>
 
-      <div className="mb-8 inline-flex rounded-full border border-border bg-muted/40 p-1">
+      <div className="mb-8 inline-flex rounded-full border border-[#d2daf0] bg-white p-1">
         <button
           type="button"
           onClick={() => setTab('leads')}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
             tab === 'leads'
-              ? 'bg-background text-foreground shadow-sm'
-              : 'text-muted-foreground'
+              ? 'bg-[#152868] text-white shadow-sm'
+              : 'text-[#667085]'
           }`}
         >
           Leads ({inquiries.length})
@@ -163,8 +166,8 @@ export function AdminDashboard() {
           onClick={() => setTab('traffic')}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
             tab === 'traffic'
-              ? 'bg-background text-foreground shadow-sm'
-              : 'text-muted-foreground'
+              ? 'bg-[#152868] text-white shadow-sm'
+              : 'text-[#667085]'
           }`}
         >
           Traffic
@@ -176,6 +179,7 @@ export function AdminDashboard() {
       ) : (
         <TrafficView stats={stats} maxDaily={maxDaily} />
       )}
+      </div>
     </main>
   );
 }
@@ -185,9 +189,9 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
 
   if (inquiries.length === 0) {
     return (
-      <section className="rounded-2xl border border-border p-8 text-sm text-muted-foreground">
+      <section className="rounded-2xl border border-[#e2e8f5] bg-white p-8 text-sm text-[#667085]">
         No quote submissions yet. When someone finishes{' '}
-        <span className="font-medium text-foreground">/inquire</span>,
+        <span className="font-medium text-[#152868]">/inquire</span>,
         they show up here — and you still get the notify email.
       </section>
     );
@@ -200,7 +204,7 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
         return (
           <article
             key={lead.id}
-            className="rounded-2xl border border-border bg-background"
+            className="rounded-2xl border border-[#e2e8f5] bg-white text-[#15205f] shadow-[0_1px_0_rgba(21,40,104,0.04)]"
           >
             <button
               type="button"
@@ -208,21 +212,25 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
               className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
             >
               <div>
-                <p className="font-medium tracking-tight">{lead.name}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">
+                <p className="font-medium tracking-tight text-[#152868]">
+                  {lead.name}
+                </p>
+                <p className="mt-0.5 text-sm text-[#667085]">
                   {lead.email}
                   {lead.company ? ` · ${lead.company}` : ''}
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                <p className="text-sm font-medium">{lead.budget || 'No budget'}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
+                <p className="text-sm font-medium text-[#15205f]">
+                  {lead.budget || 'No budget'}
+                </p>
+                <p className="mt-0.5 text-xs text-[#7a849f]">
                   {new Date(lead.createdAt).toLocaleString()}
                 </p>
               </div>
             </button>
             {open ? (
-              <div className="space-y-3 border-t border-border px-5 py-4 text-sm">
+              <div className="space-y-3 border-t border-[#e2e8f5] px-5 py-4 text-sm text-[#15205f]">
                 <Row label="Size" value={lead.size || '—'} />
                 <Row label="Timeline" value={lead.timeline || '—'} />
                 <Row
@@ -231,15 +239,15 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
                 />
                 <Row label="Website" value={lead.website || '—'} />
                 <div>
-                  <p className="text-muted-foreground">Brief</p>
-                  <p className="mt-1 whitespace-pre-wrap leading-relaxed">
+                  <p className="text-[#667085]">Brief</p>
+                  <p className="mt-1 whitespace-pre-wrap leading-relaxed text-[#15205f]">
                     {lead.message || '—'}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   <a
                     href={`mailto:${lead.email}`}
-                    className="rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background"
+                    className="rounded-full bg-[#152868] px-4 py-2 text-xs font-medium text-white"
                   >
                     Reply
                   </a>
@@ -252,7 +260,7 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full border border-border px-4 py-2 text-xs font-medium"
+                      className="rounded-full border border-[#d2daf0] px-4 py-2 text-xs font-medium text-[#152868]"
                     >
                       Current site
                     </a>
@@ -270,8 +278,8 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <p>
-      <span className="text-muted-foreground">{label}: </span>
-      <span>{value}</span>
+      <span className="text-[#667085]">{label}: </span>
+      <span className="text-[#15205f]">{value}</span>
     </p>
   );
 }
@@ -297,8 +305,8 @@ function TrafficView({
         <StatCard label="Started scheduling" value={stats.schedulingStarts} />
       </div>
 
-      <section className="mt-8 rounded-2xl border border-border p-6">
-        <h2 className="text-lg font-medium">Last 7 days</h2>
+      <section className="mt-8 rounded-2xl border border-[#e2e8f5] bg-white p-6">
+        <h2 className="text-lg font-medium text-[#152868]">Last 7 days</h2>
         <div className="mt-6 flex h-40 items-end gap-2">
           {stats.dailyPageviews.map((day) => (
             <div
@@ -306,14 +314,14 @@ function TrafficView({
               className="flex flex-1 flex-col items-center gap-2"
             >
               <div
-                className="w-full rounded-t-md bg-primary"
+                className="w-full rounded-t-md bg-[#152868]"
                 style={{
                   height: `${Math.max((day.count / maxDaily) * 100, day.count > 0 ? 8 : 2)}%`,
                   minHeight: day.count > 0 ? 8 : 2,
                 }}
                 title={`${day.count} visits`}
               />
-              <span className="text-[10px] text-muted-foreground">
+              <span className="text-[10px] text-[#7a849f]">
                 {day.date.slice(5)}
               </span>
             </div>
@@ -352,7 +360,7 @@ function TrafficView({
         </Panel>
 
         <Panel title="What we track">
-          <ul className="space-y-2 text-sm text-muted-foreground">
+          <ul className="space-y-2 text-sm text-[#667085]">
             <li>Page visits on `/` and `/portfolio`</li>
             <li>Unique visitors via anonymous browser ID</li>
             <li>&quot;Book a call&quot; button clicks</li>
@@ -362,7 +370,7 @@ function TrafficView({
         </Panel>
       </div>
 
-      <p className="mt-8 text-xs text-muted-foreground">
+      <p className="mt-8 text-xs text-[#7a849f]">
         Last event:{' '}
         {stats.lastUpdated
           ? new Date(stats.lastUpdated).toLocaleString()
@@ -375,9 +383,11 @@ function TrafficView({
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-2xl border border-border p-5">
-      <p className="text-sm text-muted-foreground">{label}</p>
-      <p className="mt-2 text-3xl font-semibold tracking-tight">{value}</p>
+    <div className="rounded-2xl border border-[#e2e8f5] bg-white p-5">
+      <p className="text-sm text-[#667085]">{label}</p>
+      <p className="mt-2 text-3xl font-semibold tracking-tight text-[#152868]">
+        {value}
+      </p>
     </div>
   );
 }
@@ -390,8 +400,8 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-border p-6">
-      <h2 className="text-lg font-medium">{title}</h2>
+    <section className="rounded-2xl border border-[#e2e8f5] bg-white p-6">
+      <h2 className="text-lg font-medium text-[#152868]">{title}</h2>
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -405,7 +415,7 @@ function KeyValueList({
   empty?: string;
 }) {
   if (items.length === 0) {
-    return <p className="text-sm text-muted-foreground">{empty}</p>;
+    return <p className="text-sm text-[#667085]">{empty}</p>;
   }
 
   return (
@@ -415,8 +425,8 @@ function KeyValueList({
           key={item.label}
           className="flex items-center justify-between gap-4 text-sm"
         >
-          <span className="truncate text-muted-foreground">{item.label}</span>
-          <span className="font-medium">{item.value}</span>
+          <span className="truncate text-[#667085]">{item.label}</span>
+          <span className="font-medium text-[#15205f]">{item.value}</span>
         </li>
       ))}
     </ul>

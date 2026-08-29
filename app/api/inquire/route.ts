@@ -63,7 +63,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   const notifyTo = process.env.INQUIRE_NOTIFY_EMAIL || 'sales@devly.info';
   const from =
-    process.env.RESEND_FROM || 'Devly <onboarding@resend.dev>';
+    process.env.RESEND_FROM || 'Devly <hello@work.devly.info>';
 
   const lead = {
     name,
@@ -131,6 +131,7 @@ export async function POST(request: Request) {
     const prospect = await resend.emails.send({
       from,
       to: email,
+      replyTo: notifyTo,
       subject: welcomeEmailSubject(name),
       html: prospectHtml,
     });
