@@ -148,31 +148,6 @@ function Nav() {
   );
 }
 
-function AcceptingStamp() {
-  const label = 'ACCEPTING NOW • ACCEPTING NOW • ';
-  return (
-    <span
-      className="relative ml-1.5 inline-flex h-[4.35rem] w-[4.35rem] shrink-0 translate-y-1 items-center justify-center rounded-full bg-[#ffe566] align-middle shadow-[0_10px_24px_-12px_rgba(245,196,0,0.7)] sm:ml-2 sm:h-[5.15rem] sm:w-[5.15rem] sm:translate-y-1.5"
-      aria-label="Accepting now"
-    >
-      <svg
-        viewBox="0 0 100 100"
-        className="h-[92%] w-[92%] animate-[spin_14s_linear_infinite] motion-reduce:animate-none"
-      >
-        <defs>
-          <path
-            id="accepting-now-path"
-            d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"
-          />
-        </defs>
-        <text fill="#152868" fontSize="8.4" fontWeight="800" letterSpacing="1.6">
-          <textPath href="#accepting-now-path">{label}</textPath>
-        </text>
-      </svg>
-    </span>
-  );
-}
-
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
@@ -221,18 +196,16 @@ export function WebsitesLanding() {
 
       {/* Hero */}
       <section className="relative mx-auto max-w-4xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
-        <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-bold leading-[1.02] tracking-[-0.05em] text-[#152868]">
-          We design and develop
-          <AcceptingStamp />{' '}
-          <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic tracking-[-0.02em] text-[#2a3fb8]">
-            really good
-          </em>{' '}
-          websites.
+        <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-bold leading-[1.08] tracking-[-0.05em] text-[#152868]">
+          We make you look{' '}
+          <em className="font-display italic font-medium tracking-[-0.01em] text-[#2a3fb8]">
+            premium.
+          </em>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#5c688f] sm:text-[18px]">
-          Custom design. Custom development. Built for founders and local
-          businesses that need leads — not another template that looks like
-          everyone else.
+          You work directly with the founder. No template farms, no handoff
+          roulette. We optimize for leads and clarity — forms, booking, and
+          messaging that help someone take the next step.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
