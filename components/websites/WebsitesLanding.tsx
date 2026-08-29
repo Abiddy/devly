@@ -427,15 +427,16 @@ export function WebsitesLanding() {
               About
             </p>
             <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
-              Meet the developer{' '}
-              <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
-                Mo.
-              </em>
+              Meet the developer
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#5c688f]">
-              You work directly with me — strategy, design, and build stay aligned
-              from first call to launch. I focus on sites that earn trust quickly
-              and push real action: inquire, book, buy.
+              You work directly with me,{' '}
+              <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+                Mo
+              </em>{' '}
+              — strategy, design, and build stay aligned from first call to
+              launch. I focus on sites that earn trust quickly and push real
+              action: inquire, book, buy.
             </p>
             <p className="mt-3 text-[15px] leading-relaxed text-[#5c688f]">
               Best fit: local service businesses and founder-led brands that have
