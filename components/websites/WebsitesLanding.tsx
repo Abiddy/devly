@@ -11,6 +11,7 @@ import {
   Sparkles,
   User,
 } from 'lucide-react';
+import { ShaderBackground } from '@/components/ui/kk';
 import { CALENDLY_EVENT_URL } from '@/lib/calendly';
 
 const projects = [
@@ -97,11 +98,11 @@ function Nav() {
       <div className="flex h-[4.25rem] w-full items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="text-[19px] font-bold tracking-[-0.04em] text-[#152868]"
+          className="text-[19px] font-bold tracking-[-0.04em] text-white"
         >
           Devly
         </Link>
-        <nav className="hidden items-center gap-0.5 rounded-full border border-[#e2e8f5] bg-[#f4f6fb]/90 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] md:flex">
+        <nav className="hidden items-center gap-0.5 rounded-full border border-white/15 bg-white/10 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md md:flex">
           {[
             { href: '#work', label: 'Work' },
             { href: '#process', label: 'Process' },
@@ -112,7 +113,7 @@ function Nav() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] transition-colors hover:bg-white hover:text-[#152868]"
+                className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-white/75 transition-colors hover:bg-white/15 hover:text-white"
               >
                 {item.label}
               </Link>
@@ -120,7 +121,7 @@ function Nav() {
               <a
                 key={item.label}
                 href={item.href}
-                className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-[#46548a] transition-colors hover:bg-white hover:text-[#152868]"
+                className="rounded-full px-4 py-1.5 text-[13px] font-semibold text-white/75 transition-colors hover:bg-white/15 hover:text-white"
               >
                 {item.label}
               </a>
@@ -132,19 +133,31 @@ function Nav() {
             href={CALENDLY_EVENT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[13px] font-semibold text-[#46548a] transition-colors hover:text-[#152868] sm:inline"
+            className="hidden text-[13px] font-semibold text-white/75 transition-colors hover:text-white sm:inline"
           >
             Book a call
           </a>
           <Link
             href="/inquire"
-            className="inline-flex items-center rounded-full bg-[#152868] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_10px_28px_-10px_rgba(21,40,104,0.65)] transition hover:bg-[#0f1d52]"
+            className="inline-flex items-center rounded-full bg-white px-4 py-2.5 text-[13px] font-semibold text-[#0a2433] shadow-[0_10px_28px_-10px_rgba(0,0,0,0.35)] transition hover:bg-white/90"
           >
             Get a quote
           </Link>
         </div>
       </div>
     </header>
+  );
+}
+
+function MeshBackdrop() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      aria-hidden
+    >
+      <ShaderBackground className="absolute inset-0 h-full w-full" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/20" />
+    </div>
   );
 }
 
@@ -179,53 +192,42 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export function WebsitesLanding() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#f3f5fa] text-[#15205f]">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[780px] bg-[radial-gradient(ellipse_90%_55%_at_50%_-10%,_rgba(21,40,104,0.11),_transparent_60%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-40 top-48 h-80 w-80 rounded-full bg-[#8fa3ff]/18 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-32 top-80 h-96 w-96 rounded-full bg-[#a8c0ff]/14 blur-3xl"
-      />
-
       <Nav />
+      <div className="relative isolate -mt-[4.25rem] overflow-hidden pt-[4.25rem]">
+        <MeshBackdrop />
 
-      {/* Hero */}
-      <section className="relative mx-auto max-w-4xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
-        <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-bold leading-[1.08] tracking-[-0.05em] text-[#152868]">
-          We make you look{' '}
-          <em className="font-display italic font-medium tracking-[-0.01em] text-[#2a3fb8]">
-            premium.
-          </em>
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#5c688f] sm:text-[18px]">
-          You work directly with the founder. No template farms, no handoff
-          roulette. We optimize for leads and clarity — forms, booking, and
-          messaging that help someone take the next step.
-        </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            href="/inquire"
-            className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-8 py-3.5 text-[14px] font-semibold text-white shadow-[0_16px_40px_-14px_rgba(21,40,104,0.6)] transition hover:-translate-y-0.5 hover:bg-[#0f1d52]"
-          >
-            Get Quote
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/pricing"
-            className="inline-flex items-center gap-2 rounded-full border border-[#d2daf0] bg-white/95 px-8 py-3.5 text-[14px] font-semibold text-[#152868] shadow-[0_8px_24px_-18px_rgba(21,40,104,0.35)] transition hover:-translate-y-0.5 hover:border-[#152868]/25"
-          >
-            How pricing works
-          </Link>
-        </div>
-      </section>
+        {/* Hero */}
+        <section className="relative z-10 mx-auto max-w-4xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
+          <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-bold leading-[1.08] tracking-[-0.05em] text-white">
+            We make you look{' '}
+            <em className="font-display italic font-medium tracking-[-0.01em] text-[#d6f4ff]">
+              premium.
+            </em>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-[16px] font-medium leading-[1.7] text-white/75 sm:text-[18px]">
+            You work directly with the founder. No template farms, no handoff
+            roulette. We optimize for leads and clarity — forms, booking, and
+            messaging that help someone take the next step.
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/inquire"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-[14px] font-semibold text-[#0a2433] shadow-[0_16px_40px_-14px_rgba(0,0,0,0.4)] transition hover:-translate-y-0.5 hover:bg-white/90"
+            >
+              Get Quote
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-8 py-3.5 text-[14px] font-semibold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/16"
+            >
+              How pricing works
+            </Link>
+          </div>
+        </section>
 
-      {/* Stats — premium card stage */}
-      <section className="relative mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
+        {/* Stats — premium card stage */}
+        <section className="relative z-10 mx-auto max-w-6xl px-5 pb-20 sm:px-8 sm:pb-28">
         <div className="rounded-[28px] border border-white/80 bg-gradient-to-b from-white/90 to-white/55 p-3 shadow-[0_30px_80px_-40px_rgba(21,40,104,0.45)] backdrop-blur-xl sm:rounded-[32px] sm:p-4">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => {
@@ -265,9 +267,10 @@ export function WebsitesLanding() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Featured */}
-      <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 sm:px-8 lg:grid-cols-2 lg:gap-16">
+      <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 pt-24 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="relative overflow-hidden rounded-[28px] border border-[#e2e8f5] bg-white p-2.5 shadow-[0_32px_64px_-36px_rgba(21,40,104,0.45)]">
           <div className="overflow-hidden rounded-[22px]">
             <Image
@@ -407,59 +410,61 @@ export function WebsitesLanding() {
       </section>
 
       {/* About */}
-      <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 sm:px-8 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
-            About
-          </p>
-          <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
-            A boutique studio founded by{' '}
-            <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
-              Mo.
-            </em>
-          </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-[#5c688f]">
-            You work directly with me — strategy, design, and build stay aligned
-            from first call to launch. I focus on sites that earn trust quickly
-            and push real action: inquire, book, buy.
-          </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#5c688f]">
-            Best fit: local service businesses and founder-led brands that have
-            outgrown DIY builders and need a site that feels as serious as the
-            work behind it.
-          </p>
-          <div className="mt-8 grid grid-cols-3 gap-3">
-            {[
-              { v: 'Founder-led', l: 'every project' },
-              { v: '2–4 wks', l: 'typical timeline' },
-              { v: 'Call-first', l: 'custom proposals' },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="rounded-2xl border border-[#e2e8f5] bg-white px-3 py-4 text-center shadow-[0_10px_28px_-22px_rgba(21,40,104,0.35)]"
-              >
-                <p className="text-[13px] font-bold tracking-[-0.02em] text-[#152868] sm:text-[14px]">
-                  {s.v}
-                </p>
-                <p className="mt-1 text-[11px] text-[#7a849f]">{s.l}</p>
-              </div>
-            ))}
+      <section className="relative bg-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-24 sm:px-8 lg:grid-cols-2 lg:gap-16">
+          <div className="relative mx-auto w-full max-w-[460px] bg-white lg:max-w-none">
+            <Image
+              src="/website-assets/nouman-portrait.png"
+              alt="Mo"
+              width={973}
+              height={1024}
+              className="h-auto w-full bg-white object-contain"
+              priority={false}
+            />
           </div>
-        </div>
-        <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
-          <Image
-            src="/website-assets/nouman-portrait.png"
-            alt="Mo"
-            width={900}
-            height={900}
-            className="h-auto w-full object-contain"
-            priority={false}
-          />
+          <div>
+            <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
+              About
+            </p>
+            <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
+              A boutique studio founded by{' '}
+              <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+                Mo.
+              </em>
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-[#5c688f]">
+              You work directly with me — strategy, design, and build stay aligned
+              from first call to launch. I focus on sites that earn trust quickly
+              and push real action: inquire, book, buy.
+            </p>
+            <p className="mt-3 text-[15px] leading-relaxed text-[#5c688f]">
+              Best fit: local service businesses and founder-led brands that have
+              outgrown DIY builders and need a site that feels as serious as the
+              work behind it.
+            </p>
+            <div className="mt-8 grid grid-cols-3 gap-3">
+              {[
+                { v: 'Founder-led', l: 'every project' },
+                { v: '2–4 wks', l: 'typical timeline' },
+                { v: 'Call-first', l: 'custom proposals' },
+              ].map((s) => (
+                <div
+                  key={s.l}
+                  className="rounded-2xl border border-[#eef1f6] bg-[#f7f8fb] px-3 py-4 text-center"
+                >
+                  <p className="text-[13px] font-bold tracking-[-0.02em] text-[#152868] sm:text-[14px]">
+                    {s.v}
+                  </p>
+                  <p className="mt-1 text-[11px] text-[#7a849f]">{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+      <section id="faq" className="relative mx-auto max-w-6xl px-5 pb-24 pt-24 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-14">
           <div>
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
@@ -482,29 +487,25 @@ export function WebsitesLanding() {
 
       {/* CTA */}
       <section className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8">
-        <div className="relative overflow-hidden rounded-[32px] bg-[#152868] px-6 py-16 text-center text-white shadow-[0_36px_80px_-32px_rgba(21,40,104,0.7)] sm:px-12">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-16 top-0 h-64 w-64 rounded-full bg-white/10 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-12 bottom-0 h-64 w-64 rounded-full bg-[#6b82e8]/35 blur-3xl"
-          />
-          <p className="relative text-[12px] font-bold uppercase tracking-[0.2em] text-white/55">
+        <div className="relative isolate overflow-hidden rounded-[32px] px-6 py-16 text-center text-white shadow-[0_36px_80px_-32px_rgba(10,36,51,0.55)] sm:px-12">
+          <MeshBackdrop />
+          <p className="relative text-[12px] font-bold uppercase tracking-[0.2em] text-white/60">
             Next step
           </p>
-          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em]">
-            Get a quote. No pressure.
+          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em] text-white">
+            Get a quote.{' '}
+            <em className="font-display italic font-medium text-[#d6f4ff]">
+              No pressure.
+            </em>
           </h2>
-          <p className="relative mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-white/70">
+          <p className="relative mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-white/75">
             Share what you&apos;re building — or book a quick call. We&apos;ll
             send a clear number back. No pitch deck, no obligation.
           </p>
-          <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="relative z-10 mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/inquire"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-[#152868] transition hover:bg-[#f3f5ff]"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-[#0a2433] transition hover:bg-white/90"
             >
               Get a quote
               <ArrowRight className="h-4 w-4" />
@@ -513,7 +514,7 @@ export function WebsitesLanding() {
               href={CALENDLY_EVENT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex rounded-full border border-white/30 px-7 py-3.5 text-[14px] font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-[14px] font-semibold text-white backdrop-blur-sm transition hover:bg-white/16"
             >
               Book a call
             </a>
