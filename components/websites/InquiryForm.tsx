@@ -168,7 +168,7 @@ export function InquiryForm() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             You&apos;re in
           </p>
-          <h3 className="mt-3 text-[clamp(1.7rem,4vw,2.35rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h3 className="mt-3 text-[clamp(1.7rem,4vw,2.35rem)] font-bold tracking-[-0.04em] text-[#152868]">
             Welcome package{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
               sent.
@@ -432,7 +432,7 @@ function StepShell({
       <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
         {title}
       </p>
-      <h3 className="mt-2 text-[clamp(1.35rem,3vw,1.75rem)] font-extrabold tracking-[-0.035em] text-[#152868]">
+      <h3 className="mt-2 text-[clamp(1.35rem,3vw,1.75rem)] font-bold tracking-[-0.035em] text-[#152868]">
         {question} <span className="text-[#c2410c]">*</span>
       </h3>
       {hint ? (

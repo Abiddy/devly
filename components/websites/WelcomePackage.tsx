@@ -60,7 +60,7 @@ export function WelcomePackage() {
         <div className="mx-auto flex h-[4.25rem] max-w-3xl items-center justify-between px-5 sm:px-8">
           <Link
             href="/"
-            className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
+            className="text-[19px] font-bold tracking-[-0.04em] text-[#152868]"
           >
             Devly
           </Link>
@@ -77,7 +77,7 @@ export function WelcomePackage() {
         <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
           Welcome package
         </p>
-        <h1 className="mt-3 text-[clamp(2.1rem,5vw,3.15rem)] font-extrabold leading-[1.08] tracking-[-0.045em] text-[#152868]">
+        <h1 className="mt-3 text-[clamp(2.1rem,5vw,3.15rem)] font-bold leading-[1.08] tracking-[-0.045em] text-[#152868]">
           We design and develop{' '}
           <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
             really good
@@ -98,7 +98,7 @@ export function WelcomePackage() {
               <p className="font-[family-name:var(--font-studio-display)] text-[1.75rem] italic leading-none text-[#152868]/30">
                 {section.label}
               </p>
-              <h2 className="mt-3 text-[1.35rem] font-extrabold tracking-[-0.03em] text-[#15205f]">
+              <h2 className="mt-3 text-[1.35rem] font-bold tracking-[-0.03em] text-[#15205f]">
                 {section.title}
               </h2>
               {section.body && (
@@ -131,7 +131,7 @@ export function WelcomePackage() {
         </div>
 
         <section className="mt-8 overflow-hidden rounded-[28px] bg-[#152868] p-7 text-white shadow-[0_28px_64px_-32px_rgba(21,40,104,0.55)] sm:p-9">
-          <h2 className="text-[1.55rem] font-extrabold tracking-[-0.03em]">
+          <h2 className="text-[1.55rem] font-bold tracking-[-0.03em]">
             Next step
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-white/70">

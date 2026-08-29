@@ -1,27 +1,15 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import {
-  Bricolage_Grotesque,
-  Fraunces,
-  Inter,
-  Playfair_Display,
-} from 'next/font/google';
+import { Inter, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 import { FontLoader } from '@/components/FontLoader';
 import './globals.css';
 
-const bricolage = Bricolage_Grotesque({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-studio',
-  display: 'swap',
-});
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-studio-display',
+  variable: '--font-studio',
   display: 'swap',
 });
 
@@ -71,10 +59,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${fraunces.variable} ${inter.variable} ${playfair.variable}`}
+      className={`${jakarta.variable} ${inter.variable} ${playfair.variable}`}
     >
       <body
-        className={`${bricolage.className} font-[family-name:var(--font-studio)] antialiased`}
+        className={`${jakarta.className} font-[family-name:var(--font-studio)] antialiased`}
       >
         <FontLoader />
         <Suspense fallback={null}>

@@ -30,7 +30,7 @@ function Nav() {
       <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
+          className="text-[19px] font-bold tracking-[-0.04em] text-[#152868]"
         >
           Devly
         </Link>
@@ -78,7 +78,7 @@ export function WebsitesPricing() {
       <Nav />
 
       <section className="relative mx-auto max-w-3xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pt-20">
-        <h1 className="text-[clamp(2.5rem,6vw,3.85rem)] font-extrabold leading-[1.05] tracking-[-0.05em] text-[#152868]">
+        <h1 className="text-[clamp(2.5rem,6vw,3.85rem)] font-bold leading-[1.05] tracking-[-0.05em] text-[#152868]">
           How much does a website{' '}
           <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
             cost?
@@ -95,7 +95,7 @@ export function WebsitesPricing() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             Pricing philosophy
           </p>
-          <h2 className="mt-2 text-[clamp(1.65rem,3vw,2.2rem)] font-extrabold tracking-[-0.035em] text-[#152868]">
+          <h2 className="mt-2 text-[clamp(1.65rem,3vw,2.2rem)] font-bold tracking-[-0.035em] text-[#152868]">
             Our pricing philosophy.
           </h2>
           <p className="mt-2 max-w-xl text-[15px] text-[#5c688f]">
@@ -108,7 +108,7 @@ export function WebsitesPricing() {
                 key={p.title}
                 className="group rounded-[22px] border border-[#eef1fb] bg-[#f6f7fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#d2daf0] hover:bg-white hover:shadow-[0_18px_40px_-28px_rgba(21,40,104,0.35)]"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-[13px] font-extrabold text-[#152868] shadow-sm ring-1 ring-[#e2e8f5] transition group-hover:bg-[#152868] group-hover:text-white group-hover:ring-[#152868]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-[13px] font-bold text-[#152868] shadow-sm ring-1 ring-[#e2e8f5] transition group-hover:bg-[#152868] group-hover:text-white group-hover:ring-[#152868]">
                   0{i + 1}
                 </div>
                 <h3 className="mt-4 text-[15px] font-bold leading-snug tracking-[-0.015em] text-[#15205f]">
@@ -125,7 +125,7 @@ export function WebsitesPricing() {
 
       <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 sm:px-8 lg:grid-cols-2">
         <div>
-          <h2 className="text-[clamp(1.9rem,4vw,2.6rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h2 className="text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
             A website is an{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
               investment.
@@ -167,7 +167,7 @@ export function WebsitesPricing() {
           <p className="relative text-[12px] font-bold uppercase tracking-[0.2em] text-white/55">
             Next step
           </p>
-          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-extrabold tracking-[-0.04em]">
+          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em]">
             Get your custom proposal now.
           </h2>
           <p className="relative mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-white/70">
@@ -197,7 +197,7 @@ export function WebsitesPricing() {
 
       <footer className="border-t border-[#e2e8f5] bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p className="text-[18px] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <p className="text-[18px] font-bold tracking-[-0.04em] text-[#152868]">
             Devly
           </p>
           <div className="flex flex-wrap gap-5 text-[13px] font-semibold text-[#46548a]">

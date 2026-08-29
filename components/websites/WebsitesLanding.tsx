@@ -97,7 +97,7 @@ function Nav() {
       <div className="flex h-[4.25rem] w-full items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
+          className="text-[19px] font-bold tracking-[-0.04em] text-[#152868]"
         >
           Devly
         </Link>
@@ -221,7 +221,7 @@ export function WebsitesLanding() {
 
       {/* Hero */}
       <section className="relative mx-auto max-w-4xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-24">
-        <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] text-[#152868]">
+        <h1 className="text-[clamp(2.75rem,7.2vw,4.5rem)] font-bold leading-[1.02] tracking-[-0.05em] text-[#152868]">
           We design and develop
           <AcceptingStamp />{' '}
           <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic tracking-[-0.02em] text-[#2a3fb8]">
@@ -311,7 +311,7 @@ export function WebsitesLanding() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             Featured
           </p>
-          <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em] text-[#152868]">
             Beautiful sites that get you{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
               results.
@@ -345,7 +345,7 @@ export function WebsitesLanding() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             Selected work
           </p>
-          <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em] text-[#152868]">
             Our work speaks for itself.
           </h2>
           <p className="mt-3 text-[15px] text-[#5c688f]">
@@ -390,7 +390,7 @@ export function WebsitesLanding() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             Process
           </p>
-          <h2 className="mt-2 text-[clamp(1.9rem,4vw,2.6rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h2 className="mt-2 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
             How we work.
           </h2>
           <p className="mt-3 max-w-xl text-[15px] text-[#5c688f]">
@@ -439,10 +439,10 @@ export function WebsitesLanding() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             About
           </p>
-          <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <h2 className="mt-3 text-[clamp(1.9rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-[#152868]">
             A boutique studio founded by{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
-              Nouman Abidi.
+              Mo.
             </em>
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-[#5c688f]">
@@ -476,7 +476,7 @@ export function WebsitesLanding() {
         <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
           <Image
             src="/website-assets/nouman-portrait.png"
-            alt="Nouman Abidi"
+            alt="Mo"
             width={900}
             height={900}
             className="h-auto w-full object-contain"
@@ -492,7 +492,7 @@ export function WebsitesLanding() {
             <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
               FAQ
             </p>
-            <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.7rem)] font-extrabold tracking-[-0.04em] text-[#152868]">
+            <h2 className="mt-3 text-[clamp(1.95rem,4vw,2.7rem)] font-bold tracking-[-0.04em] text-[#152868]">
               Questions,{' '}
               <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
                 answered.
@@ -521,7 +521,7 @@ export function WebsitesLanding() {
           <p className="relative text-[12px] font-bold uppercase tracking-[0.2em] text-white/55">
             Next step
           </p>
-          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-extrabold tracking-[-0.04em]">
+          <h2 className="relative mt-3 text-[clamp(1.95rem,4vw,2.85rem)] font-bold tracking-[-0.04em]">
             Get a quote. No pressure.
           </h2>
           <p className="relative mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-white/70">
@@ -550,7 +550,7 @@ export function WebsitesLanding() {
 
       <footer className="border-t border-[#e2e8f5] bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p className="text-[18px] font-extrabold tracking-[-0.04em] text-[#152868]">
+          <p className="text-[18px] font-bold tracking-[-0.04em] text-[#152868]">
             Devly
           </p>
           <div className="flex flex-wrap gap-5 text-[13px] font-semibold text-[#46548a]">

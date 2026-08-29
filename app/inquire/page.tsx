@@ -20,7 +20,7 @@ export default function InquirePage() {
         <div className="flex h-[4.25rem] w-full items-center justify-between px-5 sm:px-8 lg:px-12">
           <Link
             href="/"
-            className="text-[19px] font-extrabold tracking-[-0.04em] text-[#152868]"
+            className="text-[19px] font-bold tracking-[-0.04em] text-[#152868]"
           >
             Devly
           </Link>
@@ -60,7 +60,7 @@ export default function InquirePage() {
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
             Get a quote
           </p>
-          <h1 className="mt-3 text-[clamp(2.2rem,6vw,3.4rem)] font-extrabold leading-[1.05] tracking-[-0.045em] text-[#152868]">
+          <h1 className="mt-3 text-[clamp(2.2rem,6vw,3.4rem)] font-bold leading-[1.05] tracking-[-0.045em] text-[#152868]">
             Tell us what you&apos;re{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
               building.

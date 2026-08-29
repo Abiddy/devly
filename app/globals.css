@@ -23,6 +23,7 @@
     --font-noola-display: 'TT Firs Neue', sans-serif;
     --font-noola-body: 'TT Firs Neue Trl', sans-serif;
     --font-noola-inter: 'Inter', sans-serif;
+    --font-studio-display: var(--font-studio);
   }
 }
 
