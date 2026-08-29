@@ -61,9 +61,9 @@ export async function POST(request: Request) {
   const welcomeUrl = `${baseUrl}/welcome`;
   const pricingUrl = `${baseUrl}/pricing`;
   const apiKey = process.env.RESEND_API_KEY;
-  const notifyTo = process.env.INQUIRE_NOTIFY_EMAIL || 'sales@devly.info';
   const from =
     process.env.RESEND_FROM || 'Devly <hello@work.devly.info>';
+  const notifyTo = salesNotifyRecipients();
 
   const lead = {
     name,
@@ -111,30 +111,39 @@ export async function POST(request: Request) {
     photoUrl,
   });
 
-  const notifyHtml = `
-    <div style="font-family: Inter, Helvetica, Arial, sans-serif; line-height: 1.5;">
-      <p><strong>New website inquiry</strong></p>
-      <p>Name: ${escapeHtml(name)}<br/>
-      Email: ${escapeHtml(email)}<br/>
-      Company: ${escapeHtml(company || '—')}<br/>
-      Website: ${escapeHtml(website || '—')}</p>
-      <p>Goals: ${escapeHtml(goals.length ? goals.join(', ') : '—')}<br/>
-      Budget: ${escapeHtml(budget || '—')}<br/>
-      Size: ${escapeHtml(size || '—')}<br/>
-      Timeline: ${escapeHtml(timeline || '—')}</p>
-      <p>Brief:</p>
-      <p>${escapeHtml(message || '—').replace(/\n/g, '<br/>')}</p>
-    </div>
-  `;
+  const notifyHtml = buildSalesNotifyEmail({
+    name,
+    email,
+    company,
+    website,
+    message,
+    goals,
+    budget,
+    size,
+    timeline,
+  });
 
   try {
-    const prospect = await resend.emails.send({
-      from,
-      to: email,
-      replyTo: notifyTo,
-      subject: welcomeEmailSubject(name),
-      html: prospectHtml,
-    });
+    const [prospect, notify] = await Promise.all([
+      resend.emails.send({
+        from,
+        to: email,
+        replyTo: SALES_INBOX,
+        subject: welcomeEmailSubject(name),
+        html: prospectHtml,
+      }),
+      resend.emails.send({
+        from,
+        to: notifyTo,
+        replyTo: email,
+        subject: `New inquiry: ${name}${company ? ` (${company})` : ''}`,
+        html: notifyHtml,
+      }),
+    ]);
+
+    if (notify.error) {
+      console.error('[inquire] sales notify failed', notify.error);
+    }
 
     if (prospect.error) {
       console.error('[inquire] prospect email failed', prospect.error);
@@ -144,19 +153,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const notify = await resend.emails.send({
-      from,
-      to: notifyTo,
-      replyTo: email,
-      subject: `New inquiry: ${name}${company ? ` (${company})` : ''}`,
-      html: notifyHtml,
+    return NextResponse.json({
+      ok: true,
+      emailed: true,
+      notified: !notify.error,
+      stored,
+      welcomeUrl,
     });
-
-    if (notify.error) {
-      console.error('[inquire] notify email failed', notify.error);
-    }
-
-    return NextResponse.json({ ok: true, emailed: true, stored, welcomeUrl });
   } catch (err) {
     console.error('[inquire] unexpected error', err);
     return NextResponse.json(
@@ -164,6 +167,47 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+}
+
+const SALES_INBOX = 'sales@devly.info';
+
+function salesNotifyRecipients(): string[] {
+  const extra = process.env.INQUIRE_NOTIFY_EMAIL?.trim();
+  return Array.from(new Set([SALES_INBOX, extra].filter((v): v is string => Boolean(v))));
+}
+
+function buildSalesNotifyEmail(lead: {
+  name: string;
+  email: string;
+  company: string;
+  website: string;
+  message: string;
+  goals: string[];
+  budget: string;
+  size: string;
+  timeline: string;
+}) {
+  const row = (label: string, value: string) =>
+    `<p style="margin:0 0 10px;"><span style="color:#667085;">${label}:</span> ${escapeHtml(value)}</p>`;
+
+  return `
+    <div style="font-family:Inter,Helvetica,Arial,sans-serif;line-height:1.55;color:#15205f;max-width:560px;">
+      <p style="margin:0 0 16px;font-size:18px;font-weight:700;color:#152868;">New website inquiry</p>
+      ${row('Name', lead.name)}
+      ${row('Email', lead.email)}
+      ${row('Company', lead.company || '—')}
+      ${row('Website', lead.website || '—')}
+      ${row('Goals', lead.goals.length ? lead.goals.join(', ') : '—')}
+      ${row('Budget', lead.budget || '—')}
+      ${row('Size', lead.size || '—')}
+      ${row('Timeline', lead.timeline || '—')}
+      <p style="margin:16px 0 8px;color:#667085;">Brief</p>
+      <p style="margin:0;white-space:pre-wrap;">${escapeHtml(lead.message || '—').replace(/\n/g, '<br/>')}</p>
+      <p style="margin:20px 0 0;">
+        <a href="mailto:${escapeHtml(lead.email)}" style="color:#152868;font-weight:600;">Reply to ${escapeHtml(lead.email)}</a>
+      </p>
+    </div>
+  `;
 }
 
 function escapeHtml(value: string) {
