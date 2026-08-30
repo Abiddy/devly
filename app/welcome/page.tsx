@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Devly — Welcome Package',
   description:
-    'How Devly builds lead-focused websites: process, what’s included, pricing overview, and next steps.',
+    'A short look at recent work, how a Devly project runs, and what happens next — then a clear proposal if we’re a fit.',
 };
 
 export default function WelcomePackagePage() {
