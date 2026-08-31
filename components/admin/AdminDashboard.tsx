@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { AnalyticsStats } from '@/lib/analytics';
+import type { SiteReview } from '@/lib/site-reviews';
 
 const STORAGE_KEY = 'devly_admin_key';
 
@@ -28,7 +29,8 @@ export function AdminDashboard() {
   const [input, setInput] = useState('');
   const [stats, setStats] = useState<StatsResponse | null>(null);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
-  const [tab, setTab] = useState<'traffic' | 'leads'>('leads');
+  const [reviews, setReviews] = useState<SiteReview[]>([]);
+  const [tab, setTab] = useState<'traffic' | 'leads' | 'reviews'>('leads');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -38,14 +40,16 @@ export function AdminDashboard() {
 
     try {
       const headers = { Authorization: `Bearer ${key}` };
-      const [statsRes, leadsRes] = await Promise.all([
+      const [statsRes, leadsRes, reviewsRes] = await Promise.all([
         fetch('/api/analytics', { headers }),
         fetch('/api/inquiries', { headers }),
+        fetch('/api/reviews', { headers }),
       ]);
 
       if (!statsRes.ok) {
         setStats(null);
         setInquiries([]);
+        setReviews([]);
         setError(
           statsRes.status === 401
             ? 'Invalid admin password.'
@@ -63,6 +67,13 @@ export function AdminDashboard() {
         setInquiries(leads.inquiries ?? []);
       } else {
         setInquiries([]);
+      }
+
+      if (reviewsRes.ok) {
+        const data = (await reviewsRes.json()) as { reviews?: SiteReview[] };
+        setReviews(data.reviews ?? []);
+      } else {
+        setReviews([]);
       }
     } catch {
       setError('Could not reach admin API.');
@@ -89,6 +100,7 @@ export function AdminDashboard() {
     setInput('');
     setStats(null);
     setInquiries([]);
+    setReviews([]);
     setError('');
   };
 
@@ -99,7 +111,7 @@ export function AdminDashboard() {
           Devly Admin
         </h1>
         <p className="mt-2 text-sm text-[#667085]">
-          Enter your admin password to view traffic and quote leads.
+          Enter your admin password to view traffic, quote leads, and reviews.
         </p>
 
         <form onSubmit={handleLogin} className="mt-8 space-y-4">
@@ -137,7 +149,7 @@ export function AdminDashboard() {
             Admin
           </h1>
           <p className="mt-1 text-sm text-[#667085]">
-            Quote leads and landing-page traffic
+            Quote leads, reviews, and landing-page traffic
           </p>
         </div>
         <button
@@ -163,6 +175,17 @@ export function AdminDashboard() {
         </button>
         <button
           type="button"
+          onClick={() => setTab('reviews')}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            tab === 'reviews'
+              ? 'bg-[#152868] text-white shadow-sm'
+              : 'text-[#667085]'
+          }`}
+        >
+          Reviews ({reviews.length})
+        </button>
+        <button
+          type="button"
           onClick={() => setTab('traffic')}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
             tab === 'traffic'
@@ -176,6 +199,8 @@ export function AdminDashboard() {
 
       {tab === 'leads' ? (
         <LeadsList inquiries={inquiries} />
+      ) : tab === 'reviews' ? (
+        <ReviewsList reviews={reviews} />
       ) : (
         <TrafficView stats={stats} maxDaily={maxDaily} />
       )}
@@ -271,6 +296,52 @@ function LeadsList({ inquiries }: { inquiries: Inquiry[] }) {
           </article>
         );
       })}
+    </div>
+  );
+}
+
+function ReviewsList({ reviews }: { reviews: SiteReview[] }) {
+  if (reviews.length === 0) {
+    return (
+      <section className="rounded-2xl border border-[#e2e8f5] bg-white p-8 text-sm text-[#667085]">
+        No reviews yet. When someone submits{' '}
+        <span className="font-medium text-[#152868]">/reviews</span>, they show
+        up here — only you can see them.
+      </section>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {reviews.map((review) => (
+        <article
+          key={review.id}
+          className="rounded-2xl border border-[#e2e8f5] bg-white px-5 py-5 text-[#15205f] shadow-[0_1px_0_rgba(21,40,104,0.04)]"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="font-medium tracking-tight text-[#152868]">
+                {review.name}
+                {review.company ? (
+                  <span className="font-medium text-[#7a849f]">
+                    {' '}
+                    · {review.company}
+                  </span>
+                ) : null}
+              </p>
+              <p className="mt-0.5 text-xs text-[#7a849f]">
+                {new Date(review.createdAt).toLocaleString()}
+              </p>
+            </div>
+            <p className="text-sm font-medium text-[#152868]">
+              {review.rating}/5
+            </p>
+          </div>
+          <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-[#3d4663]">
+            {review.text}
+          </p>
+        </article>
+      ))}
     </div>
   );
 }

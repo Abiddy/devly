@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { ArrowRight } from 'lucide-react';
-import type { SiteReview } from '@/lib/site-reviews';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -50,8 +49,7 @@ function Stars({
   );
 }
 
-export function ReviewsPage({ initialReviews }: { initialReviews: SiteReview[] }) {
-  const [reviews, setReviews] = useState(initialReviews);
+export function ReviewsPage() {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [rating, setRating] = useState(5);
@@ -59,7 +57,7 @@ export function ReviewsPage({ initialReviews }: { initialReviews: SiteReview[] }
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus('loading');
     setError('');
@@ -70,18 +68,14 @@ export function ReviewsPage({ initialReviews }: { initialReviews: SiteReview[] }
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, company, rating, text }),
       });
-      const json = (await res.json()) as {
-        error?: string;
-        review?: SiteReview;
-      };
+      const json = (await res.json()) as { error?: string; ok?: boolean };
 
-      if (!res.ok || !json.review) {
+      if (!res.ok) {
         setError(json.error || 'Something went wrong.');
         setStatus('error');
         return;
       }
 
-      setReviews((prev) => [json.review!, ...prev]);
       setName('');
       setCompany('');
       setRating(5);
@@ -143,11 +137,10 @@ export function ReviewsPage({ initialReviews }: { initialReviews: SiteReview[] }
                 Thank you
               </p>
               <h2 className="mt-2 text-[1.45rem] font-bold tracking-[-0.03em] text-[#152868]">
-                That&apos;s on the page now.
+                Got it — thank you.
               </h2>
               <p className="mx-auto mt-2 max-w-sm text-[14px] text-[#667085]">
-                If someone asks what it&apos;s like to work with Devly, this is
-                what they&apos;ll read.
+                Your note was sent. We read every one.
               </p>
               <button
                 type="button"
@@ -227,44 +220,6 @@ export function ReviewsPage({ initialReviews }: { initialReviews: SiteReview[] }
             </>
           )}
         </form>
-
-        <section className="mt-12 sm:mt-16">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#7a849f] sm:text-[12px]">
-            From clients
-          </p>
-          <h2 className="mt-2 text-[clamp(1.35rem,4vw,1.9rem)] font-bold tracking-[-0.035em] text-[#152868]">
-            What people have said.
-          </h2>
-
-          {reviews.length === 0 ? (
-            <p className="mt-6 rounded-[20px] border border-[#e2e8f5] bg-white px-5 py-8 text-center text-[14px] text-[#667085]">
-              No reviews yet — yours can be the first.
-            </p>
-          ) : (
-            <div className="mt-6 space-y-3">
-              {reviews.map((review) => (
-                <article
-                  key={review.id}
-                  className="rounded-[20px] border border-[#e2e8f5] bg-white px-5 py-5 sm:px-6"
-                >
-                  <Stars count={review.rating} />
-                  <p className="mt-3 text-[15px] leading-relaxed text-[#3d4663]">
-                    {review.text}
-                  </p>
-                  <p className="mt-3 text-[13px] font-semibold text-[#152868]">
-                    {review.name}
-                    {review.company ? (
-                      <span className="font-medium text-[#7a849f]">
-                        {' '}
-                        · {review.company}
-                      </span>
-                    ) : null}
-                  </p>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
       </main>
     </div>
   );

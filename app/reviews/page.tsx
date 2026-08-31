@@ -1,16 +1,12 @@
 import { ReviewsPage } from '@/components/websites/ReviewsPage';
-import { listSiteReviews } from '@/lib/site-reviews';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Devly — Reviews',
+  title: 'Devly — Leave a review',
   description:
-    'What clients say about working with Devly — and a place to leave your own note.',
+    'Leave a short note about working with Devly — what stood out and whether the site helped.',
 };
 
-export const dynamic = 'force-dynamic';
-
-export default async function ReviewsRoute() {
-  const reviews = await listSiteReviews();
-  return <ReviewsPage initialReviews={reviews} />;
+export default function ReviewsRoute() {
+  return <ReviewsPage />;
 }

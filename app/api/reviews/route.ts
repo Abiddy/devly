@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
+import { isAdminAuthorized } from '@/lib/analytics';
 import { listSiteReviews, saveSiteReview } from '@/lib/site-reviews';
 
 function escapeText(value: string) {
   return value.trim();
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (!isAdminAuthorized(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const reviews = await listSiteReviews();
     return NextResponse.json({ reviews });
