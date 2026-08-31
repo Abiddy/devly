@@ -113,15 +113,51 @@ export function ReviewsPage() {
       <main className="relative mx-auto max-w-3xl px-4 py-10 sm:px-8 sm:py-16">
         <div className="text-center">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#7a849f] sm:text-[12px]">
-            Reviews
+            A note from Devly
           </p>
           <h1 className="mt-3 text-[clamp(1.85rem,6vw,3.1rem)] font-bold leading-[1.08] tracking-[-0.045em] text-[#152868]">
-            What would you tell a founder thinking about{' '}
+            Thank you{' '}
             <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
-              working with us?
-            </em>
+              so much
+            </em>{' '}
+            for working with us.
           </h1>
-          <p className="mx-auto mt-4 max-w-lg text-[14px] leading-relaxed text-[#5c688f] sm:text-[16px]">
+          <p className="mx-auto mt-4 max-w-xl text-[14px] leading-relaxed text-[#5c688f] sm:text-[16px]">
+            It was a pleasure building with you. At Devly you work directly with
+            the founder — strategy, design, and development in one pass, usually
+            live in 2–4 weeks, with revision cycles included so the final cut is
+            tight.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-7 grid max-w-2xl grid-cols-3 gap-2 sm:mt-8 sm:gap-3">
+          {[
+            { value: '10+', label: 'Sites shipped' },
+            { value: '2–4 wks', label: 'Typical delivery' },
+            { value: '1:1', label: 'Founder-led' },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl border border-[#e2e8f5] bg-white px-2 py-3 text-center sm:px-3 sm:py-4"
+            >
+              <p className="font-[family-name:var(--font-studio-display)] text-[1.15rem] leading-none tracking-[-0.03em] text-[#152868] sm:text-[1.45rem]">
+                {stat.value}
+              </p>
+              <p className="mt-1.5 text-[10px] font-semibold text-[#7a849f] sm:text-[12px]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-10 max-w-lg text-center sm:mt-12">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#7a849f] sm:text-[12px]">
+            If you have a minute
+          </p>
+          <h2 className="mt-2 text-[clamp(1.25rem,4vw,1.75rem)] font-bold tracking-[-0.035em] text-[#152868]">
+            What would you tell a founder thinking about working with us?
+          </h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-[#5c688f] sm:text-[15px]">
             A few sentences is plenty — what stood out, how the process felt,
             and whether the site actually helped you get leads.
           </p>
