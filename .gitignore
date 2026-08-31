@@ -28,6 +28,7 @@ yarn-error.log*
 # analytics + inquiry data
 /data/analytics.json
 /data/inquiries.json
+/data/site-reviews.json
 
 # vercel
 .vercel

@@ -540,6 +540,9 @@ export function WebsitesLanding() {
             <Link href="/pricing" className="hover:text-[#152868]">
               Pricing
             </Link>
+            <Link href="/reviews" className="hover:text-[#152868]">
+              Reviews
+            </Link>
             <Link href="/inquire" className="hover:text-[#152868]">
               Get a quote
             </Link>
