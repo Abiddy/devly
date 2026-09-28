@@ -186,44 +186,6 @@
   margin: -0.06em -0.12em -0.22em;
 }
 
-.an-anatomy {
-  white-space: nowrap;
-}
-
-.an-letter {
-  display: inline-block;
-  letter-spacing: 0;
-}
-
-.an-letter--serif {
-  font-family: var(--an-serif);
-  font-style: italic;
-  font-weight: 500;
-}
-
-.an-letter--mono {
-  font-size: 0.92em;
-}
-
-.an-letter--wide {
-  font-size: 0.8em;
-}
-
-.an-letter--thin {
-  font-size: 1.12em;
-}
-
-.an-letter--soft {
-  color: var(--an-accent);
-}
-
-.an-letter--syne {
-  font-size: 0.95em;
-}
-
-.an-letter--bodoni {
-  font-size: 1.04em;
-}
 
 .an-hero__sub {
   max-width: 34rem;
