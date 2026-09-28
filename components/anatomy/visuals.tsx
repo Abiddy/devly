@@ -158,10 +158,10 @@ export function SpeedVisual() {
         <div className="an-phone__notch" />
         <div className="an-phone__screen">
           <Image
-            src="/website-assets/work-freeland.png"
-            alt="Freeland Family Farms on a phone"
-            width={1024}
-            height={551}
+            src="/website-assets/crepe-heaven-mobile.png"
+            alt="Crepe Heaven on a phone"
+            width={615}
+            height={1024}
             className="an-phone__img"
           />
         </div>

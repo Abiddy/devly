@@ -19,6 +19,7 @@ import {
   Specimen,
   type Pin,
 } from './visuals';
+import { anatomyLetters } from './fonts';
 import './anatomy.css';
 
 if (typeof window !== 'undefined') {
@@ -246,6 +247,7 @@ export function AnatomyLanding() {
         SplitText.create(q('.an-hero__title'), {
           type: 'lines,chars',
           mask: 'lines',
+          linesClass: 'an-line',
           autoSplit: true,
           onSplit(self) {
             gsap.set(q('.an-hero__title'), { autoAlpha: 1 });
@@ -292,6 +294,7 @@ export function AnatomyLanding() {
           SplitText.create(el, {
             type: 'lines',
             mask: 'lines',
+            linesClass: 'an-line',
             autoSplit: true,
             onSplit(self) {
               return gsap.from(self.lines, {
@@ -503,7 +506,15 @@ export function AnatomyLanding() {
         <section className="an-hero">
           <p className="an-hero__kicker an-mono">Fig. 01 — A field guide by Devly</p>
           <h1 className="an-hero__title">
-            The anatomy of a <em>good</em> website.
+            The{' '}
+            <span className="an-anatomy">
+              {anatomyLetters.map((l, i) => (
+                <span key={i} className={`an-letter ${l.className}`}>
+                  {l.ch}
+                </span>
+              ))}
+            </span>{' '}
+            of a <em>good</em> website.
           </h1>
           <p className="an-hero__sub">
             Looking good is the entry fee. Here&apos;s what makes a website
