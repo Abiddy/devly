@@ -486,7 +486,7 @@ export function AnatomyLanding() {
         <section className="an-hero">
           <p className="an-hero__kicker an-mono">Fig. 01 — A field guide by Devly</p>
           <h1 className="an-hero__title">
-            The <em>anatomy</em> of a <em>good</em> website.
+            The anatomy of a <em>good</em> website.
           </h1>
           <p className="an-hero__sub">
             Looking good is the entry fee. Here&apos;s what makes a website
