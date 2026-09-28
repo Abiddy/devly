@@ -1,12 +1,12 @@
-import { WebsitesLanding } from '@/components/websites/WebsitesLanding';
+import { AnatomyLanding } from '@/components/anatomy/AnatomyLanding';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Devly — Custom websites that get you results',
+  title: 'The anatomy of a good website — Devly',
   description:
-    'Devly designs and develops custom websites for founders and local businesses. Book a call for a clear proposal — no template farms, no surprise checkout.',
+    'Looking good is the entry fee. See what makes a website actually work — clarity, trust, leads, speed, search, and measurement — then have Devly build one for you.',
 };
 
 export default function HomePage() {
-  return <WebsitesLanding />;
+  return <AnatomyLanding />;
 }
