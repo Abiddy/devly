@@ -164,17 +164,17 @@ export function InquiryForm() {
   if (status === 'success') {
     return (
       <div className="mx-auto max-w-2xl">
-        <div className="rounded-[28px] border border-[#e2e8f5] bg-white px-6 py-10 text-center shadow-[0_24px_56px_-36px_rgba(21,40,104,0.4)] sm:px-10">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
+        <div className="rounded-[28px] border border-[#e6e3db] bg-white px-6 py-10 text-center shadow-[0_24px_56px_-36px_rgba(18,18,18,0.4)] sm:px-10">
+          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#75726b]">
             You&apos;re in
           </p>
-          <h3 className="mt-3 text-[clamp(1.7rem,4vw,2.35rem)] font-bold tracking-[-0.04em] text-[#152868]">
+          <h3 className="mt-3 text-[clamp(1.7rem,4vw,2.35rem)] font-bold tracking-[-0.04em] text-[#121212]">
             Welcome package{' '}
-            <em className="font-[family-name:var(--font-studio-display)] not-italic font-normal italic text-[#2a3fb8]">
+            <em className="font-[family-name:var(--font-playfair)] not-italic font-normal italic text-[#ff4f1f]">
               sent.
             </em>
           </h3>
-          <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#667085]">
+          <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#75726b]">
             Check your inbox. We&apos;ll review your answers and follow up within
             1–2 business days if we&apos;re a fit — with a custom proposal, not a
             generic price list.
@@ -182,7 +182,7 @@ export function InquiryForm() {
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href={welcomeUrl}
-              className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-6 py-3 text-[13px] font-semibold text-white hover:bg-[#0f1d52]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#121212] px-6 py-3 text-[13px] font-semibold text-white hover:bg-[#ff4f1f]"
             >
               Open Welcome Package
               <ArrowRight className="h-4 w-4" />
@@ -191,7 +191,7 @@ export function InquiryForm() {
               href={CALENDLY_EVENT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex rounded-full border border-[#d2daf0] bg-white px-6 py-3 text-[13px] font-semibold text-[#152868] hover:bg-[#eef1fb]"
+              className="inline-flex rounded-full border border-[#d6d2c9] bg-white px-6 py-3 text-[13px] font-semibold text-[#121212] hover:bg-[#efede6]"
             >
               Book a call
             </a>
@@ -203,22 +203,22 @@ export function InquiryForm() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="rounded-[22px] border border-[#e2e8f5] bg-white px-5 py-4 shadow-[0_12px_32px_-24px_rgba(21,40,104,0.3)] sm:px-6">
-        <div className="flex items-center justify-between text-[13px] font-semibold text-[#667085]">
+      <div className="rounded-[22px] border border-[#e6e3db] bg-white px-5 py-4 shadow-[0_12px_32px_-24px_rgba(18,18,18,0.3)] sm:px-6">
+        <div className="flex items-center justify-between text-[13px] font-semibold text-[#75726b]">
           <span>
             Progress ({step}/{TOTAL_STEPS})
           </span>
           <span>{progress}%</span>
         </div>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#e8edf8]">
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
           <div
-            className="h-full rounded-full bg-[#152868] transition-all duration-500 ease-out"
+            className="h-full rounded-full bg-[#ff4f1f] transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
-      <div className="mt-4 rounded-[28px] border border-[#e2e8f5] bg-white p-6 shadow-[0_24px_56px_-36px_rgba(21,40,104,0.4)] sm:p-8">
+      <div className="mt-4 rounded-[28px] border border-[#e6e3db] bg-white p-6 shadow-[0_24px_56px_-36px_rgba(18,18,18,0.4)] sm:p-8">
         {step === 1 && (
           <StepShell
             title="Purpose"
@@ -236,15 +236,15 @@ export function InquiryForm() {
                     onClick={() => toggleGoal(goal.id)}
                     className={`flex w-full items-center gap-3 rounded-[18px] border px-3.5 py-3 text-left transition ${
                       selected
-                        ? 'border-[#152868] bg-[#f4f6fb]'
-                        : 'border-[#e6ebf7] bg-white hover:bg-[#f7f8fc]'
+                        ? 'border-[#121212] bg-[#f4f3ee]'
+                        : 'border-[#e6e3db] bg-white hover:bg-[#f8f7f3]'
                     }`}
                   >
                     <span
                       className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border ${
                         selected
-                          ? 'border-[#152868] bg-[#152868] text-white'
-                          : 'border-[#cfd6ea] bg-white'
+                          ? 'border-[#121212] bg-[#121212] text-white'
+                          : 'border-[#cfcbc2] bg-white'
                       }`}
                     >
                       {selected ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : null}
@@ -252,13 +252,13 @@ export function InquiryForm() {
                     <span
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
                         selected
-                          ? 'bg-[#e8ecf8] text-[#152868]'
-                          : 'bg-[#f3f5fa] text-[#7a849f]'
+                          ? 'bg-[#ffe9e0] text-[#121212]'
+                          : 'bg-[#f1efe9] text-[#75726b]'
                       }`}
                     >
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-[15px] font-semibold text-[#15205f]">
+                    <span className="text-[15px] font-semibold text-[#121212]">
                       {goal.label}
                     </span>
                   </button>
@@ -308,19 +308,19 @@ export function InquiryForm() {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               rows={7}
-              className="w-full resize-none rounded-[18px] border border-[#d5dcf0] bg-[#f6f8fd] px-4 py-3.5 text-[15px] leading-relaxed text-[#15205f] outline-none transition placeholder:text-[#98a2b3] focus:border-[#152868] focus:bg-white focus:ring-4 focus:ring-[#152868]/10"
+              className="w-full resize-none rounded-[18px] border border-[#dcd8cf] bg-[#f8f7f3] px-4 py-3.5 text-[15px] leading-relaxed text-[#121212] outline-none transition placeholder:text-[#a09c94] focus:border-[#121212] focus:bg-white focus:ring-4 focus:ring-[#121212]/10"
               placeholder="Example: 4–5 page site for a local auto shop. Need a clear path to estimates, photo-led work, and a booking or contact form. We have a logo. Inspired by quiet, premium service brands."
             />
             <label className="mt-4 block">
-              <span className="mb-1.5 block text-[13px] font-semibold text-[#152868]">
-                Current site <span className="font-medium text-[#7a849f]">(optional)</span>
+              <span className="mb-1.5 block text-[13px] font-semibold text-[#121212]">
+                Current site <span className="font-medium text-[#75726b]">(optional)</span>
               </span>
               <div className="relative">
-                <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#98a2b3]" />
+                <Globe className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#a09c94]" />
                 <input
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
-                  className="w-full rounded-[16px] border border-[#d5dcf0] bg-[#f6f8fd] py-3 pl-10 pr-4 text-[15px] text-[#15205f] outline-none transition placeholder:text-[#98a2b3] focus:border-[#152868] focus:bg-white focus:ring-4 focus:ring-[#152868]/10"
+                  className="w-full rounded-[16px] border border-[#dcd8cf] bg-[#f8f7f3] py-3 pl-10 pr-4 text-[15px] text-[#121212] outline-none transition placeholder:text-[#a09c94] focus:border-[#121212] focus:bg-white focus:ring-4 focus:ring-[#121212]/10"
                   placeholder="https://"
                 />
               </div>
@@ -374,7 +374,7 @@ export function InquiryForm() {
           <button
             type="button"
             onClick={goBack}
-            className="rounded-full border border-[#d2daf0] bg-white px-6 py-3 text-[14px] font-semibold text-[#15205f] transition hover:bg-[#eef1fb]"
+            className="rounded-full border border-[#d6d2c9] bg-white px-6 py-3 text-[14px] font-semibold text-[#121212] transition hover:bg-[#efede6]"
           >
             Back
           </button>
@@ -385,7 +385,7 @@ export function InquiryForm() {
           <button
             type="button"
             onClick={goNext}
-            className="rounded-full bg-[#152868] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(21,40,104,0.55)] transition hover:bg-[#0f1d52]"
+            className="rounded-full bg-[#121212] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition hover:bg-[#ff4f1f]"
           >
             Next
           </button>
@@ -394,7 +394,7 @@ export function InquiryForm() {
             type="button"
             onClick={submit}
             disabled={status === 'loading'}
-            className="rounded-full bg-[#152868] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(21,40,104,0.55)] transition hover:bg-[#0f1d52] disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-full bg-[#121212] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition hover:bg-[#ff4f1f] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === 'loading' ? 'Sending…' : 'Send it over'}
           </button>
@@ -402,11 +402,11 @@ export function InquiryForm() {
       </div>
 
       {(triedNext && !canAdvance()) || error ? (
-        <p className="mt-3 text-center text-[13px] text-[#c2410c]" role="alert">
+        <p className="mt-3 text-center text-[13px] text-[#ff4f1f]" role="alert">
           {error || 'Answer this one to keep going.'}
         </p>
       ) : (
-        <p className="mt-3 text-center text-[12px] text-[#98a2b3]">
+        <p className="mt-3 text-center text-[12px] text-[#a09c94]">
           Required questions only — skip nothing that has a *.
         </p>
       )}
@@ -429,17 +429,17 @@ function StepShell({
 }) {
   return (
     <div>
-      <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#7a849f]">
+      <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#75726b]">
         {title}
       </p>
-      <h3 className="mt-2 text-[clamp(1.35rem,3vw,1.75rem)] font-bold tracking-[-0.035em] text-[#152868]">
-        {question} <span className="text-[#c2410c]">*</span>
+      <h3 className="mt-2 text-[clamp(1.35rem,3vw,1.75rem)] font-bold tracking-[-0.035em] text-[#121212]">
+        {question} <span className="text-[#ff4f1f]">*</span>
       </h3>
       {hint ? (
-        <p className="mt-1.5 text-[13px] text-[#7a849f]">{hint}</p>
+        <p className="mt-1.5 text-[13px] text-[#75726b]">{hint}</p>
       ) : null}
       {body ? (
-        <p className="mt-2 text-[14px] leading-relaxed text-[#667085]">{body}</p>
+        <p className="mt-2 text-[14px] leading-relaxed text-[#75726b]">{body}</p>
       ) : null}
       <div className="mt-6">{children}</div>
     </div>
@@ -466,20 +466,20 @@ function RadioList({
             onClick={() => onChange(option)}
             className={`flex w-full items-center gap-3 rounded-[18px] border px-4 py-3.5 text-left transition ${
               selected
-                ? 'border-[#152868] bg-[#f4f6fb]'
-                : 'border-[#e6ebf7] bg-white hover:bg-[#f7f8fc]'
+                ? 'border-[#121212] bg-[#f4f3ee]'
+                : 'border-[#e6e3db] bg-white hover:bg-[#f8f7f3]'
             }`}
           >
             <span
               className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
-                selected ? 'border-[#152868]' : 'border-[#cfd6ea]'
+                selected ? 'border-[#121212]' : 'border-[#cfcbc2]'
               }`}
             >
               {selected ? (
-                <span className="h-2.5 w-2.5 rounded-full bg-[#152868]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#121212]" />
               ) : null}
             </span>
-            <span className="text-[15px] font-semibold text-[#15205f]">{option}</span>
+            <span className="text-[15px] font-semibold text-[#121212]">{option}</span>
           </button>
         );
       })}
@@ -508,12 +508,12 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-[13px] font-semibold text-[#152868]">
+      <span className="mb-1.5 block text-[13px] font-semibold text-[#121212]">
         {label}
-        {required ? <span className="text-[#c2410c]"> *</span> : null}
+        {required ? <span className="text-[#ff4f1f]"> *</span> : null}
       </span>
       <div className="relative">
-        <Icon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#98a2b3]" />
+        <Icon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#a09c94]" />
         <input
           type={type}
           required={required}
@@ -521,7 +521,7 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full rounded-[16px] border border-[#d5dcf0] bg-[#f6f8fd] py-3 pl-10 pr-4 text-[15px] text-[#15205f] outline-none transition placeholder:text-[#98a2b3] focus:border-[#152868] focus:bg-white focus:ring-4 focus:ring-[#152868]/10"
+          className="w-full rounded-[16px] border border-[#dcd8cf] bg-[#f8f7f3] py-3 pl-10 pr-4 text-[15px] text-[#121212] outline-none transition placeholder:text-[#a09c94] focus:border-[#121212] focus:bg-white focus:ring-4 focus:ring-[#121212]/10"
         />
       </div>
     </label>

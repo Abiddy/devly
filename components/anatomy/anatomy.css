@@ -147,8 +147,16 @@
   transition: color 0.2s ease;
 }
 
-.an-nav__links a:hover {
+.an-nav__links a:hover,
+.an-nav__links a.is-active {
   color: var(--an-ink);
+}
+
+.an-nav__links a.is-active {
+  text-decoration: underline;
+  text-decoration-color: var(--an-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* ——— Hero ——— */
@@ -1256,6 +1264,206 @@
 
 .an-cta__founder strong {
   color: var(--an-ink);
+}
+
+/* ——— Subpages (pricing, quote) ——— */
+.an-page-hero {
+  padding: clamp(8rem, 20vh, 11rem) var(--an-pad) clamp(3rem, 8vh, 5rem);
+  text-align: center;
+}
+
+.an-page-hero .an-mono {
+  margin: 0;
+}
+
+.an-page-title {
+  max-width: 14ch;
+  margin: 1.2rem auto 0;
+  font-size: clamp(2.8rem, 7.4vw, 6.2rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.058em;
+}
+
+.an-page-title em {
+  color: var(--an-accent);
+  letter-spacing: -0.03em;
+}
+
+.an-page-hero .an-hero__sub {
+  margin-top: 1.5rem;
+}
+
+.an-block {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 10vh, 6rem) var(--an-pad);
+  border-top: 1px solid var(--an-line);
+}
+
+.an-h2 {
+  max-width: 18ch;
+  margin: 1rem 0 0;
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.an-h2 em {
+  color: var(--an-ink-2);
+}
+
+.an-lede {
+  max-width: 46ch;
+  margin: 1.2rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--an-muted);
+}
+
+.an-principles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+
+.an-principle {
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid var(--an-line);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+.an-principle:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 79, 31, 0.4);
+  box-shadow: 0 30px 60px -40px rgba(18, 18, 18, 0.35);
+}
+
+.an-principle > span {
+  font-family: var(--an-mono);
+  font-size: 0.8rem;
+  color: var(--an-accent);
+}
+
+.an-principle h3 {
+  margin: 2.2rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.an-principle p {
+  margin: 0.7rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--an-muted);
+}
+
+.an-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+}
+
+.an-tag {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--an-line);
+  background: #fff;
+  font-family: var(--an-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.an-dark-cta {
+  max-width: 1280px;
+  margin: 0 auto clamp(3rem, 8vh, 5rem);
+  padding: 0 var(--an-pad);
+}
+
+.an-dark-cta__inner {
+  padding: clamp(3rem, 9vh, 5.5rem) clamp(1.5rem, 5vw, 4rem);
+  border-radius: 28px;
+  background: var(--an-ink);
+  color: #f4f3ee;
+  text-align: center;
+}
+
+.an-dark-cta .an-mono {
+  margin: 0;
+  color: rgba(244, 243, 238, 0.5);
+}
+
+.an-dark-cta h2 {
+  max-width: 16ch;
+  margin: 1rem auto 0;
+  font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.an-dark-cta h2 em {
+  color: var(--an-accent);
+}
+
+.an-dark-cta p:not(.an-mono) {
+  max-width: 34rem;
+  margin: 1.3rem auto 0;
+  line-height: 1.65;
+  color: rgba(244, 243, 238, 0.7);
+}
+
+.an-dark-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.2rem;
+}
+
+.an-btn--light {
+  background: #f4f3ee;
+  border-color: #f4f3ee;
+  color: var(--an-ink);
+}
+
+.an-btn--ghost-light {
+  background: transparent;
+  border-color: rgba(244, 243, 238, 0.3);
+  color: #f4f3ee;
+}
+
+.an-btn--ghost-light:hover {
+  background: #f4f3ee;
+  border-color: #f4f3ee;
+  color: var(--an-ink);
+}
+
+.an-form-wrap {
+  padding: 0 var(--an-pad) clamp(4rem, 12vh, 7rem);
+}
+
+@media (max-width: 1000px) {
+  .an-principles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .an-principles {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ——— Footer ——— */

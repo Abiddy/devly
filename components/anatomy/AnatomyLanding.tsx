@@ -7,9 +7,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight, ArrowUpRight, Check, X } from 'lucide-react';
+import { ArrowRight, Check, X } from 'lucide-react';
 
-import { CALENDLY_EVENT_URL } from '@/lib/calendly';
+import { BookButton, SiteFooter, SiteNav } from './SiteChrome';
 import {
   HeroWireframe,
   LeadToasts,
@@ -218,15 +218,6 @@ const work = [
 ];
 
 const marquee = ['Capture', 'Explain', 'Convince', 'Convert', 'Grow'];
-
-function BookButton({ className = '', children = 'Book a call' }: { className?: string; children?: ReactNode }) {
-  return (
-    <a href={CALENDLY_EVENT_URL} target="_blank" rel="noopener noreferrer" className={`an-btn ${className}`}>
-      {children}
-      <ArrowUpRight aria-hidden />
-    </a>
-  );
-}
 
 export function AnatomyLanding() {
   const root = useRef<HTMLDivElement>(null);
@@ -490,17 +481,7 @@ export function AnatomyLanding() {
     <div ref={root} className="an">
       <div className="an-progress" aria-hidden />
 
-      <header className="an-nav">
-        <Link href="/" className="an-nav__logo">
-          Devly
-        </Link>
-        <nav className="an-nav__links" aria-label="Primary">
-          <a href="#anatomy">Anatomy</a>
-          <a href="#work">Work</a>
-          <Link href="/pricing">Pricing</Link>
-        </nav>
-        <BookButton className="an-btn--sm" />
-      </header>
+      <SiteNav active="home" />
 
       <main>
         <section className="an-hero">
@@ -666,17 +647,7 @@ export function AnatomyLanding() {
         </section>
       </main>
 
-      <footer className="an-footer">
-        <span className="an-nav__logo">Devly</span>
-        <nav aria-label="Footer">
-          <a href="#work">Work</a>
-          <Link href="/pricing">Pricing</Link>
-          <Link href="/reviews">Reviews</Link>
-          <Link href="/inquire">Get a quote</Link>
-          <a href="mailto:sales@devly.info">Contact</a>
-        </nav>
-        <small>© {new Date().getFullYear()} Devly</small>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
