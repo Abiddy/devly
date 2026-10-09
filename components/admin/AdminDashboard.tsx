@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ClientsPanel } from '@/components/admin/ClientsPanel';
 import type { AnalyticsStats } from '@/lib/analytics';
 import type { SiteReview } from '@/lib/site-reviews';
 
@@ -30,7 +31,9 @@ export function AdminDashboard() {
   const [stats, setStats] = useState<StatsResponse | null>(null);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [reviews, setReviews] = useState<SiteReview[]>([]);
-  const [tab, setTab] = useState<'traffic' | 'leads' | 'reviews'>('leads');
+  const [tab, setTab] = useState<'traffic' | 'leads' | 'reviews' | 'clients'>('leads');
+  const [adminKey, setAdminKey] = useState('');
+  const [clientCount, setClientCount] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -60,6 +63,7 @@ export function AdminDashboard() {
 
       const data = (await statsRes.json()) as StatsResponse;
       setStats(data);
+      setAdminKey(key);
       sessionStorage.setItem(STORAGE_KEY, key);
 
       if (leadsRes.ok) {
@@ -98,6 +102,8 @@ export function AdminDashboard() {
   const handleLogout = () => {
     sessionStorage.removeItem(STORAGE_KEY);
     setInput('');
+    setAdminKey('');
+    setClientCount(null);
     setStats(null);
     setInquiries([]);
     setReviews([]);
@@ -149,7 +155,7 @@ export function AdminDashboard() {
             Admin
           </h1>
           <p className="mt-1 text-sm text-[#667085]">
-            Quote leads, reviews, and landing-page traffic
+            Quote leads, reviews, traffic, and client portal accounts
           </p>
         </div>
         <button
@@ -195,10 +201,23 @@ export function AdminDashboard() {
         >
           Traffic
         </button>
+        <button
+          type="button"
+          onClick={() => setTab('clients')}
+          className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+            tab === 'clients'
+              ? 'bg-[#152868] text-white shadow-sm'
+              : 'text-[#667085]'
+          }`}
+        >
+          Clients{clientCount !== null ? ` (${clientCount})` : ''}
+        </button>
       </div>
 
       {tab === 'leads' ? (
         <LeadsList inquiries={inquiries} />
+      ) : tab === 'clients' ? (
+        <ClientsPanel adminKey={adminKey} onCount={setClientCount} />
       ) : tab === 'reviews' ? (
         <ReviewsList reviews={reviews} />
       ) : (

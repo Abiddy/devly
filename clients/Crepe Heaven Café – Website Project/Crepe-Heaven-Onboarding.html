@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crepe Heaven Café — Project Onboarding · Devly Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #edefe7;
+      --ink: #002909;
+      --ink-mid: #1a4a28;
+      --ink-soft: rgba(0, 41, 9, 0.68);
+      --mute: rgba(0, 41, 9, 0.42);
+      --header-text: #f5f5e9;
+      --panel: #e2e6d8;
+      --rule: rgba(0, 41, 9, 0.18);
+      --page-w: 8.5in;
+      --page-h: 11in;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Public Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background: #c5cabd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      background: rgba(0, 41, 9, 0.94);
+      color: var(--header-text);
+      backdrop-filter: blur(10px);
+    }
+
+    .toolbar p {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-right: 8px;
+    }
+
+    .toolbar button {
+      border: 0;
+      background: var(--header-text);
+      color: var(--ink);
+      font: 600 13px "Public Sans", sans-serif;
+      padding: 10px 18px;
+      cursor: pointer;
+    }
+
+    .sheet {
+      width: var(--page-w);
+      min-height: var(--page-h);
+      margin: 28px auto;
+      background: var(--bg);
+      box-shadow: 0 18px 48px -24px rgba(0, 41, 9, 0.35);
+      page-break-after: always;
+      break-after: page;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sheet:last-of-type { page-break-after: auto; }
+
+    /* soft corner wash for oomph — print-safe */
+    .sheet::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 41, 9, 0.06), transparent 68%);
+      pointer-events: none;
+    }
+
+    .pad {
+      padding: 0.78in 0.88in 0.7in;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .toprow {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .page-no {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--mute);
+      letter-spacing: 0.06em;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 14px;
+    }
+
+    .welcome {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .welcome em {
+      display: block;
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 48px;
+      letter-spacing: -0.02em;
+      margin-top: 2px;
+    }
+
+    .client-chip {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 8px 14px;
+      background: var(--ink);
+      color: var(--header-text);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-blurb {
+      margin-top: 18px;
+      max-width: 34em;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+    }
+
+    .pull {
+      margin-top: 22px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.35;
+      color: var(--ink);
+      max-width: 18em;
+    }
+
+    .section {
+      margin-top: 34px;
+      max-width: 40em;
+    }
+
+    .section h2,
+    .page-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .page-title em {
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .section p,
+    .lead,
+    .section li {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+    }
+
+    .lead {
+      max-width: 36em;
+      margin-bottom: 26px;
+      font-size: 14px;
+    }
+
+    .section p + p { margin-top: 10px; }
+
+    .soft { color: var(--ink-soft); }
+
+    .meta {
+      margin-top: 36px;
+      max-width: 28em;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+    }
+
+    .meta-row:last-child { border-bottom: 1px solid var(--rule); }
+
+    .meta-row dt {
+      color: var(--mute);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    .meta-row dd {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .dba {
+      margin-top: auto;
+      padding-top: 24px;
+      font-size: 9.5px;
+      color: var(--mute);
+      letter-spacing: 0.02em;
+    }
+
+    .cols-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 32px;
+    }
+
+    .feat {
+      padding: 18px 18px 16px;
+      background: var(--panel);
+      border-left: 3px solid var(--ink);
+    }
+
+    .feat h3 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    ul.bullets {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    ul.bullets li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--ink-mid);
+    }
+
+    ul.bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .host-band {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1.5fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 20px 22px;
+      background: var(--ink);
+      color: var(--header-text);
+    }
+
+    .host-band h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .host-band p {
+      font-size: 12.5px;
+      line-height: 1.5;
+      opacity: 0.82;
+    }
+
+    .host-band .price {
+      text-align: right;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .host-band .price small {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 6px;
+    }
+
+    .host-band .was {
+      margin-top: 6px;
+      font-size: 11px;
+      opacity: 0.55;
+      text-decoration: line-through;
+    }
+
+    .drive-band {
+      margin-top: 24px;
+      padding: 22px 24px;
+      background: var(--panel);
+      border: 1px solid rgba(0, 41, 9, 0.12);
+    }
+
+    .drive-band .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 8px;
+    }
+
+    .drive-band a {
+      display: inline-block;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2px;
+      word-break: break-all;
+    }
+
+    .drive-band p {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    ul.check {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+      margin-top: 6px;
+    }
+
+    ul.check li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12.5px;
+      line-height: 1.4;
+      color: var(--ink);
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    ul.check .box {
+      flex: none;
+      width: 12px;
+      height: 12px;
+      margin-top: 2px;
+      border: 1.5px solid var(--ink);
+      background: transparent;
+    }
+
+    .phases {
+      display: grid;
+      gap: 0;
+      margin-top: 8px;
+      border-top: 1px solid var(--ink);
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .phase .n {
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.35;
+    }
+
+    .phase strong {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .phase p {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .note {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: var(--panel);
+      border-left: 3px solid var(--ink);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-mid);
+    }
+
+    .note strong { color: var(--ink); }
+
+    table.editorial {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 12.5px;
+      color: var(--ink);
+    }
+
+    table.editorial th {
+      background: var(--ink);
+      color: var(--header-text);
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 14px;
+      text-align: left;
+      padding: 13px 14px;
+    }
+
+    table.editorial td {
+      padding: 12px 14px;
+      border: 1px solid var(--ink);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    table.editorial td:last-child {
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    table.editorial .due {
+      display: block;
+      margin-top: 3px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #8a5a10;
+    }
+
+    .total-row {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 18px;
+      background: var(--ink);
+      color: var(--header-text);
+    }
+
+    .total-row span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .total-row strong {
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .deposit {
+      margin-top: 22px;
+      padding: 20px 22px;
+      background: var(--panel);
+      border: 1px solid rgba(0, 41, 9, 0.14);
+    }
+
+    .deposit h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .deposit p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink-mid);
+    }
+
+    .deposit .zelle {
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .contact-grid .cell {
+      padding: 18px;
+      background: var(--panel);
+    }
+
+    .contact-grid .label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 8px;
+    }
+
+    .contact-grid strong {
+      display: block;
+      font-size: 16px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .contact-grid p {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .closing {
+      margin-top: auto;
+      padding-top: 28px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.4;
+      color: var(--ink);
+      max-width: 22em;
+    }
+
+    @media print {
+      body { background: white; }
+      .toolbar { display: none !important; }
+      .sheet {
+        margin: 0;
+        box-shadow: none;
+        width: auto;
+        min-height: 100vh;
+      }
+      a { color: inherit; }
+    }
+
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <p>Print → Save as PDF · Letter · Margins: None</p>
+    <button type="button" onclick="window.print()">Download PDF</button>
+  </div>
+
+  <!-- PAGE 1 -->
+  <section class="sheet">
+    <div class="pad">
+      <div class="toprow">
+        <div class="brand">Devly</div>
+        <div class="page-no">01 / 04</div>
+      </div>
+
+      <p class="eyebrow">Project onboarding</p>
+      <h1 class="welcome">Welcome to Devly<em>Studios</em></h1>
+
+      <div class="client-chip">Crepe Heaven Café</div>
+      <p class="hero-blurb">
+        We’re so glad you’re here. Officially kicking off your custom website —
+        and we’re genuinely excited to help Crepe Heaven Café show up online
+        the way it deserves.
+      </p>
+      <p class="pull">Let’s build something warm, clear, and ready to bring people through the door.</p>
+
+      <dl class="meta">
+        <div class="meta-row">
+          <dt>Start date</dt>
+          <dd>September 22, 2026</dd>
+        </div>
+        <div class="meta-row">
+          <dt>Project</dt>
+          <dd>Custom Crepe Heaven Café Website</dd>
+        </div>
+        <div class="meta-row">
+          <dt>Studio</dt>
+          <dd>Devly Studios</dd>
+        </div>
+      </dl>
+
+      <p class="dba">Devly Studios · DBA Pilvi Systems Inc</p>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="sheet">
+    <div class="pad">
+      <div class="toprow">
+        <div class="brand" style="opacity:0.35;font-weight:500;font-size:12px;">Devly</div>
+        <div class="page-no">02 / 04</div>
+      </div>
+
+      <p class="eyebrow">The good stuff</p>
+      <h2 class="page-title">What we’re <em>building</em></h2>
+      <p class="lead">
+        A custom, mobile-friendly site that feels like your café — inviting,
+        easy to browse, and built to turn browsers into visitors (and orders).
+      </p>
+
+      <div class="cols-2">
+        <div class="feat">
+          <h3>On the site</h3>
+          <ul class="bullets">
+            <li>Custom mobile-friendly website</li>
+            <li>Modern homepage around your brand</li>
+            <li>Menu / product presentation</li>
+            <li>Best sellers / featured items</li>
+            <li>Hours and location</li>
+            <li>Google Maps / directions</li>
+            <li>Contact information</li>
+          </ul>
+        </div>
+        <div class="feat">
+          <h3>Plus extras</h3>
+          <ul class="bullets">
+            <li>Instagram / social links</li>
+            <li>Promotions / seasonal specials</li>
+            <li>Catering or event inquiry (if you want it)</li>
+            <li>Clear Order / Visit Us buttons</li>
+            <li>Basic SEO setup</li>
+            <li>Mobile optimization</li>
+            <li>Deployment and launch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="host-band">
+        <div>
+          <h3>Hosting &amp; maintenance</h3>
+          <p>We’ve got hosting, deployment, routine upkeep, and support covered for a full year — so you can focus on the café.</p>
+        </div>
+        <div>
+          <div class="price">
+            <small>Annual rate</small>
+            $336/yr
+          </div>
+          <div class="was">Standard $480/year</div>
+        </div>
+      </div>
+
+      <div class="drive-band">
+        <div class="label">Your project folder</div>
+        <a href="https://drive.google.com/drive/folders/1m2xGDcNn9M-MrSvcStCLh0ynLXPshVXG?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          Drop files here → Crepe Heaven Café Drive folder
+        </a>
+        <p>
+          Everything’s labeled and ready: Brand &amp; Logo, Menu, Food Photos, Store Photos,
+          Business Information, Content &amp; Copy, Review &amp; Feedback, Final Assets.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="sheet">
+    <div class="pad">
+      <div class="toprow">
+        <div class="brand" style="opacity:0.35;font-weight:500;font-size:12px;">Devly</div>
+        <div class="page-no">03 / 04</div>
+      </div>
+
+      <p class="eyebrow">A little homework</p>
+      <h2 class="page-title">What we need <em>from you</em></h2>
+      <p class="lead">
+        Think of this as stocking the kitchen before service. The more you can
+        share up front, the faster (and prettier) design goes.
+      </p>
+
+      <ul class="check">
+        <li><span class="box"></span>Logo files</li>
+        <li><span class="box"></span>Brand colors, if you have them</li>
+        <li><span class="box"></span>Current menu</li>
+        <li><span class="box"></span>Menu pricing</li>
+        <li><span class="box"></span>Business hours</li>
+        <li><span class="box"></span>Address</li>
+        <li><span class="box"></span>Phone number</li>
+        <li><span class="box"></span>Ordering link(s)</li>
+        <li><span class="box"></span>Instagram / social links</li>
+        <li><span class="box"></span>High-quality food photos</li>
+        <li><span class="box"></span>Store / interior photos</li>
+        <li><span class="box"></span>Best-selling items</li>
+        <li><span class="box"></span>Current promotions</li>
+        <li><span class="box"></span>Catering info, if applicable</li>
+        <li><span class="box"></span>A short story about the café</li>
+        <li><span class="box"></span>Sites or styles you love</li>
+        <li><span class="box"></span>Any must-have features</li>
+      </ul>
+
+      <div class="section" style="margin-top:36px;max-width:none;">
+        <p class="eyebrow" style="margin-bottom:8px;">How it flows</p>
+        <h2 class="page-title" style="font-size:24px;">Timeline</h2>
+        <p class="lead" style="margin-bottom:12px;">
+          Clear phases, no mystery. We’ll stay flexible around your feedback so nothing feels rushed.
+        </p>
+
+        <div class="phases">
+          <div class="phase">
+            <div class="n">01</div>
+            <div>
+              <strong>Onboarding</strong>
+              <p>You drop assets in the shared folder — we get organized and set.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div class="n">02</div>
+            <div>
+              <strong>Design</strong>
+              <p>Homepage direction, brand feel, and site structure.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div class="n">03</div>
+            <div>
+              <strong>Development</strong>
+              <p>Full build, mobile polish, and all the practical details.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div class="n">04</div>
+            <div>
+              <strong>Review</strong>
+              <p>You take a look and send one consolidated round of notes.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div class="n">05</div>
+            <div>
+              <strong>Launch</strong>
+              <p>Final yes, remaining payment, hosting setup — and you’re live.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          <strong>Heads up:</strong> We start the clock once the first materials and the $200 deposit are in. Easy as that.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="sheet">
+    <div class="pad">
+      <div class="toprow">
+        <div class="brand" style="opacity:0.35;font-weight:500;font-size:12px;">Devly</div>
+        <div class="page-no">04 / 04</div>
+      </div>
+
+      <p class="eyebrow">Investment</p>
+      <h2 class="page-title">Payment <em>schedule</em></h2>
+      <p class="lead">
+        A small deposit locks in your spot and gets us building. Simple, transparent, no surprises.
+      </p>
+
+      <table class="editorial">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Details</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Website development</td>
+            <td>Custom Crepe Heaven Café site</td>
+            <td>$1,000</td>
+          </tr>
+          <tr>
+            <td>Initial deposit</td>
+            <td><span class="due">Due now · kicks off the project</span></td>
+            <td>$200</td>
+          </tr>
+          <tr>
+            <td>Remaining balance</td>
+            <td>Due when the site is ready, before launch</td>
+            <td>$800</td>
+          </tr>
+          <tr>
+            <td>Hosting &amp; maintenance</td>
+            <td>First year · 30% off standard $480</td>
+            <td>$336/yr</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="total-row">
+        <span>Due at launch</span>
+        <strong>$1,136</strong>
+      </div>
+      <p class="soft" style="margin-top:8px;font-size:12px;">
+        That’s the remaining $800 + first-year hosting ($336).
+      </p>
+
+      <div class="deposit">
+        <h3>Deposit ($200)</h3>
+        <p>
+          Cash is preferred — happy to arrange a quick pickup.
+          Zelle works too if that’s easier for the deposit.
+        </p>
+        <p class="zelle">Zelle: 310-733-6047</p>
+        <p class="soft" style="margin-top:10px;font-size:12px;">
+          We’ll confirm the remaining balance and hosting separately before go-live.
+        </p>
+      </div>
+
+      <div class="section" style="margin-top:28px;max-width:none;">
+        <h2 style="font-size:18px;margin-bottom:12px;">How we’ll stay in touch</h2>
+        <div class="contact-grid">
+          <div class="cell">
+            <div class="label">Primary contact</div>
+            <strong>Mo</strong>
+            <p>Devly Studios</p>
+            <p style="margin-top:8px;color:var(--ink);font-weight:600;">310-733-6047</p>
+          </div>
+          <div class="cell">
+            <div class="label">Assets &amp; notes</div>
+            <strong>Drive + email</strong>
+            <p style="margin-top:6px;">
+              Drop files in Drive. Send feedback by text, call, or email —
+              batching notes helps us move faster.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="closing">
+        Can’t wait to bring Crepe Heaven Café online with you.
+        Deposit in, materials ready — and we dive into design.
+      </p>
+    </div>
+  </section>
+</body>
+</html>
