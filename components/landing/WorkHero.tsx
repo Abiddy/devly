@@ -1,7 +1,12 @@
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, CalendarDays } from 'lucide-react';
 
 import { TiltedGridHero } from '@/components/ui/tilted-grid-hero';
+import { InquiryForm } from '@/components/websites/InquiryForm';
+import { CALENDLY_EVENT_URL } from '@/lib/calendly';
+import { cn } from '@/lib/utils';
 
 const WORK = [
   { src: '/showcase/crepe-heaven.png', alt: 'Crepe Heaven Café website' },
@@ -23,6 +28,18 @@ const WORK = [
 ];
 
 export function WorkHero() {
+  const [open, setOpen] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
   return (
     <TiltedGridHero
       images={WORK}
@@ -54,16 +71,54 @@ export function WorkHero() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <Link
-            href="/inquire"
-            className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_14px_34px_-14px_rgba(21,40,104,0.7)] transition hover:bg-[#1d3585] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#152868]"
-          >
-            Inquire
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </Link>
+          <div className="flex flex-col items-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => {
+                setStarted(true);
+                setOpen(true);
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-[#152868] px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_14px_34px_-14px_rgba(21,40,104,0.7)] transition hover:bg-[#1d3585] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#152868]"
+            >
+              What are you building?
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </button>
+            <a
+              href={CALENDLY_EVENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/90 px-7 py-3.5 text-[15px] font-semibold text-[#0b0d12] backdrop-blur transition hover:border-[#152868] hover:text-[#152868]"
+            >
+              <CalendarDays className="h-4 w-4" aria-hidden />
+              Book a call
+            </a>
+          </div>
           <p className="max-w-sm text-balance text-[13px] leading-relaxed text-neutral-500">
             Custom websites for founders and local businesses.
           </p>
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          'absolute inset-0 z-20 flex items-center justify-center bg-white/60 p-4 backdrop-blur-md transition-opacity duration-300 sm:p-8',
+          open ? 'opacity-100' : 'pointer-events-none opacity-0',
+        )}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setOpen(false);
+        }}
+        aria-hidden={!open}
+      >
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="What are you building?"
+          className={cn(
+            'flex max-h-full w-full max-w-xl flex-col overflow-hidden rounded-[24px] border border-neutral-200 bg-white text-left shadow-[0_40px_90px_-40px_rgba(21,40,104,0.45)] transition-transform duration-300',
+            open ? 'translate-y-0 scale-100' : 'translate-y-3 scale-[0.98]',
+          )}
+        >
+          {started ? <InquiryForm compact onClose={() => setOpen(false)} /> : null}
         </div>
       </div>
     </TiltedGridHero>

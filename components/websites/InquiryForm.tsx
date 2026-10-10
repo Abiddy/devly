@@ -15,6 +15,7 @@ import {
   ShoppingBag,
   Sparkles,
   User,
+  X,
 } from 'lucide-react';
 import { CALENDLY_EVENT_URL } from '@/lib/calendly';
 
@@ -54,7 +55,13 @@ const TIMELINES = [
 
 const TOTAL_STEPS = 6;
 
-export function InquiryForm() {
+type InquiryFormProps = {
+  /** One card with a hairline progress bar; keeps the visitor on the current page. */
+  compact?: boolean;
+  onClose?: () => void;
+};
+
+export function InquiryForm({ compact = false, onClose }: InquiryFormProps = {}) {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
@@ -72,6 +79,9 @@ export function InquiryForm() {
   const [website, setWebsite] = useState('');
 
   const progress = Math.round((step / TOTAL_STEPS) * 100);
+  const primaryTone = compact
+    ? 'bg-[#152868] hover:bg-[#1d3585]'
+    : 'bg-[#121212] hover:bg-[#ff4f1f]';
 
   const toggleGoal = (id: string) => {
     setGoals((prev) =>
@@ -161,6 +171,43 @@ export function InquiryForm() {
     }
   };
 
+  if (status === 'success' && compact) {
+    return (
+      <div className="px-6 py-10 text-center sm:px-10">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-400">
+          You&apos;re in
+        </p>
+        <h3 className="mt-3 text-[clamp(1.6rem,4vw,2.1rem)] font-semibold tracking-[-0.04em] text-[#0b0d12]">
+          Welcome package{' '}
+          <em className="font-display font-medium italic text-[#152868]">sent.</em>
+        </h3>
+        <p className="mx-auto mt-3 max-w-sm text-[14px] leading-relaxed text-neutral-500">
+          Check your inbox. We&apos;ll review your answers and follow up within
+          1–2 business days with a custom proposal.
+        </p>
+        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href={CALENDLY_EVENT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-full bg-[#152868] px-6 py-3 text-[13px] font-semibold text-white hover:bg-[#1d3585]"
+          >
+            Book a call
+          </a>
+          {onClose ? (
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex rounded-full border border-neutral-200 bg-white px-6 py-3 text-[13px] font-semibold text-[#0b0d12] hover:bg-neutral-50"
+            >
+              Done
+            </button>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
   if (status === 'success') {
     return (
       <div className="mx-auto max-w-2xl">
@@ -201,24 +248,8 @@ export function InquiryForm() {
     );
   }
 
-  return (
-    <div className="mx-auto max-w-2xl">
-      <div className="rounded-[22px] border border-[#e6e3db] bg-white px-5 py-4 shadow-[0_12px_32px_-24px_rgba(18,18,18,0.3)] sm:px-6">
-        <div className="flex items-center justify-between text-[13px] font-semibold text-[#75726b]">
-          <span>
-            Progress ({step}/{TOTAL_STEPS})
-          </span>
-          <span>{progress}%</span>
-        </div>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
-          <div
-            className="h-full rounded-full bg-[#ff4f1f] transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      <div className="mt-4 rounded-[28px] border border-[#e6e3db] bg-white p-6 shadow-[0_24px_56px_-36px_rgba(18,18,18,0.4)] sm:p-8">
+  const steps = (
+    <>
         {step === 1 && (
           <StepShell
             title="Purpose"
@@ -367,9 +398,11 @@ export function InquiryForm() {
             </div>
           </StepShell>
         )}
-      </div>
+    </>
+  );
 
-      <div className="mt-4 flex items-center justify-between gap-3">
+  const nav = (
+      <div className={`flex items-center justify-between gap-3 ${compact ? '' : 'mt-4'}`}>
         {step > 1 ? (
           <button
             type="button"
@@ -385,7 +418,7 @@ export function InquiryForm() {
           <button
             type="button"
             onClick={goNext}
-            className="rounded-full bg-[#121212] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition hover:bg-[#ff4f1f]"
+            className={`rounded-full px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition ${primaryTone}`}
           >
             Next
           </button>
@@ -394,18 +427,78 @@ export function InquiryForm() {
             type="button"
             onClick={submit}
             disabled={status === 'loading'}
-            className="rounded-full bg-[#121212] px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition hover:bg-[#ff4f1f] disabled:cursor-not-allowed disabled:opacity-60"
+            className={`rounded-full px-7 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_-12px_rgba(18,18,18,0.55)] transition disabled:cursor-not-allowed disabled:opacity-60 ${primaryTone}`}
           >
             {status === 'loading' ? 'Sending…' : 'Send it over'}
           </button>
         )}
       </div>
+  );
 
-      {(triedNext && !canAdvance()) || error ? (
-        <p className="mt-3 text-center text-[13px] text-[#ff4f1f]" role="alert">
-          {error || 'Answer this one to keep going.'}
-        </p>
-      ) : (
+  const alert =
+    (triedNext && !canAdvance()) || error ? (
+      <p className="mt-3 text-center text-[13px] text-[#ff4f1f]" role="alert">
+        {error || 'Answer this one to keep going.'}
+      </p>
+    ) : null;
+
+  if (compact) {
+    return (
+      <div className="flex max-h-full min-h-0 flex-col">
+        <div className="h-[2px] w-full shrink-0 bg-neutral-100">
+          <div
+            className="h-full bg-[#152868] transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="flex shrink-0 items-center justify-between px-6 pt-4 text-[11px] font-medium tracking-[0.08em] text-neutral-400 sm:px-8">
+          <span>
+            {step} / {TOTAL_STEPS}
+          </span>
+          {onClose ? (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="-mr-2 rounded-full p-2 text-neutral-400 transition hover:bg-neutral-100 hover:text-[#0b0d12]"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          ) : null}
+        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-2 pt-1 sm:px-8">{steps}</div>
+        <div className="shrink-0 border-t border-neutral-100 px-6 py-4 sm:px-8">
+          {nav}
+          {alert}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-2xl">
+      <div className="rounded-[22px] border border-[#e6e3db] bg-white px-5 py-4 shadow-[0_12px_32px_-24px_rgba(18,18,18,0.3)] sm:px-6">
+        <div className="flex items-center justify-between text-[13px] font-semibold text-[#75726b]">
+          <span>
+            Progress ({step}/{TOTAL_STEPS})
+          </span>
+          <span>{progress}%</span>
+        </div>
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
+          <div
+            className="h-full rounded-full bg-[#ff4f1f] transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      <div className="mt-4 rounded-[28px] border border-[#e6e3db] bg-white p-6 shadow-[0_24px_56px_-36px_rgba(18,18,18,0.4)] sm:p-8">
+        {steps}
+      </div>
+
+      {nav}
+
+      {alert ?? (
         <p className="mt-3 text-center text-[12px] text-[#a09c94]">
           Required questions only — skip nothing that has a *.
         </p>
